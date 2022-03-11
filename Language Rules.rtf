@@ -1,0 +1,1189 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-LightOblique;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid3\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid4\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2880\lin2880 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid5\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li3600\lin3600 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid6\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li4320\lin4320 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\qc\partightenfactor0
+
+\f0\fs96 \cf0  Bytl (.bytl file) Coding Language\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs36 \cf0 UNDERSTANDING/TIPS:\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	1.	}Most things will require square brackets [ blah blah blah ] and curly brackets \{ blah blah blah \}\
+{\listtext	2.	}If you want to enable a certain library just type 
+\f1\i enable 
+\f0\i0 the library you want to enable\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}The available libraries are 
+\f1\i fl (for math (fl means formula)), alph (for the alphabet), terminate (to terminate a program or the whole program), ascii(for ascii characters like \uc0\u8721 \'b4\'86\'a9\u729 \'88\u730 \u8710 \'a9 etc.), visual(for visual creations (needs separate tutorial for all of the syntax)), code(for coding in other languages), option(for creating options), index(for allowing anything to have an index), sendable (for allowing script linkage), modifier (to allow the usage of modifiers), strict (for good practice code)\
+\ls1\ilvl1
+\f0\i0 {\listtext	\uc0\u8259 	}If you want to enable all of them at once, you can just separate each by a comma\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}enable fl, alph, terminate, ascii, visual, code, option`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	3.	}You can make a fnc in a fnc	\
+{\listtext	4.	}You can make an alg (algorithm) as a fnc in a fnc - alg\{fnc1 name, fnc2 name, etc.\}\
+{\listtext	5.	}To make a new line, just add a $ in a statement, e.g. ex \'93
+\f1\i 3 + 4$\'94
+\f0\i0 , also more than one can be added e.g. ex \'93
+\f1\i 3$ + 4$\'94
+\f0\i0  `\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you want to add a new line to a string, you will need to either put the $ outside of the quotes, or add in a $ in between 2 backslashes e.g. either ex 
+\f1\i \'93The\'94$\'94 amazing dog!\'94
+\f0\i0  `, or ex 
+\f1\i \'93The
+\f0\i0 |
+\f1\i $ 
+\f0\i0 |
+\f1\i  amazing dog!\'94
+\f0\i0  `\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	6.	}To concatenate (put multiple strings in one line), use one of the following examples \
+{\listtext	7.	}\uc0\u960     - is used as pi\
+{\listtext	8.	}\uc0\u8721    - can be used as sum\
+{\listtext	9.	}\'83 	  - can be used as fl but not for enable\
+{\listtext	10.	}\uc0\u8730    - is used as square root or sqrt\
+{\listtext	11.	}\'a1 OR \uc0\u8800    - is used as !=\
+{\listtext	12.	}\uc0\u8734    - is used for infinity as inf\
+{\listtext	13.	}\'f7   - can be used as /\
+{\listtext	14.	}\'ab\'bb   - can be used as << >> for c++ code importing\
+{\listtext	15.	}\'89 (option shift R) can be used as %% \
+{\listtext	16.	}\uc0\u8804  or \u8805    - is used as equal or greater/smaller\
+{\listtext	17.	}e    - can be used as \'9310^\'94 but must be activated with \uc0\u64258 \
+{\listtext	18.	}\uc0\u64258  is used as formula \
+{\listtext	19.	}\uc0\u64258  is used to enable math\
+{\listtext	20.	}alph is used to enable the alphabet\
+{\listtext	21.	}\'e5 is used as alph but not for import\
+{\listtext	22.	}rndmzo_ works 
+\f2\b only
+\f0\b0  with data types e.g. rndmzo_\{
+\f1\i an object that can be more than one value, num1, num2
+\f0\i0 \}`\
+{\listtext	23.	}You can start coding in other languages with certain symbols e.g. <<
+\f1\i c++ code
+\f0\i0 >>, importp(
+\f1\i Python Code
+\f0\i0 ),  script(
+\f1\i JavaScript            Code
+\f0\i0 ), class(
+\f1\i Java Code
+\f0\i0 ), cs(
+\f1\i C# Code
+\f0\i0 ), go(
+\f1\i Go Code
+\f0\i0 ), kt(
+\f1\i Kotlin Code
+\f0\i0 ), ruby(
+\f1\i Ruby Code
+\f0\i0 ), install(
+\f1\i Shell Code
+\f0\i0 ), echo(
+\f1\i PHP Code
+\f0\i0 ), r(
+\f1\i R code
+\f0\i0 ), c(
+\f1\i C Code
+\f0\i0 ), swift(
+\f1\i Swift Code
+\f0\i0 ), ts(
+\f1\i TypeScript Code
+\f0\i0 ), sql(
+\f1\i SQL Code
+\f0\i0 ), qml(
+\f1\i QML Code
+\f0\i0 ), perl(
+\f1\i Perl Code
+\f0\i0 ), vb(
+\f1\i Visual Basic Code
+\f0\i0 ), lisp(
+\f1\i Lisp Code
+\f0\i0 )\
+{\listtext	24.	}anbw is anywhere in between\{
+\f1\i val1, val2
+\f0\i0 \}`\
+{\listtext	25.	}evbw is everywhere in between\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3114\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	26.	}cval (change value) is general while va (value adjust) is for one specific thing\
+{\listtext	27.	}if you want to use the first value then do the following: [
+\f1\i org ~ line[line number + datatype]
+\f0\i0 ] e.g. [org ~ line[15 + fpn]]`\
+{\listtext	28.	}then if you want to use the new value after using the original value, same thing except write \'93new\'94.\
+{\listtext	29.	}anbt is anything but while anbw is anywhere in between\
+{\listtext	30.	}rep is another thing you can do which is repeat and it is equivalent to tor\{1\}\
+{\listtext	31.	}anbw is by default excluding so to make it including just write 
+\f1\i anbw\{1, 10\}.inc` \
+{\listtext	32.	}
+\f0\i0 If you want a certain number including and a certain number excluding 
+\f1\i anbw\{1(exc), 10(inc)\}`\
+{\listtext	33.	}
+\f0\i0 ==== means follows the rules of\'85 (This will only work if something can have more than one value e.g. prime numbers)\
+{\listtext	34.	}And !==== is does not follow the rules of\'85\
+{\listtext	35.	}\uc0\u8800 \u8800 \u8800 \u8800  can be used as !====\
+{\listtext	36.	}=== means identical\
+{\listtext	37.	}!=== means exact opposite\
+{\listtext	38.	}\uc0\u8800 \u8800 \u8800  can be used as !===\
+{\listtext	39.	}&& is \'93and\'94 while // is or\
+{\listtext	40.	}If you want to specify code that you used in another language use 
+\f1\i line[num, code you want to tag, e.g. 4, script(q)]`
+\f0\i0 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	41.	}You can add AND or OR statements for functions by using && for AND and // for OR\
+{\listtext	42.	}arr is an array\
+{\listtext	43.	}You can make an oppif statement that says whatever your if statement is, oppif is the opposite of that\
+{\listtext	44.	}\uc0\u8800 \u8800  is cannot be\
+{\listtext	45.	}!== can be used as \uc0\u8800 \u8800 \
+{\listtext	46.	}== is must be\
+{\listtext	47.	}= is equal to\
+{\listtext	48.	}\uc0\u8800  is not equal to\
+{\listtext	49.	}You can run 2 functions at the same time by using the && function but you 
+\f2\b need 
+\f0\b0 to enable alg\
+{\listtext	50.	}In a for loop, you can do every function in one line separated by collins\
+{\listtext	51.	}In the blocks of code to be executed in a for loop, if you\'92ve made more blocks to be executed in one line, all lines must end with a backslash\
+{\listtext	52.	}You can take a local variable from a function and use it globally, but you need to use glb(
+\f1\i the variable you want to define
+\f0\i0 )\
+{\listtext	53.	}You can enable the alphabet with using alph\{
+\f1\i the things you want to use in the alphabet e.g. a-z OR 
+\f0\i0 \}`\
+{\listtext	54.	}You can add strings to strings or chars vice versa by using plus\
+{\listtext	55.	}You can also add a character or a string to a certain index in a string or character by specifying it e.g. str(
+\f1\i \'93LALALA\'94
+\f0\i0 ).lala += char(\'93E\'94[2]).e\
+{\listtext	56.	}You can also specify the 
+\f2\b line
+\f0\b0  index of a fnc by doing [
+\f1\i index number
+\f0\i0 ]`\
+{\listtext	57.	}To make a comment, use @ for a one line comment and anything in between / \\ will be a comment e.g. @this does blahblah /this does many different things but all of them are blahblah\\\
+{\listtext	58.	}You can make an 
+\f1\i arg 
+\f0\i0 (an argument) which is a set of input statements\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}They will be a set where you will be given the first input statement in the argument and after you answer it, the next one appears until the last input statement\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	59.	}You can terminate the program just by writing 
+\f1\i term()
+\f0\i0  but you need to enable terminate also you need to start with 
+\f1\i start() 
+\f0\i0 and inside the parentheses, write the thing you want to start or terminate\
+{\listtext	60.	}If you want to 
+\f2\b break
+\f0\b0  a function or something else, NOT terminate it, then use brk` on the line in which you want to break it\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you want to continue the function or other thing after you break it, you can write cont` on the line where you want to continue the function\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	61.	}eif is the equivalent to else if\
+{\listtext	62.	}You can use .len to find the length of anything but specify with parentheses e.g. falafel::sc::\'94Falafel\'94` falafel.len(char) will output the character length which is 7\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you wanted the string length you would put str in the parentheses \
+{\listtext	\uc0\u8259 	}If you wanted the character length without spaces, type charww (ww is without whitespace) in the parentheses\
+{\listtext	\uc0\u8259 	}If you wanted the character length without commas, type charwc (wc is without commas) in the parentheses\
+{\listtext	\uc0\u8259 	}If you wanted to make it with spaces or commas after you\'92ve removed it, put an \'93i\'94 (for include) in\
+{\listtext	\uc0\u8259 	}If you wanted more than one filter then you would need to put a collin for each filter inside of square brackets e.g. falafel.len(char[ww:wc])`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	63.	}If you print an array, it will print every single string inside the array\
+{\listtext	64.	}You can define statements (ex or in) but they have to be as a sta data type e.g. sta::in \'93Enter a number between 1 and 10: \'94::input` \
+{\listtext	65.	}There are 
+\f1\i do while
+\f0\i0  loops where while is the same as fala but do while is doing something while the loop is being executed e.g. do while \{ d: (d stands for do)` w: (w stands for while)` \}\
+{\listtext	66.	}You can put input statements as parameters in functions e.g. sta::in \'93Enter a number: \'93::num(input)` fnc func\{input\} [timer\{fl\{e6*input\}\}]`\
+{\listtext	67.	}et is almost like a loop except it relates to loops but isn\'92t a literal loop e.g. et\{x = 2\} [y++]`\
+{\listtext	68.	}You can also define more than one variable at a time, by using - - or + +\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}The way to do it is by defining a variable first e.g. sc::eg::\'94Hello\'94++` and this will define a variable as shown and another variable with each character moved up by 1 which would create a variable valued \'93Ifmmp\'94 and it is the SAME VARIABLE that just has more than one value so you can specify its index!!\
+{\listtext	\uc0\u8259 	}If you want to define it as a different data type or skip by more than one for the + + or - - or even create more than another variable you can use the following syntax int::num::12\{55\}4 - -` The 12 in this code says how many times you want to create another variable, the 55 is the value of the first variable, the 4 means by how much do you want to decrease or increase the variable by e.g. 4 would mean decreasing by 4, 12 times, and the - - just means that you\'92re decreasing it  \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	69.	}You can make a set which is a group of variables and it is different from an array because it is always in order and can never be changed e.g. set(val1,  val2,  val3)`\
+{\listtext	70.	}You can make a shortcut for a function by using => \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}The way to do it is: instead of fnc func\{\} [blahblah]`, You can do func\{\} => blahblah` so it saves the fnc space and the square brackets\
+{\listtext	\uc0\u8259 	}An actual example of this is func\{\} => et\{ex liveTime(*sec)\} [ex \'93A second has passed\'94]`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	71.	}There is way to define more than one variable at once\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}You can do val::
+\f1\i var1 var2 var3 var4, etc.
+\f0\i0 ::\'94This\'94 314 10.34 \'93W\'94`\
+{\listtext	\uc0\u8259 	}This can also be used with the + + and - - thing\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	72.	}You can do a get() function that gets information from other files\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}To show, if you made a .txt file with some stuff, you can use get(name.txt) \{line[3]\}`\
+{\listtext	\uc0\u8259 	}And you can store it in a variable as val::file::get(name.txt)`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	73.	}You can import code from other files by using the import() function\
+{\listtext	74.	}You can use the iden 
+\f1\i name 
+\f0\i0 ()
+\f1\i  
+\f0\i0 function in order to assign things \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Ex. iden x (x += y/\uc0\u8730 z) \{x++\}`\
+{\listtext	\uc0\u8259 	}Then you can assign the iden 
+\f1\i x 
+\f0\i0 to other variables\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}You assign them by doing the following code: assign z idx`\
+{\listtext	\uc0\u8259 	}This code assigns the variable z, with an iden (that\'92s the id) of the name x\
+{\listtext	\uc0\u8259 	}If you want to assign more than one variable to the same class just do assign z,y,s,g,w,a,l,h idx` \
+{\listtext	\uc0\u8259 	}This assigns all z,y,s,g,w,a,l,h to the iden x\
+{\listtext	\uc0\u8259 	}If you want to print the final values after running the function (the value will increase by one every time because it says x++ at the end) just type ex bx\
+{\listtext	\uc0\u8259 	}You can adjust a certain variable from this iden if you want to \
+{\listtext	\uc0\u8259 	}You need to use the identhval() function\
+{\listtext	\uc0\u8259 	}Inside the parentheses, you put in the variable you want to adjust\
+{\listtext	\uc0\u8259 	}An example is this, identhval(g) -> 
+\f1\i what you want to do\
+\ls1\ilvl2
+\f0\i0 {\listtext	\uc0\u8259 	}You can tag a specific identifier by using iden(
+\f1\i The name of the identifier
+\f0\i0 )\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	75.	}You can use the next() function to do something in a \'93list\'94 and adjusts every variable differently (but with a pattern)\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}An example of using it is: iden(x) -> next(-0.1)`\
+{\listtext	\uc0\u8259 	}This code gets the iden, x and takes every variable (in order) and subtracts 0.1 from the first, another 0.1 from the next and so on \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	76.	}The let option is only for mathematical equations and something is only equal to something when it is used in a mathematical equation\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. let x = 10` Now x can only be used in a mathematical equation\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	77.	}\
+{\listtext	78.	}\
+{\listtext	79.	}option 
+\f1\i variable name 
+\f0\i0 function \{\} lets you create options for a variable\
+{\listtext	80.	}There is a +++ function that is the same as the - - - function and it makes a number add or subtract until one\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Basically if the number is 10 and you add the +++ function after so it\'92s 10 +++ it will add 10 to 9, then 8, 7, 6, all the way until one\
+{\listtext	\uc0\u8259 	}So 10 +++ is equal to 55 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	81.	}The at function is what it says in its name\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}It is doing something when something is at something\
+{\listtext	\uc0\u8259 	}For example it goes like this, at 
+\f1\i whatever it is at
+\f0\i0  (
+\f1\i when it is at it
+\f0\i0 )`\
+{\listtext	\uc0\u8259 	}A real example is 
+\f1\i at 1 (10 - - -)`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0
+\f0\i0 \cf0 {\listtext	82.	}The as function is meaning as something is happening\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. fala x!=30 (x++)` \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	83.	}You can create a variable with a value of a function with filled parameters (and if there are no parameters, then that is fine)\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example, fnc difference\{y, z\} (y - z)` x = difference(32, 20)`\
+{\listtext	\uc0\u8259 	}Then you can use x for anything, it will just have a value of 12 because that is 32 - 20\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	84.	}The dt() function is for specifying the data type of a variable but this can only be used from options\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example, if x = dt(FPN) (round(x))`\
+{\listtext	\uc0\u8259 	}This is saying, if x is a floating point number, round x to an integer. Also as you can see the dt is capitalized completely\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	85.	}An 
+\f1\i experiment 
+\f0\i0 is a function that can only work once, then it becomes 
+\f1\i idle (which is also function that makes functions \'93not work\'94 anymore and the opposite of idle is active)\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1
+\f0\i0 \cf0 {\listtext	\uc0\u8259 	}It works like this: 
+\f1\i experiment 
+\f0\i0 (
+\f1\i the things that you want to do
+\f0\i0 )\
+{\listtext	\uc0\u8259 	}If you want to make it active, you can just type active 
+\f1\i name of experiment/function
+\f0\i0 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	86.	}When doing something related to one specific thing, let it be a function, and then you repeat the thing that you were just coding, instead of repeating it, you can just type 
+\f1\i this\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1
+\f0\i0 \cf0 {\listtext	\uc0\u8259 	}If you were typing a second thing that you repeated prior to the first, type 
+\f1\i this[1]
+\f0\i0  because it is the second \'93this\'94, and 2 is equal to index 1\
+{\listtext	\uc0\u8259 	}An example of this\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	87.	}There is something called a system (sys) and when invoked, starts creating a system with rules\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}How it works is that you start with your system and the name \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}
+\f1\i sys x [] 
+\f0\i0 would be an example\
+{\listtext	\uc0\u8259 	}In order to make rules, you need to invoke the r() function (r stands for rule)\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}A rule specifies what the input can or can\'92t be\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}Basically a system is a place where you input things and get outputs\
+{\listtext	\uc0\u8259 	}A rule is defining what type oft input is allowed\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}Each rule has a function that it does to the input which gets an output\
+{\listtext	\uc0\u8259 	}Also, each rule has a name placed after the \'93r\'94\
+{\listtext	\uc0\u8259 	}The name of the rule is acting as an input so in order to make the rules, they are based off of the name of the rule\
+{\listtext	\uc0\u8259 	}To make the function for the rule, just separate the rule by a comma\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}It works like this:\
+{\listtext	\uc0\u8259 	}sys x [r x(x\uc0\u8800 7, x*5)]`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	88.	}def is for defining set values\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Let\'92s say you\'92re making a game in the visual library\
+{\listtext	\uc0\u8259 	}You want to set minimum size for a screen\
+{\listtext	\uc0\u8259 	}You can type def min_screen_size (px_count(100))`\
+{\listtext	\uc0\u8259 	}Then you can set the screen size by using the set_size(min_screen_size, SCREEN) 
+\f1\i  
+\f0\i0 \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	89.	}The 
+\f1\i set 
+\f0\i0 function is a conditional used if you invoked a function\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example if set freed() => y++ ()\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	90.	}A backwards slash function \'93\\
+\f1\i function
+\f0\i0 \'94 is a function that can only do one thing and you can do it at any time and u can just invoke it by typing in the name of it with the slash\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}So in order to give it something to do all you need to do is the same as a shortcut for a normal function\
+{\listtext	\uc0\u8259 	}\\quick => if in timer\{37s\} y=4 (tor\{y++, y++\})`\
+{\listtext	\uc0\u8259 	}So now whenever I want, I can just type \\quick and that function will be called \
+{\listtext	\uc0\u8259 	}P.S. - It doesn\'92t need parameters unless you want them\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	91.	}The call() function can call an idle function without making it active (it can also call an active function)\
+{\listtext	92.	}An idle function can be used (by using the 
+\f1\i fnc name\{\} 
+\f0\i0 method) in other functions or parts of your code, they will just be skipped as if they aren\'92t there\
+{\listtext	93.	}If you have a function that\'92s idle (called fnc eg\{\} ()) but you call it this way: eg\{\}`, it will just skip the function\
+{\listtext	94.	}If you want to code on the next line, you can just put a | (shift-backslash) \
+{\listtext	95.	}The val_count() function counts how many values are in a variable/list through index numbers\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}So if you want to find the exact amount by making a function \'97> valCount(x) => val_count(x) + 1`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	96.	}You can \'93data-type-ify\'94 any variable\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example, if you want to turn a number into a string, you can use the dot operator (.) with int\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}e.g. int one 1` one.sc`\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you want to turn a fpn to a int or int to fpn, do the same thing\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	97.	}If you want to make a variable a constant unchangeable value, you can either type 
+\f1\i const 
+\f0\i0 before defining a variable, or you can use the const() function\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}You can also \'93unconst\'94 something, just use the unconst() function\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	98.	}If you want to create an alternate value for something, give it an 
+\f1\i alt\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1
+\f0\i0 \cf0 {\listtext	\uc0\u8259 	}This means you can give a variable an alias and that alias will have a key:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}const sc example \'93String\'94` 
+\f1\i example alt eg key general
+\f0\i0 `\
+{\listtext	\uc0\u8259 	}The code above defines a constant string with the value of \'93String\'94 and gives it an alias of eg and a key of general (the alias is an alternate name and the key functions as a class for aliases)\
+{\listtext	\uc0\u8259 	}The alias can be accessed/referred to through the alias(
+\f1\i name of alias
+\f0\i0 ) function and the key can be accessed/referred to through the key(
+\f1\i name of key
+\f0\i0 ) function \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	99.	}If you want to skip a value in the increment part of the for loop e.g. for i=0, i<10, i++ () and you want to skip one of the increments, you can use the pass function to pass it\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example, val x 32`  for i=0, i<10, i++ (x++: pass x = 37: ex x)`\
+{\listtext	\uc0\u8259 	}The above code will print out 32,33,34,35,36,38,39,40,41 (the commas are instead breaks)\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	100.	}The .val() function targets the value of a variable\
+{\listtext	101.	}The each() function targets a list/array and targets each value in the list/array\
+{\listtext	102.	}The .through() function can be used for anything with multiple values and you want to target those multiple values in \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example, if you want to target all the info from specific lines (maybe line 12 - 20) you can use the .through() function as:\
+{\listtext	\uc0\u8259 	}val x line[12].through(line[20])`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	103.	}The code() function is for targeting things you have written in your code\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}All the things you can target are:\
+{\listtext	\uc0\u8259 	}SPEC (Special Character e.g. &, %, #, etc.), STRING (String), WHITESPACE (Blank Space), INTEGER (Integer), CHARACTER (Character), BOOLEAN (Boolean), FLOAT (floating point number), ARRAY (Array), ERROR(an error)\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	104.	}The and() function is for either this and this and this, etc.\
+{\listtext	105.	}The lcase() function is to make something lowercase while the ucase() function is to make something uppercase, the cap() function is to capitalize a string and the low() is to make the first letter of a string lowercase\
+{\listtext	106.	}The act_sys() function is for activating systems with all of their functions\
+{\listtext	107.	}The if_error() function is used if there is an error with a function that is specified inside of the parameters, then do something instead of an error when separated by a comma\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}question = in \'93Enter a number between 1 and 10: \'93`\
+{\listtext	\uc0\u8259 	}question = only[anbw\{1, 10\}.inc]`\
+{\listtext	\uc0\u8259 	}if_error(question, ex \'93That was not a number between 1 and 10!\'94` question = in \'93Try again: \'94)`\
+{\listtext	\uc0\u8259 	}The above code has an input statement defined as question and the next line says it can only be in between 1 and 10 (if it isn\'92t then it will cause an error). Then the next line says if there is an error, then say \'93That was not a number between 1 and 10!\'94 and \'93Try again: \'94 as an input statement with the value of question\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	108.	}Concatenation in Bytl is by using ::\
+{\listtext	109.	}If too much code is in one line, use the ~ to start coding in another line e.g. \\blah => ex \'93blachbljsdhfglaiuwrghrkdkuldskjhgldksghjfdsgudrhglskjdghflsuigkh\'94, ~~ \
+{\listtext	110.	}in \'93giuareyietv7ityeirudtveriutvyiuerytveirsuytb: \'94\
+{\listtext	111.	}The split_time() function splits the time (in miliseconds) between 2 different functions e.g. int x 54` fpn y 9.82` \\math1 => y*x` \\math2 => x/y` split_time(\\math1 \\math2, 700)`\
+{\listtext	112.	}Lists are sets of string, substrings and arrays of strings\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}The syntax for lists are list 
+\f1\i name 
+\f0\i0 \{
+\f1\i strings, substrings, and arrays
+\f0\i0 \}`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	113.	}A state is defined by a programmer and is the state of something\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}For example maybe in visual you want to make something hidden \
+{\listtext	\uc0\u8259 	}So you would create a statement that says: state hidden`\
+{\listtext	\uc0\u8259 	}Then you would define the state hidden by creating either a function or a loop with the name of the state\
+{\listtext	\uc0\u8259 	}If it is a loop then your state would be used right before the loop\
+{\listtext	\uc0\u8259 	}All examples are:\
+{\listtext	\uc0\u8259 	}fnc hidden\{\} (
+\f1\i split_time(hidden.hide.show), 3000
+\f0\i0 )`\
+{\listtext	\uc0\u8259 	}hidden for i=0, i<10, i++ (split_time(hidden.hide.show, 3000))\
+{\listtext	\uc0\u8259 	}etc.\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	114.	}To make coding quotations use a double backslash before ` and end with a `\\\\\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Example\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}int(var).33` ex \\\\`33 divided by 33 is equal to $\{var / 33\}`\\\\`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	115.	}You can define your own data types\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}This is the syntax:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}cr code(DT) 
+\f1\i name/parameter
+\f0\i0  => do stuff with 
+\f1\i name/parameter \
+\ls1\ilvl2
+\f0\i0 {\listtext	\uc0\u8259 	}Example\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}cr code(DT) fullDync => fullDync.ability.dync[null]`\
+{\listtext	\uc0\u8259 	}Break down of code:\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}cr means create (A.K.A. you can create more things than just data types)\
+{\listtext	\uc0\u8259 	}code(DT) is targeting the data types\
+{\listtext	\uc0\u8259 	}fullDync is the name\
+{\listtext	\uc0\u8259 	}=> is short for fnc(fullDync) \{\}\
+{\listtext	\uc0\u8259 	}.ability. is for creating things and allows you to manipulate whatever\
+{\listtext	\uc0\u8259 	}dync is targeting the dynamic data type \
+{\listtext	\uc0\u8259 	}dync[null] means that you are creating a data type that\'92s dynamic and nullable\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	116.	}Other types of for loops\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}A foreach loop looks like this:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}list_cycle array with val (ex val)`\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}A loop through a set of lines per se looks like this:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}through lines by line (ex line)`\
+{\listtext	\uc0\u8259 	}Example:\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}through code(line[2, 14]) by line (ex line)`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	117.	}For a multidimensional array, specify md before declaring the array                                        
+\f1\i x
+\f0\i0 \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Example:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}
+\f1\i name 
+\f0\i0 md arr[3 $+ 4 $+ 5, 3 $+ 5 $+ 7, 3 $+ 6 $+ 9]`\
+{\listtext	\uc0\u8259 	}The $+ is creating an alias and every $+ you add in an item is another sub alias\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	118.	}The 
+\f1\i keep 
+\f0\i0 keyword keeps a function running from a statement\
+{\listtext	119.	}Instead of using try catch finally throw, you can use the cr for an error\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Just do cr code(ERROR) arrError => arrError.check.OutOfBoundsException.ability.cr.fnc arrError()` cr arrError(ex `Array index is not a right number on line $\{line[curr]\}`)`\
+{\listtext	\uc0\u8259 	}This code means the following:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}cr code(ERROR) arrError is making a code error creator with the name arrError\
+{\listtext	\uc0\u8259 	}arrError.check.OutOfBoundsException is to check the parameter for this specific error (OutOfBoundsException)\
+{\listtext	\uc0\u8259 	}And if the above is true (which otherwise it will be false and return nothing), it will add an ability by creating a function with a dynamic parameter name \
+{\listtext	\uc0\u8259 	}This function sends a message saying that the array index is not a right number\
+{\listtext	\uc0\u8259 	}If you want to send this message EVERY time this error occurs, you can use a through loop at the top of your code saying:\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}through line[*] by line (if check.true of line.arrError (keep))`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	120.	}If you want to link multiple scripts together (for example: get a variable from a variable from another script)\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Use the 
+\f1\i link 
+\f0\i0 keyword and the name of the script in single quotes after it and the file that you are getting the info from, type 
+\f1\i enable sendable` 
+\f0\i0 at the top \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}E.g. *Receiving file* link \'91sender.btlp\'92\
+{\listtext	\uc0\u8259 	}*Sending file* enable sendable\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	121.	}If you want to override a function, you can use the ovd keyword like this (you can also override shortcut functions):\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}ovd 
+\f1\i function name that you want to override without the parameters or brackets || name of function that will override 
+\f0\i0 => code\
+{\listtext	\uc0\u8259 	}E.g. \\func => ex \'93this is a multi-character datatype\'94` val(fal).file[*]` val.dync fileLoop through fal (ex only(code(DT with only(STRING)))::\'94: \'93 & \\func)` if fileLoop[code(this.exec.after(code(OPERATOR \'91&\'92)))].cont(code(DT) of ;[char]) (ovd \\func override => ex \'93this is a single character string datatype\'94)`\
+{\listtext	\uc0\u8259 	}Lemme break it down\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}I declare a shorthand backslash function that prints the following to the terminal\
+{\listtext	\uc0\u8259 	}I have a variable, \'93fal\'94 with the value of the file packed into an array of lines\
+{\listtext	\uc0\u8259 	}I create a dynamic variable called fileLoop with a value of looping through the file by lines with an alias of \'93ln\'94\
+{\listtext	\uc0\u8259 	}In this loop, it will only print the data type and saying that it is a multi-character datatype\
+{\listtext	\uc0\u8259 	}Then after I have an if statement saying if that variable has a piece of code after the \'91and\'92 operator that contains a datatype of character, then override the function to saying it is a single character string datatype\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	122.	}If you want to check for a datatype of a variable just do the following:\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}type 
+\f1\i variable name
+\f0\i0 `\
+{\listtext	\uc0\u8259 	}If you want to change the data type then you will also have to change the value\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}You can use cval() with the third parameter being the data type to change to but will cause an error if value and datatype do not match or if value change is a const\
+{\listtext	\uc0\u8259 	}You can even use a fourth parameter as a modifier for saying if you want a global or local change (default is local), the global modifier is GEN (for general) and LOC (for local)\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	123.	}A SET is like a class from a language like Java or Python\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}new SET \{alpha(
+\f1\i set name
+\f0\i0 , val.
+\f1\i first var, 
+\f0\i0 val.
+\f1\i first func
+\f0\i0 ) \{
+\f1\i firstvar
+\f0\i0 =
+\f1\i value
+\f0\i0 :
+\f1\i firstfunc
+\f0\i0 =
+\f1\i value
+\f0\i0 :\}` \}\
+{\listtext	\uc0\u8259 	}The above code is like a constructor method and gives a starter function and variable for your set\
+{\listtext	\uc0\u8259 	}This would be a \'93default\'94 function and variable for example, if the set is animal, then your variable name is dog, your function could be bark\
+{\listtext	\uc0\u8259 	}The alpha() function is not required \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	124.	}There are datatypes and datatype types (supertypes)\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Here are a list of datatype types that go with a datatype optionally (they are connected through a dot e.g. val.dync, you can also connect multiple datatype types, e.g. val.obj.const)\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}dync \'97> a dynamic variable that can be any value even null\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}There are also dynamic systems where rules can do anything\
+{\listtext	\uc0\u8259 	}Has a secret function to create variables dynamically\
+{\listtext	\uc0\u8259 	}If a variable or anything is dynamic it has a function called strcdync()\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}strcdync() is a function to evaluate strings as code only for dynamic variables\
+{\listtext	\uc0\u8259 	}The way to use the function is the following\
+\pard\tx3820\tx4320\tx4535\tx5102\tx5669\tx6236\tx6803\li4320\fi-4320\pardirnatural\partightenfactor0
+\ls1\ilvl5\cf0 {\listtext	\uc0\u8259 	}strcdync(
+\f1\i variable or whatever name
+\f0\i0 )`\
+{\listtext	\uc0\u8259 	}The above code will automatically evaluate as a string and can be used for creating variables dynamically\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}obj \'97> an object that is used for setting functions, systems, loops, etc. into a variable \
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}If you want your object to be \'93unoverridable\'94 then use a modifier in brackets at the end of your code \
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}E.g. enable fl fpn.obj(func).. decimal => \{decimal.ceil\} (UOVD)`\
+{\listtext	\uc0\u8259 	}The \'93..\'94 after (func) is to indcate that there is going to be a function or method of some sort and not a variable or single value\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}abst \'97> an abstract which allows full manipulation of a variable\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}E.g. If you have an abstract string called noun, you can change the name, the value, etc.\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}conc \'97> a concrete is similar to const but is overridable, dt type can be switched, and security/clearance level can be changed\
+{\listtext	\uc0\u8259 	}const \'97> a constant no part of the value can be changed and is by default unoverridable\
+{\listtext	\uc0\u8259 	}hash \'97> a variable with properties (hash table)\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}E.g sc.hash \{name | \'93vlad\'94, \}\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}let \'97> a variable type that has a specific scope depending one where the declaration is\
+{\listtext	\uc0\u8259 	}comm \'97> a variable type that let\'92s you store comments and use them as a variable (needs a COMM modifier) then a backslash after to continue with your code\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}E.g. val.comm forLoopComment /This is a for loop declaration\\` for i = 10; i > 1; - - i \{COMM\}->forLoopComment\\ ex i`\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}secure \'97> a variable with the second highest level of clearance that \
+{\listtext	\uc0\u8259 	}default \'97> give a variable a default value with a quick bit of code to put variable back to default value if something\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}E.g. int.default var \{7#20\}`\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}This code says the default val is 7 but if it reaches 20, then reset back to 7 (if this code could run infinitely, it will cause an error saying that time is out of bounds)\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}fauth \'97> Full authorization\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}Highest level of security (completely private and cannot be touched or changed)\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}nauth \'97> No authorization\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}Even less secure than abstract and can change everything including the \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}auth \'97> Can change authorization of variable customizably\
+{\listtext	\uc0\u8259 	}stable \'97> Can change value only with authorization\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}Authorization must be specified with a \'93authorization key\'94\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}E.g. stable AUTH 
+\f1\i auth name
+\f0\i0  = \'93a variable\'94` Auth[
+\f1\i auth name
+\f0\i0 ]`
+\f1\i  
+\f0\i0 \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}init\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}Intializes a variable (or better said), gives it a \'93first\'94 value \
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}E.g. dync x 0` while (x!=32) (sc.init string = \'93A string:\'94: x++: string.stradd(\'91 blah \'92))` ex string.init` \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}prep\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}A variable where you are going to use it later but you define it in a function\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}E.g. fnc.prep func (x+=4)` var x = 3` func.call`\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}strict \'97> a variable where the name is required and you cannot use functions, loops, or systems, etc. as variables\
+{\listtext	\uc0\u8259 	}iancas \'97> in any case or no matter what happens\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}E.g. int.iancas distance = 30` /Then you can make it so that a player moves towards this object that is 30 units away but no matter what, it will always stay 30 units away from you.\\\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}snip \'97> This variable represents a snippet of code that you can reuse in your code editor\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}A snippet is created like so (only can be made through res data type):\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}res.snip 
+\f1\i (optional) AUTH name 
+\f0\i0 => (if not using AUTH, then surround code with _ e.g. _
+\f1\i code
+\f0\i0 _)`\
+{\listtext	\uc0\u8259 	}Then using the snippet requires the following code:\
+\pard\tx3820\tx4320\tx4535\tx5102\tx5669\tx6236\tx6803\li4320\fi-4320\pardirnatural\partightenfactor0
+\ls1\ilvl5\cf0 {\listtext	\uc0\u8259 	}_name of snippet_ OR Auth[name of snippet]\
+{\listtext	\uc0\u8259 	}If you want to use user input in brackets e.g. res.snip vc => _val_count(
+\f1\i user input
+\f0\i0 )_, then you use the @ keyword for \'93at user\'94 and for actually inputting that code, you do @ -> 
+\f1\i input
+\f0\i0 `\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}Now all at once:\
+\pard\tx3820\tx4320\tx4535\tx5102\tx5669\tx6236\tx6803\li4320\fi-4320\pardirnatural\partightenfactor0
+\ls1\ilvl5\cf0 {\listtext	\uc0\u8259 	}res.snip AUTH fncXYparam => _fnc \{x, y\} (@)_` Auth[fncXYparam, @->x*y/2]`\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}typed \'97> Only for error variables\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}typed = type distinct\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}type \'97> Only for error variables\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}type = general type\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}uom \'97> Unit of measurement\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}You can create your own units of measurement and even a base unit\
+{\listtext	\uc0\u8259 	}If you use the function setbaseuom() and the parameter uses a name, it will be your base unit with the first unit measurement being 1\
+{\listtext	\uc0\u8259 	}An example of a mini metric system would be like this:\
+\pard\tx3100\tx3600\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li3600\fi-3600\pardirnatural\partightenfactor0
+\ls1\ilvl4\cf0 {\listtext	\uc0\u8259 	}setbaseuom(millimeter)` fpn.uom centimeter = milimeter10` fpn.uom meter = centimeter100` ex meter3.24 + centimeter35.642\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}md \'97> Multidimensional Array\
+\pard\tx2380\tx2880\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2880\fi-2880\pardirnatural\partightenfactor0
+\ls1\ilvl3\cf0 {\listtext	\uc0\u8259 	}This will require your variable (only allowed for arrays) to be multidimensional\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	125.	}Different variables have different clearance / auth levels that can be changed \
+{\listtext	126.	}For all nested things, an indentation will not suffice, you need a \'93NEST\'94 modifier right before the opening brackets \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you want to have a variable that is a \'93sub-variable\'94 (it is a part of another variable (not a prop)), you actually use a prop with the name being sub and value being the variable name (it needs to be initialized first)\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	127.	}If you want to have a function or something that is part of another (it doesn\'92t have to be of same type) use 
+\f1\i extd
+\f0\i0  for extending one thing to another (this can be a way to globalize a variable to only certain variables (extd cannot be used for let variables)), you also have to use 
+\f1\i retr
+\f0\i0  to retrieve the extended value\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. for let i=0;i<10;i++ extd 
+\f1\i name
+\f0\i0  (val x = 10`) for let y=10;y>0;y- - retr 
+\f1\i name 
+\f0\i0 (x**4)`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	128.	}To check for any type (dataype, supertype, subtype, etc.) use the type keyword after and then the datatype after the type keyword\
+{\listtext	129.	}The 
+\f1\i that 
+\f0\i0 keyword refers to the object that holds a parameter value \
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. if x type int (ex that)` /This will print x because it holds the type of int\\\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	130.	}The any() function is a condition for if any of the parameters return a specific value\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. arr.nauth fun = [32, 21, \'93Joe\'94, \'91A\'92, 2.87]` if any(fun) type ratn (ex that)\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	131.	}You can use an if statetment on a loop\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. val LOOP list_cycle array with item (ex item)` if any(array) = \'93Joe\'94 (ex \'93 Joe Mama\'94)`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	132.	}The ertype() function gives the type of an error as a string\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}If you have the following code: const.val = 4`\
+{\listtext	\uc0\u8259 	}Two errors will generate:\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}
+\f1\i DeclarationIncomplete
+\f0\i0  and 
+\f1\i DeclarationArrangement
+\f0\i0 `\
+{\listtext	\uc0\u8259 	}So if you do ex ertype() on this line number it will output 
+\f1\i Declaration\
+\ls1\ilvl2
+\f0\i0 {\listtext	\uc0\u8259 	}If you want it to output each specific type, then do the function ertyped() for error type specific \
+{\listtext	\uc0\u8259 	}If you want to check for an error type, use the .check thing again, e.g. ertyped(err->DeclarationIncomplete).check`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	133.	}You can create an error exception using the erexc() function which is similar to the die() function in PHP except it has multiple parameters\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}You replace the error with a string of your choice and the error type needs to be stated in the first parameter\
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}E.g. err.typed (ALL) din->= DeclarationIncomplete`erexc(din, \'93Not finished declaring a variable\'94)`\
+{\listtext	\uc0\u8259 	}The (ALL) modifier means it goes over every line of code in your file\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	134.	}There are set arrays that have different options\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Auth[] for variable authorization\
+{\listtext	\uc0\u8259 	}ESpace[] an empty space where you can temporarily put variables and get their value\
+{\listtext	\uc0\u8259 	}Strict[] for variables that are strict\
+{\listtext	\uc0\u8259 	}Temp[] for temporary variables and functions\
+{\listtext	\uc0\u8259 	}Array[] for all set arrays and created arrays combined\
+{\listtext	\uc0\u8259 	}Number[] for number functions\
+{\listtext	\uc0\u8259 	}String[] for string functions\
+{\listtext	\uc0\u8259 	}Resource[] for resource variables\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	135.	}The .filter method will give you the option to filter an array with a callback function\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}val Arr [3, 4, 2, 46, 2, 5, 2, 5, 32, 5, 245, 311]`\
+{\listtext	\uc0\u8259 	}list_cycle Arr.filter as key (key.store:if ESpace[].!incl(key) (Arr.add(key)) else (idle))` \
+{\listtext	\uc0\u8259 	}This code takes an array with duplicates, and stores it in ESpace[] and checks if it 
+\f2\b doesn\'92t
+\f0\b0  include what has already been added, else, do nothing \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	136.	}To make a sub array (for md) (or sys, id, SET, etc.) any sub object you use a <~ for the first element and ~> for the last element\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}Examples: \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\pardirnatural\partightenfactor0
+\ls1\ilvl2\cf0 {\listtext	\uc0\u8259 	}arr.md Arr = [23, \'93string\'94 <~ \'93not a number\'94, \'93another example\'94, \'93rain\'94 ~> 90, 33]`\
+{\listtext	\uc0\u8259 	}new SET \{<~ SET \{\}` ~>\}`\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	137.	}You can use your own libraries using the \'93lib\'94 function: 
+\f1\i enable lib(path)`
+\f0\i0 \
+{\listtext	138.	}You can specify if you want a strongly typed function by using the hashtag\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. fnc# function \'85\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	139.	}The equivalent of the javascript spread operator in bytl is ::\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}E.g. val eg = [1 2 3]` ex eg` ex ::eg`\
+{\listtext	\uc0\u8259 	}The first print will print with type array while the second print will print 3 times with type int\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	140.	}You can define your own special keys ($, ^, ~, etc.) by using the 
+\f1\i special
+\f0\i0  keyword like this:\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\pardirnatural\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}special NUM __$__ (desc \'93To convert a number into a dollar format\'94 use \'93$##\'94` (## ))`\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+TUTORIAL/SYNTAX:\
+	How to define variables:\
+		val(
+\f1\i name
+\f0\i0 ).
+\f1\i value`\
+		data type name value
+\f0\i0 `\
+			val = variable definer\
+			` = code ender\
+\
+	Logical Operators:\
+		&& is AND\
+		|| is OR\
+		% is for remainder e.g. 10 % 5 would output 0 because that\'92s the remainder when you divide them\
+		~~ is for replacing things of the same data type e.g. int(3).var` int(8).var2` if x == 2  (var ~~ vals)` will switch the two values if x is 2 (it works both ways)\
+		:: is to concatenate
+\f1\i \
+		
+\f0\i0 ; is for ALL data type values and is specified with square brackets e.g. ;[char] OR ;[sc]  \
+		? : is a shortcut for if, then, else e.g. x == 1 ? y++ : z++` is equivalent to if x == 1 (y++) else (z++)`
+\f1\i \
+		
+\f0\i0 # is \'93if reaches\'94 (99% of the time used for default variables)\
+		\
+	Data types: \
+		int ((integer) fpn for floating point numbers and >int for numbers with more than one value like a prime number and yes fpn>int for a floating point number with more than one value, dpn)\
+		frac = fraction e.g. 3/7\
+		char = character and stchar for characters that can have the value of a string but have an index by character while sc have index by word\
+		sc = string of characters\
+		bool = boolean \'97> t for true, f for false\
+		spec = specifying variable \'97> a variable that specifies stuff\
+		mod = a modifier variable \'97> you can create your own modifier \
+		null = no value\
+		sta = statement (the only way to define statements like 
+\f1\i ex
+\f0\i0  or 
+\f1\i in 
+\f2\i0\b as a value 
+\f0\b0 (not using val), otherwise use num, char, sc, etc.)\
+		arr = array\
+		ratn = rational number\
+		iratn = irrational number\
+		res = resource variable \
+		err = error variable\
+\
+	Loops and Functions:\
+		fala 
+\f1\i condition
+\f0\i0  (\
+			
+\f1\i blocks of code to be executed
+\f0\i0 \
+		)`\
+\
+		fala stands for \'93
+\f2\b f
+\f0\b0 or 
+\f2\b a
+\f0\b0 s 
+\f2\b l
+\f0\b0 ong 
+\f2\b a
+\f0\b0 s\'94\
+		\
+		do while (\
+			d: 
+\f1\i do
+\f0\i0 \
+			w: 
+\f1\i while
+\f0\i0 \
+		)\
+\
+		for 
+\f1\i only executed once, condition, the increment thing e.g. x- -, y++, x++
+\f0\i0  (\
+			
+\f1\i the other things you want to do e.g. y\'97: rndmzo_\{prime\}: negseq[53, prime]
+\f0\i0 \
+		)`\
+		\
+		list_cycle 
+\f1\i the list/array you want to cycle through 
+\f0\i0 with 
+\f1\i item name 
+\f0\i0 as 
+\f1\i alias (optional + etc.) 
+\f0\i0 (
+\f1\i \
+			blocks of code to be executed\
+		
+\f0\i0 )`\
+\
+		fnc 
+\f1\i name\{parameters\} (
+\f0\i0 \
+			
+\f1\i blocks of code to be executed\
+			
+\f0\i0 return
+\f1\i  parameters
+\f0\i0 \
+		)`\
+\
+		fncs 
+\f1\i fnc1, fnc2, etc.
+\f0\i0 ,\
+			
+\f1\i blocks of code to be executed
+\f0\i0 \
+		`\
+\
+		rndm\{
+\f1\i number1, number2, tor, the amount of numbers you want to print(3) per repetition
+\f0\i0 \} - P.S. tor can be used as \uc0\u8734 \
+		tor\{x
+\f1\i number of times
+\f0\i0 \} (\
+			
+\f1\i the thing(s) you want to repeat
+\f0\i0 \
+		)`\
+\
+		rndmzo_\{
+\f1\i an object that can be more than one value e.g. a prime number
+\f0\i0 \}`\
+\
+		rndmz_\{
+\f1\i the items you want to randomize
+\f0\i0 \}`\
+\
+		line[
+\f1\i line number + data type or function e.g. 5 + only, or 7 + val, etc.
+\f0\i0 ]`\
+		To get the current line number (maybe you have an input), just put 
+\f1\i curr 
+\f0\i0 in between the square brackets\
+		\
+		\uc0\u8721 
+\f1\i num1, num2, num3, etc. 
+\f0\i0 OR sum\{
+\f1\i num1, num2, num3, etc.
+\f0\i0 \}`
+\f1\i \
+		
+\f0\i0 \uc0\u8721 
+\f1\i xyz, wpq, abc, etc. 
+\f0\i0 OR sum\{
+\f1\i abc, xyz, wpq, etc.
+\f0\i0 \}`\
+\
+		ex 
+\f1\i the things you wan to print
+\f0\i0 `     ex = exterior\
+		in 
+\f1\i the things you want inputted
+\f0\i0 `   in = interior\
+\
+		liveTime(
+\f1\i if you want, you can put in how to make the time e.g. *sec, *day,*year, etc.
+\f0\i0 )`\
+		sw(start)(you can stop it with if statements by doing it with sw(stop))`\
+		timer\{
+\f1\i from a certain time e.g. 14sec OR 5min, 12sec, 3yr 7hr 9wk, etc. AND how fast you want it in microseconds e.g. fl\{e6\}
+\f0\i0 \}`\
+\
+		anbw\{
+\f1\i num1, num2
+\f0\i0 \}`\
+		cval\{
+\f1\i change value as any object e.g. current value, new value e.g. 6, 7
+\f0\i0 \}`\
+		va\{
+\f1\i change to one specific thing e.g. current value >< new value e.g. line[num, str(\'93Ford\'94)] >< str(\'93Audi\'94)
+\f0\i0 \}`\
+		\
+		arr is an array\
+		arr[
+\f1\i the objects you want in the array e.g. car, fafafafa, \'93por32r\'94, 3892, etc.
+\f0\i0 ]`\
+		arrint[
+\f1\i the numbers you want in the array e.g. 324, 352234, 52, 91, etc.
+\f0\i0 ]`\
+		arrChar[
+\f1\i the characters you want in the array e.g. \'93D\'94, \'93w\'94, \'93q\'94, 
+\f0\i0 ]`\
+		arr<int[
+\f1\i the numbers with more than one value that you want in the array e.g. prime, array, etc.
+\f0\i0 ]`\
+		arrFPN[
+\f1\i the floating point numbers you want in the array e.g. 61.34, 104.1412475, etc.
+\f0\i0 ]`\
+		arrSc[
+\f1\i the strings you want in the array e.g. \'93Hello World\'94, \'93Marshmallow\'94, etc.
+\f0\i0 ]`\
+		seq\{
+\f1\i array1, array2, array3, etc.
+\f0\i0 \}`\
+		\
+		only(
+\f1\i the code you want to use
+\f0\i0 )`\
+		anbt\{
+\f1\i the code you want to use
+\f0\i0 \}`\
+	\
+		etc\{
+\f1\i the place where you want to make the pattern, the number of times you want to go with the pattern
+\f0\i0 \}`\
+		opp\{
+\f1\i the thing you want to oppose
+\f0\i0 \}`\
+		negseq[
+\f1\i the opposite pattern and you can start at a certain number
+\f0\i0 ]`\
+		eith\{
+\f1\i either this or that e.g. 1, 4
+\f0\i0 \}`\
+		arg(
+\f1\i the names of the input statements e.g. first:second:third:etc.
+\f0\i0 )`\
+		arr.rem is removing an item from an array by selecting its index or specifying the explicit value of the thing you want to remove e.g. arr.rem[3] will remove the item in the 3rd index in an array OR arr.rem[\'93hi\'94]` will remove the index with a value of \'93hi\'94 in a certain array\
+		arr.add() is adding an item to an array by selecting its index or just adding it to the end e.g. arr.add([2], \'93third\'94) OR arr.add(\'93third\'94)\
+		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3256\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		et 
+\f1\i every time something 
+\f0\i0 (
+\f1\i do something
+\f0\i0 )`\
+		rnd(
+\f1\i whatever number you want to round
+\f0\i0 )`		val_count(
+\f1\i the thing you want to count the amount of values from
+\f0\i0 )`\
+		str_match(
+\f1\i the string you want to match
+\f0\i0 )`\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		int_match(
+\f1\i the int you want to match
+\f0\i0 )\
+				\
+\
+STATEMENTS/CONDITIONALS:\
+		if 
+\f1\i condition
+\f0\i0  (
+\f1\i blocks of code to be executed
+\f0\i0 )`\
+			else (
+\f1\i blocks of code to be executed
+\f0\i0 )`\
+		eif 
+\f1\i condition
+\f0\i0  (
+\f1\i blocks of code to be executed
+\f0\i0 )`\
+\
+		switch 
+\f1\i variable 
+\f0\i0 (case: )`\
+		switch (MULT) 
+\f1\i variables 
+\f0\i0 (
+\f1\i a variable from switch 
+\f0\i0 case: )`\
+\
+\
+EXAMPLES:\
+		enable fl`\
+		if (\uc0\u8730 36 * 42**2 / 90) == anbw\{35, 120000\} (\
+			va\{line[20+obj] >< 43\}\
+		)`\
+\
+		ex line[20 + obj]`\
+			
+\f2\b This program changes the value of the object on line 20 to 43 IF the formula output is between 35 and 120000!\
+			The next function prints the new (or same) value of the obj on line 20. 
+\f0\b0 \
+\
+		\
+		>int(only[(prime % 1 == 0), (prime % prime == 0)]).prime`\
+		prime \uc0\u8800 \u8800  1`	\
+		\
+		ex etc\{prime, 5\}`\
+			
+\f2\b This program defines a prime number as a number with more than one value and the ex function prints the first 5 prime numbers.
+\f0\b0 \
+\
+\
+		question = in \'93Enter a number between 1 and 10: \'94`\
+		question = only[anbw\{1, 10\}.inc]`\
+		>int(only[(prime % 1 == 0), (prime % prime == 0)]).prime`\
+		prime \uc0\u8800 \u8800  1`\
+		if question == anbt\{opp\{line[2 + only]\}\} (\
+			ex \'93That was not between 1 and 10.\'94`\
+		)`\
+			else (\
+				if question ==== prime (\
+					ex \'93That is a prime number!\'94\
+				)`\
+					oppif (\
+						ex \'93That is not a prime number! :(\'94\
+					)`\
+			)`\
+\
+\
+			
+\f2\b This program gives an input of \'93Enter a number between 1 and 10: \'94\
+			Then, if the number is prime, then it will print \'93That is a prime number!\'94\
+			Otherwise, it will print either \'93That was not between 1 and 10.\'94 or \'93That is not a prime number! :(\'94!
+\f0\b0 \
+								\
+\
+		fnc myFunction\{x, y, z\} (\
+			num(34).y\
+			x = 16\
+			x += y\
+			z == 1\
+		)`	\
+	\
+		fnc otherFunction\{\} (\
+			str(\'93GRRREATT!!\'94).flakes += char(\'93E\'94[4])`\
+		)`\
+\
+		val(alg\{myFunction\{x, y, z\} && otherFunction\{\}\}).funcs`\
+		ex funcs[0[eith\{0, 1, 2\}]`\
+\
+		
+\f2\b This prints either the first, second, or third line of the first function. 
+\f0\b0 \
+		enable index		\
+\
+		const sc lionel \'93Lionel Messi\'94`\
+		const sc cristiano \'93Cristiano Ronaldo\'94`\
+		const sc chris \'93Chris Pratt\'94 \
+		const sc jennifer \'93Jennifer Lopez\'94\
+		const sc antonio \'93Antonio Valencia\'94`\
+\
+		arrSc[line[3].through(line[7])] example`\
+\
+		list_cycle example (\
+			each(this) alt lcase(each(this)[1]) key celebraties\
+		)`\
+\
+		sys celebraties [\
+			r soccerPlayers(code(STRING) == alt(and(\'93messi\'94, \'93ronaldo\'94, \'93valencia\'94)), ex \'93These are soccer players:\\$\\\'94::each(cap(this[1]))`)\
+			r others(code(STRING) == alt(and(\'93pratt\'94, \'93lopez\'94)), ex \'93These are other celebraties:\\$\\\'94::each(cap(this[1]))`)\
+		]`\
+\
+		act_sys(celebraties)`\
+\
+		
+\f2\b The first line enables the index library (which will be used later)\
+\
+		The const lines are defining strings which cannot be changed \
+\
+		The arrSc[] line is creating an array only made of strings and is created with using the line[] and .through() function\
+\
+		The list_cycle line is a loop running through the array called example from the previous line and takes each string in the array and assigns and alt of the 		lowercase value of the 1st index (2nd) of each string and assigns all of them a key of celebreties\
+ \
+		The sys function has 2 rules:\
+		1. Called soccerPlayers and is targeting all of the strings with the *alt*s of \'93messi\'94, \'93ronaldo\'94, and \'93valencia\'94 and is printing a statement that says that they are 		soccer players \
+		2. Called others and targets all of the strings with the *alt*s of \'93pratt\'94, and \'93lopez\'94 and is printing a statement that says that they are other celebraties\
+\
+		The \'93$\'94 in each ex statement are for breaks and the act_sys() function on the last line is activating the system called celebraties\
+		This will print the ex statements\
+\
+		
+\f0\b0\fs48 \
+		\
+		 \
+\
+\
+\
+\
+\
+\
+\
+		}

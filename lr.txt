@@ -1,0 +1,274 @@
+-------------------------------------------
+                  Bytl
+-------------------------------------------
+SYNTAX DEFINITION:
+    Line separator/ender = `
+    One line comments = __ (double underscore)
+    Multi-line comments = // <comment> \\
+    Data type casting = <datatype in all caps> <variable> e.g. FPN number` (sets num var to fpn var)
+    Add supertype = .<name of supertype> <variable> e.g. -> .cannil string` (adds cannil stype to sc var)
+     
+    Logical Operators:
+        & for AND
+        | for OR (can also be used in )
+        > for GREATER THAN
+        < for LESS THAN
+        || for BASE SUPERTYPE REFERENCE
+        ~ for MULTIVARS (in function parameters)
+        % for MODULO
+        @ for HIGHER SCOPE REFERENCING (within function parameters) or ASSOC KEY REFERENCE
+        ? for NIL CHECK (before variable)
+        ^ for OPTIONAL PARAMETER
+        # for INITIAL RECURSION (only for init vars)
+        : for OBJECT ACCESS
+        .. for ANONYMUS FUNCTION
+        ... for COLLECTION TYPE CREATING
+        . for SUPERTYPE/DATATYPE CHAINING
+        :: for CONCATENATION
+        ? : for TERNARY
+        == for EQUALITY
+        === for STRICT EQUALITY
+        ; for CONTEXT
+    
+    Data types:
+        Normal types:
+            Any = val -> { val value = "string"` }
+            Array = arr -> { arr array = [1 2 3 4 5 6 7 8 9 10]` } (can be a vect or collection)
+                Vector (same data type the entirety of the vector) = vect -> { vect.char integerVector = ['A' 'B' 'C']` }
+                Collection (can be any data type for each element) = collection -> { collection collect = [3 "four" true nil]` }
+                Sequence (only numbers and characters are allowed) = seq -> { seq.int sequence = {startingValue separator iterations}` }
+                Or Parameters (checking if this or that or that equals whatever) = orp -> { orp orParams = [1|2|3]` if orParams 2 (ex 'y'`) } OR { if [1|2|3] == x (ex x`) } (will print x if x is 1, 2, or 3)
+                JSON (using json format) = json -> { json JSON = [{"some":"example"}, {"J":"S"}, {"O":"N"}]` }
+            String = sc (string of characters that must be in double quotes) -> { sc string = "a string"` }
+            Number = num -> { num number = 6.2` }
+                Integer (32 bit) = int -> { int integer = 35` } 
+                Float (32 bit) = fpn  (floating point number) -> { fpn float = 7.88` }
+                Double (64 bit) = dfpn (double floating point number) -> { dfpn double = 4.0139485710349857346` }
+                Long (64 bit) = long -> { long bigint = 679345669706` }
+            Character = char (must be in single quotes) -> { char letter = 'E'` }
+            Boolean = bool -> { bool boolean = true` }
+            Null = nil ->  { nil.sc nullString` }
+            Exception = exc ->  { exc somethingElse = Except:(exc:type exceptionType, sc message)` }
+            Comment = comm -> { comm comment = __This is a comment` }
+            Resource = res -> { res file = Resource:files("example.txt")` }
+            Input/Output Stream = io -> { io input = in "Enter your name and age: ", sc, int` }  (comma, then data type (after the prompt), is specifying the desired dtype of the output)
+            Global = glob -> { glob object = Resource` } (anything can be accessed with glob (basically a reference of bytl itself))
+            Function = fnc -> { fnc int function int arg1, int arg2 (rn args:sum()`) }
+            Association = assoc -> { assoc<sc @sc sc> association = <"key1" "value1" "extra1", "key2" "value2" extra2">` } (the @ symbol means that that part of the association is how to access the part e.g. association("value1") will return ["key1" "value1" "extra1"])
+            Regular Expression = rgx -> { rgx oneOrMoreDigit = /\d+/g` }
+    
+        Super types (supertypes can be chained by separating them with a period):
+            Dynamic = dync -> { sc.dync dynamicVariable = "ooooooo"` }
+            Object (accesses the constructor function of used datatype (every datatype except for dtype has its own constructor)) = obj -> { int.obj numberConstructor = Int(5)` }
+            Unit of Measurement = uom -> { int.uom newMeter = ;meter * 100` } (the semi-colon defines the context of the assignment)
+            Multi-Dimensional = md -> { vect.md twoDArray = [3 3 [5 5] 4 4 [6 6]]` }
+            Initial = init -> { int.init initial = 7#20` } (# is used to indicate if 'initial' reaches 20, it will be assigned back to 7 again (its initial value))
+            Nullable = cannil -> { sc.cannil string = nil` }
+            Instance = instance -> { vect.instance revCopy = array:rev()` } (instead of changing the value of array to a reversed state, it creates a new instance of it and sets that instance to the variable 'revCopy')
+            Unique = uniq (only applies to arrays) -> { vect.uniq unique = [1 2 3 4 1 2 3 4]` } ('unique' is equal to [1 2 3 4])
+            Constant (Immutable) = immute -> { int.immute = 45` }
+            Super Type = stype -> { book.stype pages .. rn pages` } (the dollar sign references the custom data type's property; the super type returns a function (which is why 'rn' is used))
+            Base = base (a variable's value based on another) -> { int.base baser = 5 || original` } (now every value original increases, baser will too i.e. if original++ is called, then baser++ is also called and therefore is value will become 6)
+            Unsigned = usn (only for number dtypes) -> { int.usn unsigned = 34` }
+            Signed = sn (only for number dtypes) -> { int.sn signed = -45` }
+            Template Literal (only for sc dtype) = raw -> { sc.raw = "this is a <thing>"` } (anything inside the angle brackets runs as bytl code)
+
+        Collection types (data types that initially have native bytl types of it (multiple))
+            Data Type = dtype (creates a custom data type) -> { dtype book.cannil ... int pages, sc ^text, res ^txtfile` } (the ellipse indicates where to put the subvariables)
+            Modifier = mod (creates or selects a modifier) -> { mod SOMETHING ... dtype ~targets (*function*)` } (now {{ SOMETHING }} can now be used on whatever dtypes were specified)
+            Collection Type = ctype (creates a custom collection type) -> { ctype example ... *list of each function*` } (now example is essentially a js object as it has properties/methods you can access)
+            Function Type = ftype (creates a custom function type) -> { ftype math2 ... dfpn sin, dfpn cos, dfpn tan` } (where each 'variable' set is actually an initialized function for the ftype)
+
+        Function types (data types that contain only methods and not used as variables)
+            Time = time -> { int today = time:now():day()` }
+            Random = rnd -> { int rand = Rnd(1 10)` }
+            Math = math -> { fpn pi = math:PI` }
+
+
+
+KEYWORDS:
+    Loops:
+        For loop: (default for loop is: initial value starts at 0 and goes to another number in increments of 1)
+            default for loop -> { for defl var 6 (ex var`) } (for loop from 0 to 6 with variable 'var') 
+            customizable for loop = { for var = false, var != true, x++ (if x > 5 (var = true`)) }
+            array for loop -> { for.arr array, index (ex array[index]`) }
+        While loop (while something is happening):
+            while x (y()`) (while x is true, run the function y())
+        Array loop (arrcycle):
+            arrcycle array use val element, int index, arr array ()
+    Conditional Statements:
+        If/Else/Else if statement:
+            if <bool condition> (<fnc expression>)
+            else (<fnc expression>)
+            eif <bool condition> (<fnc expression>)
+        Switch statement:
+            switch <val variable> (
+                case <val checker> {<fnc expression>}
+                __ more cases
+                def {<fnc expression>}
+            )
+            the 'case' keyword can be used with brackets to specify if a value is greater than (or equal to), less than (or equal to), divisible by, or connected to another variable by using the following syntax:
+            case("gt") <if variable is greater than a value>
+            case("gte") <if variable is greater than or equal to a value>
+            case("lt") <if variable is less than a value>
+            case("lte") <if variable is less than or equal to a value
+            case("dvs") <if variable is divisible by a value>
+            case("fun") <if variable returns true in a function>
+    Function = fnc -> { fnc vect.sc functionName sc arg1, sc arg2 (rn args`) } (the keyword: 'args' represents all of the arguments in the func)
+    Global Variables/Functions:
+        Event = event (checks when a variable changes value) -> { event variable beforeValue afterValue .. ex [variable beforeValue afterValue]` } (ex is the function/keyword to print)
+        Remove Immute Property (Set mutable) = mute (sets an immute variable to mutable) -> { sc.immute string = "skd"` mute string` string = "eig"` }
+        Return (in a function) = rn -> { fnc int four (rn 4`) }
+        Typeof (dtype) = Dtype -> { sc var = "string guy"` ex Dtype var` } (prints out "SC")
+        Typeof (stype) = Stype -> { int.cannil.usn var = nil` ex Stype var` } (prints an array of all stypes i.e. ["CANNIL" "USN"])
+        Arguments = args -> returns an array of all arguments in a function inputted
+        Is Nil (Nil Question) = nilq (checks if value is nil) -> { nil var = nil` ex nilq var` } (will output true)
+        Set = set (used for setting modifiers for all cases) -> { set  mod modifier } (where modifier is the modifier to set)
+        Import/Export = enable/send (can send and receive functions and variables from one file to another)
+        Looseify = loose (strong typing isn't required) -> { loose()` __At the start of the file }
+        Strictify = strict (less leeway and more for better practice) -> { strict()` __At the start of the file }
+        That = that (returns the variable that holds the mainly used parameter) -> { if (anArray any(e) .. e == 5) (ex that : index(5)`)` } (prints the index of 5 in the array, anArray)
+    Valid Type Casts (*doesn't work in strict mode):
+        SC array` (array to string which is the equivalent of array:join(Nil))
+        *ARR string` (string to array which is the equivalent of string:split(Nil))
+        *SC number` (number to string which converts 9 to "9")
+        *CHAR number` (number to character which takes the ascii value of the character and returns it)
+        *INT|NUM character` (character to number which returns the ascii value of the character)
+        SC character` (character to string)
+        COLLECTION vector` (collection to vector)
+        VECT collection` (vector to collection)
+        *BOOL string` (string to boolean (checks truthy or falsy value))
+        SC boolean` (boolean to string (returns either "true" or "false"))
+
+
+
+MODIFIERS/SPECIFIERS: (   {{ MODIFIER }}  ** MODIFIER INVERSE **   ) [ modifiers modify default code ]
+    Modifiers:
+        Global:
+            glob{{ INSTANCESWAP }} -> the default changes from altering a value to returning a value and instance 
+        Array:
+            glob : array : rem{{ MUL }} -> the function called is not removing 2 elements, but instead removing n elements at a position 
+            glob : arr : fat{{ FATEACH }} -> fatten each element as opposed to groups
+            glob : arr : index{{ NEGATIVE }} -> gets index in terms of negative value (from right to left)
+        Association:
+            glob : assoc{{ NOACCESSDUPE }} -> there cannot be any duplicate accessors in an association
+        Function:
+            glob : fnc{{ UOVD }} -> a function that is unoverridable (cannot stop it when its running and cannot alter the function after it has been created)
+        Data Type:
+            glob : dtype{{ STYPEDISABLEDEFAULT }} -> disable default super types for global data types in custom data type
+        Base Supertype:
+            glob : stype : base{{ ALL }} -> all variables are affected no matter which one's value changes in a base supertype
+        String:
+            glob : sc : idxo{{ NEGATIVE }} -> gets index in terms of negative value (from right to left)
+            
+
+
+
+METHODS/FUNCTIONS:
+    Boolean Methods [ where 'boolean' is an example bool ]:
+        Compare = compare -> { bool.instance check = boolean : compare(val.cannil item)` } (where 'item' is any value and check will be the booleanic comparison between 'boolean' and 'item')
+
+
+    Number Methods [ where 'number' is an example num ]:
+        To Fixed = fix -> { fpn fixed = number : fix(int places = math:INF)` {{ INSTANCESWAP }} } (where 'places' is the number of decimal places to fix to defaulting to the max value)
+
+
+    String Methods [ where 'string' is an example string ]:
+        ToCharArray = type cast from string to arr -> { ARR string` }
+        Select/Slice = sel -> { sc.instance selection = string : sel(int.sn start, int.sn end)` } (where 'start' and 'end' target create a substring of the original string)
+        Includes = inc -> { bool doesInclude = string : inc([sc|char|rgx] checker)` } (where 'checker' is a substring/regex )
+        ToLowerCase = lcase -> { string : lcase()` } (converts every character to lowercase if it isn't already)
+        ToUpperCase = ucase -> { string : ucase()` } (converts every character to uppercase if it isn't already)
+        Length = len -> { string : len() }` (returns the number of characters in the string)
+        Replace = repl -> { string : repl([rgx|sc] checker, sc replacer)` } (where 'checker' is what to check for and 'replace' is what to replace it with in the string)
+        Trim = trim -> { string : trim(bool ^start  bool ^end)` } (where 'start' and 'end' are if only you want to trim the beginning or end of the string)
+        ASCII = ascii -> { arr asciis = string : ascii()` } (returns an array of every character in ascii)
+        Index Of = idxo -> { int.usn.cannil ix = string : idxo([sc|char|rgx] checker, int amount = 1)` } (where 'checker' is what to look for and 'amount' is the number of indices to return defaulting to 1)
+        Split = split -> { arr.sc splitted = string : split([sc|char] splitter)` } (where 'splitter' will take every instance of itself and remove it from the string and at each removal a substring from the previous removal (or 0) to the index of the removal will be added to a returned array)
+        Repeat = rep -> { string : rep(int amount)` } (where 'amount' is the number of times to repeat the string)
+
+
+    Array Methods [ where 'array' is an example array ] (you can either use full keyword method or bracket method):
+        Loops:
+            Filter = filter ->
+                keyword:
+                    { arrcycle array use int e, int i, vect a with filter ( rn fnc bool expression` ) } (you don't need brackets if there is just one line)
+                bracket:
+                    { array filter(int e, int i, vect a) .. ( rn fnc bool expression` ) } (semi-ellipse (..) is to indicate an anonymus function)
+            Any = any ->
+                keyword:
+                    { bool check = arrcycle array use int e with any ( rn fnc bool expression` ) } 
+                bracket:
+                    { bool check = array any(int e) .. ( rn fnc.bool expression` ) }
+            Every = every ->
+                keyword:
+                    { bool check = arrcycle array use int e with every ( rn fnc bool expression` ) }
+                bracket:
+                    { bool check = array every(int e) .. ( rn fnc bool expression` ) }
+            Map = map ->
+                keyword:
+                    { vect.int mapper = arrcycle array use int e with map ( rn fnc expression` ) }
+                bracket:
+                    { vect.int mapper = array map(int e) .. ( rn fnc expression` ) }
+            Prop = prop ->
+                keyword:
+                    { arrcycle array use int e with prop ( rn fnc assoc<val ~items>` ) }
+                bracket:
+                    { array prop(int e) .. ( rn fnc assoc<val ~items>` ) }
+            Up till = till -> 
+                keyword:
+                    { arrcycle array use int e with till ( rn fnc expression` ) }
+                bracket:
+                    { array till(int e) .. ( rn fnc expression` ) }
+        Not Loops:
+            Join = join -> { array : join(sc joiner)` } (will create an array with a separator of 'joiner')
+            Index Of = index -> { int e = array : index(val element, int ^times = 1)` } (where 'element' is the item to check for its index and 'times' is for how many indexes to return)
+            Push = ins -> { array : ins(int position = (array:len() - 1), val ~items)` } (where position is the index to push (default is end of array) and items is the list of items to insert)
+            Pop = rem -> { array : rem(val ~items)` } OR { array:rem(int position, int amount)` ;{{ MUL }} } (where position is index in the array and amount is the number of items to remove at that index; the 'mul' specifier is specifying multiple removals for the context )
+            Sort = sort -> { array : sort(sc format)` } (where 'format' is matched by a specific regex such as "a-z")
+            Reverse = rev -> { array : rev()` }
+            Select/Slice = select -> { collection sliced = array : select(int start, int amount)` } (where 'start' is the start of slice (index base 0) and 'amount' is the places in the array to slice)
+            Includes = has -> { bool check = array : has(val element)` } (where 'element' is any value that you would want to check for in an array)
+            Flatten = flat -> { array : flat() } OR { array : flat(int ^amount) } (will flatten any 2d+ array to a 1d array unless otherwise specified by a depth argument, 'amount')
+            Fatten = fat -> { array : fat(amount)` } (where 'amount' specifies how many extra layers of array e.g. [1 2 3]:fat(1) would give [[1 2 3]] and [[1 2 3] [4 5 6] [7 8 9]] would give [[[1 2 3]] [[4 5 6]] [[7 8 9]]])
+            Sum = sum (only for num arrays) -> { num sum = array : sum()` } (returns the sum of all numeric values in an array)
+            Series = serie (only for sequences) -> { num sum = seq : serie(int last)` } (where 'last' is the place of the seq to sum up to i.e. {1 3 5}:serie(2) will return 1 + 3 because the last value is 2)
+            Shuffle = shuf -> { arr.instance shuffled = array : shuf()` }
+
+
+
+ERRORS/EXCEPTIONS:
+    Global Variable errors:
+        Variable doesn't exist = VariableInexistent
+    Array errors:
+        Array index is out of bounds = ArrayIndexUnreachable
+        Indexing a non-array = NonArrayIndexing
+    String errors:
+        String in single quotes = StringSingleQuote
+    Number errors:
+        Non number using mathematical operators = NonNumberMathematicalUsage
+    Function errors:
+        Function doesn't exist/can't be found = FunctionInexistent
+    Association errors:
+        Association without access points = AssociationNoAccess
+    Nil errors:
+        Variable can't be nil = NilNotAllowed
+    Character errors:
+        Character in double quotes = CharacterDoubleQuote
+    Comment errors:
+        Comment obstructing line of code = CommentObstruction
+    Resource errors:
+        File errors:
+            File not found = ResourceFileNotFound
+    Iostream errors:
+    Regular Expression errors:
+        Invalid regexp = RegexInvalid
+
+    Supertype errors:
+        Immute variable can't be altered = ImmutableValueChange
+
+    Miscellaneous Errors:
+        Alone keyword (with surrounding spaces) = IllegalKeywordPlacement
+        Invalid case param in switch statement = SwitchCaseInvalidParameter
+        Wrong datatype (e.g. int number = "string?"`) = DataTypeInequality
+        Casting that doesn't make sense (e.g. char to fnc) = IllegalDataTypeCast
