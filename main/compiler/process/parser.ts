@@ -1,8 +1,8 @@
 import lexed from "./lexer.ts";
-import type { Assign, Token, AST, TokenValueNode } from "./tokens.ts";
-import { TokenType, Nested, MultiTypes } from "./tokens.ts";
-import { lookAheadStr, lookAheadReg, lookBehindReg } from "./looks.ts";
-import { NthD } from "./tokens.ts";
+import type { Assign, Token, AST, TokenValueNode } from "../misc/tokens.ts";
+import { TokenType, Nested, MultiTypes } from "../misc/tokens.ts";
+import { lookAheadStr, lookAheadReg, lookBehindReg } from "../misc/looks.ts";
+import { NthD } from "../misc/tokens.ts";
 
 function Parser(lexer: Token[]): AST<TokenType>[] {
     let lexerPos: number = 0;
