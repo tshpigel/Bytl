@@ -1,4 +1,4 @@
-import { Null } from "../tokens.ts";
+import { Null } from "../misc/tokens.ts";
 
 /* 
     Numbers
