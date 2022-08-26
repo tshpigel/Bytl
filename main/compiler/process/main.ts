@@ -3,8 +3,13 @@ import type { AST, Assign, Exit } from "../misc/tokens.ts";
 import { TokenType } from "../misc/tokens.ts";
 
 //console.log("\n\nAST CONVERSION:\n");
+
 const XN: TextEncoder = new TextEncoder();
-await Deno.writeFile("./output.ts", XN.encode("import * as TYPE from './defs/types.ts';\n"));
+async function Gen(text: string, options?: Deno.WriteFileOptions) {
+    await Deno.writeFile("../O/O.ts", XN.encode(text), options);
+}
+
+await Gen("import * as TYPE from '../defs/types.ts';\n");
 
 for(const N of _AST) {
     let asg = "";
@@ -33,5 +38,5 @@ for(const N of _AST) {
             asg += i + 1 === l ? `${a[i]});\n` : `${a[i]},`;
         }
     }
-    await Deno.writeFile("./output.ts", XN.encode(asg), { append: true });
+    await Gen(asg, { append: true });
 }
