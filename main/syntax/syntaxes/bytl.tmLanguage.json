@@ -1,1 +1,41 @@
-
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Bytl",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#declaration"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.bytl",
+				"match": "\\b(if|while|for|rn|else|eif|welse|switch|sysc)\\b"
+			}]
+		},
+		"declaration": {
+			"patterns": [{
+				"name": "keyword",
+				"match": "\\b(num|int|dec|sc|char|arr|vect|coll|seq|orp|anp|json|bool|nil|val|ambg|exc|assoc|res|file|localize|rgx|proc|alg|fnc|io|comm)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.bytl",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.bytl",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.bytl"
+}
