@@ -6,7 +6,7 @@ SYNTAX DEFINITION:
     Line separator/ender = `
     One line comments = __ (double underscore)
     Multi-line comments = // <comment> \\
-    Data type casting = <datatype in all caps> <variable> e.g. FPN number` (sets num var to fpn var)
+    Data type casting = <datatype in all caps> <variable> e.g. DEC number` (sets num var to dec var)
     Add kinetype = .<name of kinetype> <variable> e.g. -> .cannil string` (adds cannil ktype to sc var)
 
      
@@ -191,17 +191,15 @@ KEYWORDS:
         *CHAR number` (number to character which takes the ascii value of the character and returns it)
         *INT character` (character to number which returns the ascii value of the character)
         SC character` (character to string)
-        FPN integer` (integer to float)
-        DFPN integer` (integer to double)
-        LONG integer` (integer to long)
-        COLLECTION vector` (collection to vector)
-        VECT collection` (vector to collection)
+        FPN integer` (integer to decimal)
+        COLL vector` (vector to collection)
+        VECT collection` (collection to vector)
         *BOOL string` (string to boolean (checks truthy or falsy value))
         SC boolean` (boolean to string (returns either "true" or "false"))
 
 
 
-MODIFIERS: (   {{ <MODIFIER> }<parameters>}  {{ \<MODIFIER INVERSE> } <parameters> }   ) [ modifiers modify default code ]
+MODIFIERS: (   {{ <MODIFIER> } <parameters> }  {{ \<MODIFIER INVERSE> } <parameters> }   ) [ modifiers modify default code ]
     Functional Modifiers (fmod):
         Decimal:
             glob : num : dec{{ PRECISIONSET } <int.usn{# bet 1, 15} precision> }
