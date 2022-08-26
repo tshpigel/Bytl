@@ -1,6 +1,6 @@
 import { _AST } from "./parser.ts";
-import type { AST, Assign, Exit } from "./tokens.ts";
-import { TokenType } from "./tokens.ts";
+import type { AST, Assign, Exit } from "../misc/tokens.ts";
+import { TokenType } from "../misc/tokens.ts";
 
 //console.log("\n\nAST CONVERSION:\n");
 const XN: TextEncoder = new TextEncoder();
