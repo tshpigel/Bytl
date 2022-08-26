@@ -1,6 +1,6 @@
-import type { Token, NthD } from "./tokens.ts";
-import { TOKENMAP, TokenType } from "./tokens.ts";
-import { lookAheadStr, lookAheadReg } from "./looks.ts" 
+import type { Token, NthD } from "../misc/tokens.ts";
+import { TOKENMAP, TokenType } from "../misc/tokens.ts";
+import { lookAheadStr, lookAheadReg } from "../misc/looks.ts" 
 
 export function Lexer(code: string) : Token[] {
     const output: Token[] = [];
