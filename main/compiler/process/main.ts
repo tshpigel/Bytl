@@ -1,6 +1,6 @@
 import { _AST } from "./parser.ts";
-import type { AST, Assign, Exit } from "../misc/tokens.ts";
-import { TokenType } from "../misc/tokens.ts";
+import type { AST, Assign, Exit } from "../misc/general/tokens.ts";
+import { TokenType } from "../misc/general/tokens.ts";
 
 //console.log("\n\nAST CONVERSION:\n");
 
