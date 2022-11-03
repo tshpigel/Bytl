@@ -9,22 +9,117 @@
 			"include": "#declaration"
 		},
 		{
+			"include": "#global"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#operators"
+		},	
+		{
+			"include": "#ktypes"
+		},
+		{
+			"include": "#modifiers"
+		},
+		{
 			"include": "#strings"
+		},
+		{
+			"include": "#characters"
+		},
+		{
+			"include": "#floating-context"
+		},
+		{
+			"include": "#regex"
+		},
+		{
+			"include": "#access"
+		},
+		{
+			"include": "#numbers"
 		}
 	],
 	"repository": {
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.bytl",
-				"match": "\\b(if|while|for|rn|else|eif|welse|switch|sysc)\\b"
-			}]
+			"patterns": [
+				{
+					"name": "keyword.control.bytl",
+					"match": "\\b(if|while|for|rn|else|eif|welse|switch|sysc|defl|elw|cycle|def|cont|br|skip|case)\\b"
+				},
+				{
+					"name": "markup.inserted",
+					"match": "\\b(gte?|lte?|dvs|pro|bet)(?=\\scase)\\b"
+				}
+			]
+		},
+		"global": {
+			"patterns": [
+				{
+					"name": "entity.name.function.bytl",
+					"match": "\\b(Set|Event|When|Mute|rn|Dtype|Ktype|Args|Nilq|Enable|Send|Infer|Strict|That|Apply|Alias|Expunge|Soc|Crt|Adj|Serialize)\\b"
+				},
+				{
+					"name": "variable.language.bytl",
+					"match": "\\bC0\\b"
+				},
+				{
+					"name": "constant.language.bytl",
+					"match": "\\b(true|false|nil)\\b"
+				}
+			]
 		},
 		"declaration": {
 			"patterns": [{
-				"name": "keyword",
-				"match": "\\b(num|int|dec|sc|char|arr|vect|coll|seq|orp|anp|json|bool|nil|val|ambg|exc|assoc|res|file|localize|rgx|proc|alg|fnc|io|comm)\\b"
+				"name": "storage.type.bytl",
+				"match": "\\b(num|int|dec|sc|char|arr|vect|coll|seq|orp|anp|bool|val|assoc|res|file|proc|alg|fnc|json|ambg|exc|localize|rgx|comm|neurlw)\\b"
 			}]
 		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.bytl",
+					"match": "__[^\\n]*"
+				},
+				{
+					"name": "comment.block.bytl",
+					"begin": "!@",
+					"end": "@!"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.bytl",
+					"match": "([&|@=?%]|::(?!:))"
+				},
+				{
+					"name": "constant.other.bytl",
+					"match": "([~$^#,_\\-*/]|:(?!:))"
+				}, 
+				{
+					"name": "markup.bold",
+					"match": ">>"
+				}
+			]
+		},
+		"ktypes": {
+			"patterns": [{
+				"name": "storage.modifier.bytl",
+				"match": "(?<=\\.|\\.\\\\)[a-z][a-z0-9]*(?=[.\\s,])"
+			}]
+		},
+		"modifiers": {
+			"begin": "\\{\\{",
+			"end": "\\}.*\\}",
+			"patterns": [{
+				"name": "storage.modifier.bytl",
+				"match": "\\s*[A-Z]+\\s*"
+			}]
+		},	
 		"strings": {
 			"name": "string.quoted.double.bytl",
 			"begin": "\"",
@@ -35,6 +130,54 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"characters": {
+			"begin": "'",
+			"end": "'",
+			"patterns": [{
+				"name": "string.quoted.single",
+				"match": "."
+			}]
+		},
+		"floating-context": {
+			"patterns": [{
+				"name": "constant.other",
+				"match": "(;[rembps])|((?<=;[rempbs].*);)"
+			}]
+		},
+		"regex": {
+			"patterns": [{
+				"name": "string.regexp",
+				"match": "(?<=;r).*(?=;)"
+			}]
+		},
+		"procedures": {
+			"patterns": [{
+				"name": "entity.name.function.bytl",
+				"match": "(?<=_\\s*)[a-zA-Z]\\w*"
+			}]
+		},
+		"access": {
+			"patterns": [
+				{
+					"name": "support.type.bytl",
+					"match": "(?<=:\\s*)[a-zA-Z]\\w*"
+				},
+				{
+					"name": "entity.name.function.bytl",
+					"match": "(?<=_\\s*)[a-zA-Z]\\w*"
+				},
+				{
+					"name": "markup.italic",
+					"match": "(?<=#\\s*)[a-zA-Z]\\w*"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [{
+				"name": "constant.numeric",
+				"match": "\\d"
+			}]
 		}
 	},
 	"scopeName": "source.bytl"
