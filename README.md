@@ -36,24 +36,24 @@ n = nil __ Variables are mutable by default
 ```
 Kinetic types are also chainable, so if `n` not only needed to be able to be `nil`, but also be unsigned, then simply setting the type to `num.cannil.usn` works fine.
 
-### Coalesced and Coalescing Types
+### Encapsulated and Encapsulating Types
 To create an array in Bytl, simply 
 ```
 arr a = [1 2 3] __ arrays don't require comma separation
 ``` 
-will suffice. Although if `a` needs to contain at least one string, then it is possible to coalesce `arr` with `sc` for `a`. 
+will suffice. Although if `a` needs to contain at least one string, then it is possible to encapsulate `arr` with `sc` for `a`. 
 ```
 arr[sc] a = ["there is one string" 1 2 3]
 ```
-A data type can either be coalescing, or not, though all data types are coalescable. Only data types that may require another type to be specified (procedure return type, array require type, etc.) are coalescing as they are the initiators of the coalescence.
+A data type can either be encapsulating, or not, though all data types are encapsulatable. Only data types that may require another type to be specified (procedure return type, array require type, etc.) are encapsulating as they are the initiators of the encapsulation.
 
 ```
 arr.cannil[num.usn] a = nil __ The cannil ktype overrides the num coalesced type
 ```
-As shown above, coalescing types can be combined with ktypes.
+As shown above, encapsulating types can be combined with ktypes.
 
 ### Procedures
-Procedures are simply variables that contain a list of actions. There are two subtypes of procedures, that being functions (`fnc`, and does not return a value), and algorithms (`alg`, and must return a value). Algorithms and procedures are both coalescing types (if you coalesce a procedure it automatically converts to an algorithm, and if you don't it automatically converts to a function) while functions are not, as they have no return type to coalesce with.
+Procedures are simply variables that contain a list of actions. There are two subtypes of procedures, that being functions (`fnc`, and does not return a value), and algorithms (`alg`, and must return a value). Algorithms and procedures are both encapsulating types (if you encapsulate a procedure it automatically converts to an algorithm, and if you don't it automatically converts to a function) while functions are not, as they have no return type to encapsulate in.
 
 Procedure syntax is quite different to most programming languages
 ```
@@ -71,7 +71,7 @@ int five2 = 5
 
 >> five1, five2 __ 5 and 5
 ```
-> _Note that if code becomes too unreadable, surrounding expressions with regular parentheses `()` can help, and does nothing to the code except create precedence which usually isn't an issue_
+> _Note that if code becomes too unreadable, surrounding expressions with regular parentheses `()` can help, and does nothing to the code_
 
 Because procedures are just variables, they are accessed/called in the same way as shown in the example above
 
