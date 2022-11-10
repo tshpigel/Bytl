@@ -86,7 +86,7 @@ So... there's some new syntax to uncover here. First of all, the underscore is a
 ### Associations
 Associations are essentially a super hash map. A normal hashmap contains a unique key, and a value that is accessed through the key. Not only is this possible with associations, but they can have multiple keys and values.
 ```
-assoc <@sc int> map = <
+assoc[@sc int] map = <
   "one" 1,
   "two" 2,
   "three" 3
@@ -102,7 +102,7 @@ let map = {
 ```
 Now, you might be asking: why go through all the trouble to declare types for the hashmap, or why does it have to be so convoluted for such simple code. Well if you wanted multiple access points, you could do the following 
 ```
-assoc <@int @sc arr[int]> superMap = <
+assoc[@int @sc arr[int]] superMap = <
   1 "one" [1],
   2 "two" [2 2],
   3 "three" [3 3 3]
