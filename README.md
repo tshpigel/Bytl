@@ -1,4 +1,4 @@
-# Bytl <img src="https://github.com/tshpigel/Bytl/blob/main/docs/images/icon.png" alt="Bytl Icon" title="Bytl Icon" align="right">
+# Bytl <img src="https://github.com/tshpigel/Bytl/blob/main/docs/images/icon.png" alt="Bytl Icon" title="Bytl Icon" align="right" width="100px" height="100px">
 #### A S2S compiler for a statically typed non-OO AI development esoteric programming language made purely in TypeScript Deno
 When I decided to start making the design for Bytl, I was thinking of a language where you type as little as possible to write equally as powerful programs as other common languages where you would have to type more. This obviously ended up in shorter and sometimes not as memorable keywords, but it did end up with a lot of shortcuts to do common things such as loops or even switch statements. Bytl also has different syntax from other languages in some cases, as not only are keywords different, but also expressions are made slightly differently. In addition, Bytl can have very complex typing and, types have the option to be become extremely specific. 
 
