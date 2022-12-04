@@ -3,15 +3,14 @@
 -------------------------------------------
 
 SYNTAX DEFINITION:
-    Line separator/ender = `
+    No delimiter, instead tab is a line separator
     One line comments = __ (double underscore)
-    Multi-line comments = // <comment> \\
-    Data type casting = <datatype in all caps> <variable> e.g. DEC number` (sets num var to dec var)
-    Add kinetype = .<name of kinetype> <variable> e.g. -> .cannil string` (adds cannil ktype to sc var)
-
+    Multi-line comments = !@ <comment> @!
+    Data type casting = <datatype in all caps> <variable> e.g. FPN number (sets num var to fpn var)
+    Add kinetype = .<name of kinetype> <variable> e.g. -> .cannil string (adds cannil ktype to sc var)
      
     Logical Operators:
-        & for AND
+        & for AND 
         | for OR (can also be used in orps)
         > for GREATER THAN
         < for LESS THAN
@@ -19,12 +18,12 @@ SYNTAX DEFINITION:
         % for MODULO
         @ for HIGHER SCOPE REFERENCING (within procedure parameters) or ASSOC KEY REFERENCE
         ? for NIL CHECK (before variable)
-        ^ for OPTIONAL PARAMETER
+        ^ for EXPONENTIATION
+        ! for UNOPTIONAL
         : for RELATIVE ACCESS
         # for VALUE ACCESS
         .. for ANONYMUS PROCEDURE
         . for KINETYPE CHAINING
-        - for DATATYPE/SUBTYPE ACCESS
         - for CONCATENATION
         :: for RELATIVE CREATION
         ? : for TERNARY
@@ -34,112 +33,90 @@ SYNTAX DEFINITION:
         ;; for FULL/STRICT CONTEXT
         _ for PROCEDURE ACCESS
         _@ for SCOPED PROCEDURE REFERENCING
-        $ for FLAGS/PLACEHOLDERS
-        <- for DE-CONTEXT (specifying a number in between like <n- will decontext n times)
+        $ for SYNTACTIC SUGAR ARGUMENTS
+        <- for DE-CONTEXT (specifying a number in between < and - will decontext n times)
         * for ARRAY KTYPE EACH (only for array vars)
-        { … } for SPECIAL BLOCKS
 
-    
+
     Data types:
         Normal types:
-            Any = val -> { val value = "string"` }
-            Dynamic Tree = tree -> { tree AI; } (starts a self-learning tree)
+            Any = val -> { val value = "string" }
+            Dynamic Tree = tree -> { tree AI } (starts a self-learning tree)
             Ambiguous (can change data type) = ambiguous -> { ambiguous }
-            Array = arr -> { arr array = [1 2 3 4 5 6 7 8 9 10]` } (can be a vect or collection)
-                Vector (same data type the entirety of the vector) = vect -> { vect-char characterVector = ['A' 'B' 'C']` }
-                Collection (can be any data type for each element) = coll -> { coll collect = [3 "four" true nil]` }
-                Sequence (only numbers and characters are allowed) = seq -> { seq-int sequence = [startingValue separator iterations]` }
-                Or Parameters (checking if this or that or that equals whatever) = orp -> { orp orParams = [1|2|3]` if orParams 2 (ex 'y'`) } OR { if orp->[1|2|3] == x (ex x`) } (will print x if x is 1, 2, or 3)
+            Array = arr -> { arr array = [1 2 3 4 5 6 7 8 9 10] } (can be a vect or collection)
+                Vector (same data type the entirety of the vector) = vect -> { vect-char characterVector = ['A' 'B' 'C'] }
+                Collection (can be any data type for each element) = coll -> { coll collect = [3 "four" true nil] }
+                Sequence (only numbers and characters are allowed) = seq -> { seq[int] sequence = [startingValue separator iterations] }
+                Or Parameters (checking if this or that or that equals whatever) = orp -> { orp orParams = [1|2|3]  if orParams 2 ('y') } OR { if orp->[1|2|3] == x (x) } (will print x if x is 1, 2, or 3)
                 And Parameters (checking if multiple values or types match a value of some sort) = anp (pronounced 'ap') -> {  }
-                JSON (using json format) = json -> { json JSON = [{"some":"example"}, {"J":"S"}, {"O":"N"}]` }
-            String = sc (string of characters that must be in double quotes) -> { sc string = "a string"` }
-            Number = num -> { num number = 6.2` }
-                Integer = int -> { int superInt = <any number between -2^1023 and +2^1023>` }
-                Decimal = dec -> { dec decimal = <any decimal up to 15 decimals>` }
-            Character = char (must be in single quotes) -> { char letter = 'E'` }
-            Boolean = bool -> { bool boolean = true` }
-            Null = nil -> { nil-sc nullString` }
-            Exception = exc ->  { exc somethingElse = Except:(exc:type exceptionType, sc message)` }
-            Comment = comm -> { comm comment = __This is a comment` }
-            Resource = res -> { res file = Resource:files "example.txt"` }
-                File = file -> {  }
-                Localize = localize -> {  }
-            Input/Output Stream = io -> { io input = in "Enter your name and age: ", sc, sint` }  (comma, then data type (after the prompt), is specifying the desired dtype of the output)
-            Global = glob -> { glob object = Resource` } (anything can be accessed with glob (basically a reference of bytl itself))
-            Procedure (a list of actions to run) = proc -> { proc procedure (ex "a procedure")` }
-                Algorithm = alg (returns a value) -> { alg-int algorithm <int arg1, int arg2> (rn args_sum`)` }
-                Function = fnc (doesn't return a value) -> { fnc function <int arg1, int arg2> (ex "<arg1> and <arg2>".raw)` }
-            Association = assoc -> { assoc<sc @sc sc> association = <"key1" "value1" "extra1", "key2" "value2" extra2">` } (the @ symbol means that that part of the association is how to access the part e.g. association("value1") will return ["key1" "value1" "extra1"])
-            Regular Expression = rgx -> { rgx oneOrMoreDigit = ;r \d+ ;g` }
-            Modifier = mod (creates or selects a modifier) -> { mod SOMETHING .. rel ~targets (<proc procedure>)` } (now {{ SOMETHING }} can now be used on whatever dtypes were specified)
-            Time = time -> { int today = time_now_@day` }
-            Random = rnd -> { int rand = Rnd 1, 10` }
-            Math = math -> { dec pi = math#PI` }
-    
+                JSON (using json format) = json -> { json JSON = [{"some":"example"}, {"J":"S"}, {"O":"N"}] }
+            String = sc (string of characters that must be in double quotes) -> { sc string = "a string" }
+            Number = num -> { num number = 6.2 }
+                Integer = int -> { int integer = <any number between -2^1023 and +2^1023> }
+                Decimal = dec -> { dec decimal = <any decimal up to 15 decimals> }
+            Character = char (must be in single quotes) -> { char letter = 'E' }
+            Boolean = bool -> { bool boolean = true }
+            Null = nil -> { nil-sc nullString }
+            Exception = exc ->  { exc somethingElse = Except:(exc:type exceptionType, sc message) }
+            Comment = comm -> { comm comment = __This is a comment }
+            Resource = res -> { res file = .obj(res:File) "example.txt" }
+                File = file -> { file.obj f = File <fileToOpen;p;> }
+                Localize = localize -> { localize-int a = 5 } (localize#a to access)
+                Input Stream = in -> { in-sc,int input = "Enter your name and age: " }
+            Global = glob -> { glob object = Resource } (anything can be accessed with glob (basically a reference of bytl itself))
+            Procedure (a list of actions to run) = proc -> { proc procedure ("a procedure") }
+                Algorithm = alg (returns a value) -> { alg-int algorithm <int arg1, int arg2> = (rn args_sum) }
+                Function = fnc (doesn't return a value) -> { fnc function <int arg1, int arg2> = (.RAW "<arg1> and <arg2>") }
+            Association = assoc -> { assoc<sc @sc sc> association = <"key1" "value1" "extra1", "key2" "value2" extra2"> } (the @ symbol means that that part of the association is how to access the part e.g. association("value1") will return ["key1" "value1" "extra1"])
+            Regular Expression = rgx -> { rgx oneOrMoreDigit = ;r \d+ ;g }
+            Modifier = mod (creates or selects a modifier) -> { mod SOMETHING .. rel ~targets (<proc procedure>) } (now {{ SOMETHING }} can now be used on whatever dtypes were specified)
+            Time = time -> { int today = time_now_@day }
+            Random = rnd -> { int rand = Rnd 1, 1 }
+            Math = math -> { dec pi = math#PI }
+            Neural Network = neurlw -> { neurlw }
+            Code Macro = cmacro -> { cmacro macro = ( else (!@ code @!) ) } (everytime 'macro' is called, it will replace it with the code specified)
+
         Kinetic types (kinetypes can be chained by separating them with a period):
             Functional Kinetypes (fnktypes are ktypes with arguments using curly braces):
-                Base = base (a variable's value based on another) -> { int.base{original} baser = 5` } (now every value original increases, baser will too i.e. if original++ is called, then baser++ is also called and therefore is value will become 6)
-                Initial = init -> { int.init{20} initial = 7` } (now every time 'initial' becomes 20, it will revert back to 7)
-                Lambda (only for procedure dtypes) = lambda -> { alg.lambda{$ + 2} lambdaFunc` } (now any input to 'lambdaFunc' will return an addition of 2)
-                Multi-Dimensional = md -> { vect.md{int.usn^ nestedLimit} twoDArray = [3 3 [5 5] 4 4 [6 6]]` }
+                Base = base (a variable's value based on another) -> { int.base{original} baser = 5 } (now every value 'original' increases, 'baser' will too i.e. if 'original++' is called, then 'baser++' is also called and therefore its value will become 6)
+                Initial = init -> { int.init{20} initial = 7 } (now every time 'initial' becomes 20, it will revert back to 7)
+                Lambda (only for procedure dtypes) = lambda -> { alg.lambda{$ + 2} lambdaFunc } (now any input to 'lambdaFunc' will return an addition of 2)
+                Multi-Dimensional = md -> { vect.md{int.usn nestedLimit} twoDArray = [3 3 [5 5] 4 4 [6 6]] }
+                Toggle = tog -> { int.tog{arr[dtype](Dtype #)} integerToggle } ()
+                Left-hand side = lhs (only for proc dtypes) -> { proc.lhs{int sc} p = ( >> Args#lhs ) \\ 4 "4" p __ [4 "4"] }
             Valued Kinetypes (vlktypes are normal ktypes):
-                Dynamic = dync -> { sc.dync dynamicVariable = "ooooooo"` } (allows variable names to be dynamic)
-                Object (accesses the constructor procedure of used datatype (every datatype except for dtype has its own constructor)) = obj -> { int.obj numberConstructor = Int 5` }
-                Unit of Measurement = uom -> { int.uom newMeter = <-;meter * 100` } (the semi-colon defines the context of the assignment)
-                Nullable = cannil -> { sc.cannil string = nil` }
-                Spaced Out Algorithm (e.g. ex 'd'`) = fspace -> { alg.fspace example <int number> (rn number`)` ex example 4` } (disabled in strict mode)
-                Spaced Out Array Elements (e.g. [1 2 3]) = arrspace -> { arr.arrspace }
-                Instance = instance -> { vect.instance revCopy = array_rev` } (instead of changing the value of array to a reversed state, it creates a new instance of it and sets that instance to the variable 'revCopy')
-                Unique = uniq (only applies to arrays) -> { vect.uniq unique = [1 2 3 4 1 2 3 4]` } ('unique' is equal to [1 2 3 4])
-                Constant (Immutable) = immute -> { int.immute = 45` }
-                Kinetic Type = ktype -> { book.ktype pages .. rn pages` } (the dollar sign references the custom data type's property; the super type returns an algorithm (which is why 'rn' is used))
-                Unsigned = usn (only for number dtypes) -> { int.usn unsigned = 34` }
-                Signed = sn (only for number dtypes) -> { int.sn signed = -45` }
-                Template Literal (only for sc dtypes) = raw -> { sc.raw templateLiteral = "this is a <thing>"` } (anything inside the angle brackets runs as bytl code)
-                Left/Right Hand-Side (only for procedure dtypes) = lrhs -> {  } (defines arguments for both left and right sides (automatically ))
-                Invisible Return Parameter (only for procedure dtypes) = r2 -> { proc.r2.lambda double e --> e * 5` } (secretly returns the parameter in addition to the output)
+                Dynamic = dync -> { sc.dync dynamicVariable = "ooooooo" } (allows variable names to be dynamic)
+                Object (accesses the constructor procedure of used datatype (every datatype except for dtype has its own constructor)) = obj -> { int.obj numberConstructor = Int 5 }
+                Unit of Measurement = uom -> { int.uom newMeter = ;<-meter * 100 } (the semi-colon defines the context of the assignment)
+                Nullable = cannil -> { sc.cannil string = nil }
+                Instance = instance -> { vect.instance revCopy = array_rev } (instead of changing the value of array to a reversed state, it creates a new instance of it and sets that instance to the variable 'revCopy')
+                Unique = uniq (only applies to arrays) -> { vect.uniq unique = [1 2 3 4 1 2 3 4] } ('unique' is equal to [1 2 3 4])
+                Constant (Immutable) = immute -> { int.immute = 45 }
+                Overloadable = ovld (only for procedure dtypes) -> { proc.ovld-int <int p> p = (rn p)   p <sc s> = (rn s) }
+                Kinetic Type = ktype -> { book.ktype pages .. rn pages } (the dollar sign references the custom data type's property; the super type returns an algorithm (which is why 'rn' is used))
+                Unsigned = usn (only for number dtypes) -> { int.usn unsigned = 34 }
+                Signed = sn (only for number dtypes) -> { int.sn signed = -45 }
+                Template Literal (only for sc dtypes) = raw -> { sc.raw templateLiteral = "this is a <thing>" } (anything inside the angle brackets runs as bytl code)
+                Invisible Return Parameter (only for procedure dtypes) = r2 -> { proc.r2.lambda double e --> e * 5 } (secretly returns the parameter in addition to the output)
 
 
-
-MISCELLANEOUS:
-    Difference between 'ambiguous' and 'val'? ambigious can change data type while val cannot
-    Difference between curly braces and normal parentheses? curly are for more complex expressions/code for differentiation
-    Special (Curly) blocks uses:
-        Parameter Filters (also works on orps) -> proc procedure = sc.?cannil{_len > 6, _occur "string" > 2, # !== "nope"} string (...)` (will only allow string parameters with len > 6 and at least 2 occurences of "string", and self is not "nope")
-        JSON -> JSON json = [{...}, {...}, ...]`
-        Sequences -> seq sequence = {...}`
-    
-
-    Special Contexts:
-        Bit-context -> ;b 3 >> 4 ~ 2 - 4 & 1 ; (example bit operations)
-        Regex-context -> ;r ^[^not]\d+$ ; (example regex)
-        Executable-context -> ;e cd ~, ls ; (example terminal commands (commas and newlines separate commands))
-        Mathematical-context -> ;m 3! * 7% ∑(n1,10,n) ; (mathematical operators such as factorial, and sigma sum are now executable)
-        Source-context -> ;s ;
-
-    Relative Creation Syntax (indents are not required, but make it more readable):
-        :: <relative name>
-            : <create sub relative> __ (can infinitely nest relatives)
-            _ <create procedure for relative>
-            # <create value for relative>
-        ::`
 
 KEYWORDS:
     Loops:
         Toggle, Continue, and Break -> 
-            tog <int.usn{# bet 2, array_len} skips = 2> (runs code every other iteration), 
+            skip <int.usn{# bet 2, array_len} skips = 2> (runs code every other iteration), 
             cont (skips current iteration), 
-            brk (stops loop)
+            br (stops loop)
         For loop: (default for loop is: initial value starts at 0 and goes to another number in increments of 1)
-            default for loop -> { for defl var 6 (ex var`) } (for loop from 0 to 6 with variable 'var') 
-            customizable for loop = { for $false, !$, x++ (if x > 5 ($true`)) } ($ are flags that represent variable placeholders and infer if it is a condition, expression, or assignment based on the context)
-            array for loop -> { for:-arr array, index (ex array[index]`) }
+            default for loop -> { for defl var 6 (var) } (for loop from 0 to 6 with variable 'var') 
+            customizable for loop = { for $false, !$, x++ (if x > 5 ($true)) } ($ are flags that represent variable placeholders and infer if it is a condition, expression, or assignment based on the context)
+            array for loop -> { for:-arr array, index (array[index]) }
         While loop (while something is happening):
-            while x (y`) (while x is true, run the procedure y)
+            while x (y) (while x is true, run the procedure y)
             elw <condition> (<expression>) (else while)
             welse (<expression>) (else, run a while on the opposite condition)
         Array loop (cycle):
-            cycle array use val element, int index, arrd arrayDuplicate ()
+            cycle array use <val element>, <int index>, <arr arrayDuplicate> ()
     Conditional Statements:
         If/Else/Else if statement:
             if <bool condition> (<proc expression>)
@@ -161,202 +138,250 @@ KEYWORDS:
             pro case <if variable returns true in a procedure>
         System Conditionals:
             sysc <val ~variables> (<alg-arr-bool conditions>)
-    Algorithm = alg -> { alg-vect-sc algorithmName sc arg1, sc arg2 (rn args`)` } (the keyword: 'args' represents all of the arguments in the func)
+    Algorithm = alg -> { alg-vect-sc algorithmName sc arg1, sc arg2 (rn args) } (the keyword: 'args' represents all of the arguments in the func)
     Global Variables/Algorithms:
-        Event = Event (checks when a variable changes value) -> { Event variable beforeValue afterValue .. ex [variable beforeValue afterValue]` } (ex is the algorithm/keyword to print)
-        When = When (similar to 'Event', except checks when a condition becomes true or when an action has happened) -> { When <fnc expression> }
-        Remove Immute Property (Set mutable) = Mute (sets an immute variable to mutable) -> { Mute <val.immute const>` } (where 'const' is an immutable to turn into a mutable)
-        Return (in a procedure) = rn -> { alg-int four (rn 4`)` }
+        Event = Event (checks when a variable changes value) -> { Event <val* var val beforeValue val afterValue> .. [var beforeValue afterValue] }
+        When = When (similar to 'Event', except checks when a condition becomes true or when an action has happened) -> { When <expr expression> }
+        Remove Immute Property (Set mutable) = Mute (sets an immute variable to mutable) -> { Mute <val.immute const> } (where 'const' is an immutable to turn into a mutable)
+        Return (in a procedure) = rn -> { alg-int four (rn 4) }
         Typeof (dtype) = Dtype -> { Dtype <val variable> } (where 'variable' is the variable to print the dtype for)
-        Typeof (ktype) = Ktype -> { int.cannil.usn var = nil` ex Ktype var` } (prints an array of all ktypes i.e. ["CANNIL", "USN"])
+        Typeof (ktype) = Ktype -> { int.cannil.usn var = nil Ktype var } (prints an array of all ktypes i.e. ["CANNIL", "USN"])
         Arguments = Args -> returns an array of all arguments in a algorithm inputted
         Is Nil (Nil Question) = Nilq (checks if value is nil) -> { NilQ <val variable> } (where 'variable' is the variable to nil check)
         Set = Set (used for setting modifiers for all cases) -> { Set <[mod|ktype] modifierOrKtype> } (where 'modifierOrKtype' is the modifier or ktype to set)
-        Import/Export = Enable/Send (can send and receive algorithms and variables from one file to another)
-        Infer = Infer (all values can be inferred if not specified) -> { Infer()` __At the start of the file }
-        Strictify = Strict (less leeway and more for better practice) -> { Strict()` __At the start of the file }
-        That = That (returns the variable that holds the mainly used parameter) -> { if anArray any e .. e == 5 (ex That _ index(5)`)` } (prints the index of 5 in the array, anArray)
-        Apply Modifier To = Apply (applies modifiers to specified files) -> Apply <vect-mod modifierList, ~file files>` __At the end of the file
-        Alias = Alias (gives a variable an alias) -> <val variable> Alias <sc ALIAS>` (variable aliases are capitalized for easy recognition)
-        Expunge = EPG (completely removes variable from memory) -> EPG variable` ('variable' can now be redeclared as a different variable)
-        Exit Program = C0 (Stops program at that line of code, no line break needed) -> C0
-        Stringify = Soc (Converts literal code value/output into a string) -> arr a = [1, 2, 3, 4]` ex Soc a` (outputs '[1, 2, 3, 4]')
-        Create Relative Procedure = Crt (adds a custom procedure to a specified dtype) -> Crt <dtype type> <name> <ambg ~parameters> .. <proc procedure>`
-        Adjust Relative Procedure = Adj (allows to change source code of existing procedure) -> Adj <;;proc procedure>`
-        Serialize = Serialize (converts complex object to a portable format) -> Serialize <[assoc|json] object> <bool ^arrOrSc>`
+        Import/Export = Enable/Ship (can ship out and receive algorithms and variables from one file to another)
+        Infer = Infer (all values can be inferred if not specified) -> { Infer __At the start of the file }
+        Strictify = Strict (less leeway and more for better practice) -> { Strict __At the start of the file }
+        That = That (returns the variable that holds the mainly used parameter) -> { if anArray any e .. e == 5 (That _ index(5)) } (prints the index of 5 in the array, anArray)
+        Apply Modifier To = Apply (applies modifiers to specified files) -> Apply <vect-mod modifierList, ~file files> __At the end of the file
+        Alias = Alias (gives a variable an alias) -> <val variable> Alias <sc ALIAS> (variable aliases are capitalized for easy recognition)
+        Expunge = EPG (completely removes variable from memory) -> EPG variable ('variable' can now be redeclared as a different variable)
+        Exit Program = C0 (Stops program at that line of code) -> C0
+        Stringify = Soc (Converts literal code value/output into a string) -> arr a = [1 2 3 4]  Soc a (outputs '[1 2 3 4]')
+        Create Relative Procedure = Crt (adds a custom procedure to a specified dtype) -> Crt <dtype type> <name> <ambg ~parameters> .. <proc procedure>
+        Adjust Relative Procedure = Adj (allows to change source code of existing procedure) -> Adj <;;proc procedure>
+        Serialize = Serialize (converts complex object to a portable format) -> Serialize <[assoc|json|rel] object> <bool ^arrOrSc>
     Valid Type Casts (*doesn't work in strict mode):
-        SC array` (array to string which is the equivalent of array_join(Nil))
-        *ARR string` (string to array which is the equivalent of string_split(Nil))
-        *SC number` (number to string which converts 9 to "9")
-        *CHAR number` (number to character which takes the ascii value of the character and returns it)
-        *INT character` (character to number which returns the ascii value of the character)
-        SC character` (character to string)
-        FPN integer` (integer to decimal)
-        COLL vector` (vector to collection)
-        VECT collection` (collection to vector)
-        *BOOL string` (string to boolean (checks truthy or falsy value))
-        SC boolean` (boolean to string (returns either "true" or "false"))
+        SC array (array to string which is the equivalent of array_join nil)
+        *ARR string (string to array which is the equivalent of string_split nil)
+        *SC number (number to string which converts 9 to "9")
+        *CHAR number (number to character which takes the ascii value of the character and returns it)
+        *INT character (character to number which returns the ascii value of the character)
+        SC character (character to string)
+        DEC integer (integer to decimal)
+        COLL vector (collection to vector)
+        VECT collection (vector to collection)
+        *BOOL string (string to boolean (checks truthy or falsy value))
+        SC boolean (boolean to string (returns either "true" or "false"))
+        *DTYPE string (string to data type (e.g. "int" to int))
 
 
 
-MODIFIERS: (   {{ <MODIFIER> } <parameters> }  {{ \<MODIFIER INVERSE> } <parameters> }   ) [ modifiers modify default code ]
+MODIFIERS: (   {{ <MODIFIER> }<parameters>}  {{ \<MODIFIER INVERSE> } <parameters> }   ) [ modifiers modify default code ]
     Functional Modifiers (fmod):
-        Decimal:
-            glob : num : dec{{ PRECISIONSET } <int.usn{# bet 1, 15} precision> }
+        Input:
+            {{ glob:res:in MESSAGE } <sc message> } -> (when given the incorrect type in an input, a custom error message will be shown)
 
     Regular Modifiers:
         Global:
-            glob{{ INSTANCESWAP }} -> the default changes from altering a value to returning a value and instance 
-            glob{{ ZARGSPARENTHESES }} -> no parentheses are needed for procedures with no arguments (can be called like this -> proc x ex 'x'` x` {{ ZARGSPARENTHESES }})
-            glob _ Ktype{{ TARGETS }} -> returns an md array instead with both the ktype and the dtypes it targets
-            glob _ Set{{ APPLYTODEFAULT }} -> applies the modifiers to default bytl variables, algorithms, etc. as well
-            glob{{ IGNOREEXCEPTION }} -> instead of throwing an error, faulty code will be skipped/ignored
+            {{ glob INSTANCESWAP }} -> the default changes from altering a value to returning a value and instance 
+            {{ glob ZARGSPARENTHESES }} -> no parentheses are needed for procedures with no arguments (can be called like this -> proc x 'x'    x {{ ZARGSPARENTHESES }})
+            {{ glob_Ktype TARGETS }} -> returns an md array instead with both the ktype and the dtypes it targets
+            {{ glob_Set APPLYTODEFAULT }} -> applies the modifiers to default bytl variables, algorithms, etc. as well
+            {{ glob IGNOREEXCEPTION }} -> instead of throwing an error, faulty code will be skipped/ignored
         Exception:
-            glob : exc{{  }}
+            {{ glob:exc STACKTRACE }} -> returns a full view on an error instead of a simple one-line sentence
         Array:
-            glob : arr _ rem{{ MUL }} -> the algorithm called is not removing 2 elements, but instead removing n elements at a position 
-            glob : arr _ fat{{ EACH }} -> fatten each element as opposed to groups
-            glob : arr _ index{{ NEGATIVE }} -> gets index in terms of negative value (from right to left)
+            {{ glob:arr_rem MUL }} -> the algorithm called is not removing 2 elements, but instead removing n elements at a position 
+            {{ glob:arr_fat EACH }} -> fatten each element as opposed to groups
+            {{ glob:arr_index NEGATIVE }} -> gets index in terms of negative value (from right to left)
+            {{ glob:arr ARRELEMSINGLE }} -> returns the first element if the array is of length 1
+            {{ glob:arr INVERSE }} -> indexing becomes inverted (array[0] gets last element)
         Association:
-            glob : assoc{{ NOACCESSDUPE }} -> there cannot be any duplicate accessors in an association
+            {{ glob:assoc NOACCESSDUPE }} -> there cannot be any duplicate accessors in an association
+            {{ glob:assoc EXCLUDEACCS }} -> return other possible accessors (if there is more than one)
         Procedure:
-            glob : proc{{ UOVD }} -> a procedure that is unoverridable (cannot stop it when its running and cannot alter the procedure after it has been created)
-            glob : proc{{ ONCE }} -> a procedure that only runs once, and if called again, holds the value of the first output
+            {{ glob:proc UOVD }} -> a procedure that is unoverridable (cannot stop it when its running and cannot alter the procedure after it has been created)
+            {{ glob:proc ONCE }} -> a procedure that only runs once, and if called again, holds the value of the first output
         Data Type:
-            glob : dtype{{ KTYPEDISABLEDEFAULT }} -> disable default super types for global data types in custom data type
+            {{ glob:dtype KTYPEDISABLEDEFAULT }} -> disable default super types for global data types in custom data type
         Kinetic Type:
-            glob : ktype : base{{ ALL }} -> all variables are affected no matter which one's value changes in a base kinetype
-            glob : ktype{{  }}
+            {{ glob:ktype:base ALL }} -> all variables are affected no matter which one's value changes in a base kinetype
         String:
-            glob : sc _ idxo{{ NEGATIVE }} -> gets index in terms of negative value (from right to left)
-            glob : sc{{ FORMATINVERSE }} -> angle brackets are ok, but a backslash before it expects a template literal
-            
+            {{ glob:sc_idxo INVERSE }} -> gets index in terms of opposite value (from right to left)
+            {{ glob:sc FORMATINVERSE }} -> angle brackets are ok, but a backslash before it expects a template literal
+        Context:
+            Executable Context:
+                {{ glob:;e SIMULATION }} -> simulates possibly harmful cmds instead of running them legitimately
 
 
 
 PROCEDURES:
     Boolean Procedures [ where 'boolean' is an example bool ]:
-        Compare = compare -> { bool.instance check = boolean : compare<val.cannil item>` } (where 'item' is any value and check will be the booleanic comparison between 'boolean' and 'item')
+        Compare = compare -> { bool.instance check = boolean : compare<val.cannil item> } (where 'item' is any value and check will be the booleanic comparison between 'boolean' and 'item')
 
 
     Number Procedures [ where 'number' is an example num ]:
-        To Fixed = fix -> { fpn.instance fixed = number : fix<int places = math#INF>` } (where 'places' is the number of decimal places to fix to defaulting to the max value)
-        Truncate (round down) = trunc -> { int.instance truncated = number _ trunc` }
+        To Fixed = fix -> { fpn.instance fixed = number _ fix<int places = math#INF> } (where 'places' is the number of decimal places to fix to defaulting to the max value)
+        Truncate (round down) = trunc -> { int.instance truncated = number _ trunc }
 
 
     String Procedures [ where 'string' is an example string ]:
-        ToCharArray = type cast from string to arr -> { ARR string` }
-        Select/Slice = sel -> { sc.instance selection = string _ sel(int.?sn start, int.?sn end)` } (where 'start' and 'end' target create a substring of the original string)
-        Includes = inc -> { bool doesInclude = string _ inc([sc|char|rgx] checker)` } (where 'checker' is a substring/regex )
-        ToLowerCase = lcase -> { string _ lcase` } (converts every character to lowercase if it isn't already)
-        ToUpperCase = ucase -> { string _ ucase()` } (converts every character to uppercase if it isn't already)
-        Length = len -> { string _ len() }` (returns the number of characters in the string)
-        Replace = repl -> { string _ repl([rgx|sc] checker, sc replacer)` } (where 'checker' is what to check for and 'replace' is what to replace it with in the string)
-        Trim = trim -> { string _ trim(bool ^start, bool ^end)` } (where 'start' and 'end' are if only you want to trim the beginning or end of the string)
-        ASCII = ascii -> { arr asciis = string _ ascii()` } (returns an array of every character in ascii)
-        Index Of = idxo -> { int.usn.cannil ix = string _ idxo([sc|char|rgx] checker, int amount = 1)` } (where 'checker' is what to look for and 'amount' is the number of indices to return defaulting to 1)
-        Split = split -> { arr-sc splitted = string _ split([sc|char] splitter)` } (where 'splitter' will take every instance of itself and remove it from the string and at each removal a substring from the previous removal (or 0) to the index of the removal will be added to a returned array)
-        Join = join -> { array _ join(sc joiner)` } (will create an array with a separator of 'joiner')
-        Repeat = rep -> { string _ rep(int.usn amount)` } (where 'amount' is the number of times to repeat the string)
-        Occurences = occur -> { string _ occur([rgx|sc|char] checker, int ^limit)` } (where 'checker' is the occurence checker and 'limit' is the max occurence count to be returned)
+        ToCharArray = type cast from string to arr -> { ARR string }
+        Select/Slice = sel -> { sc.instance selection = string _ sel<int.?sn start int.?sn end> } (where 'start' and 'end' target create a substring of the original string)
+        Includes = inc -> { bool doesInclude = string _ inc<[sc|char|rgx] checker> } (where 'checker' is a substring/regex )
+        ToLowerCase = lcase -> { string _ lcase } (converts every character to lowercase if it isn't already)
+        ToUpperCase = ucase -> { string _ ucase } (converts every character to uppercase if it isn't already)
+        Length = len -> { string _ len } (returns the number of characters in the string)
+        Replace = repl -> { string _ repl<[rgx|sc] checker, sc replacer> } (where 'checker' is what to check for and 'replace' is what to replace it with in the string)
+        Trim = trim -> { string _ trim<bool ?start bool ?end> } (where 'start' and 'end' are if only you want to trim the beginning or end of the string)
+        ASCII = ascii -> { arr asciis = string _ ascii } (returns an array of every character in ascii)
+        Index Of = idxo -> { int.usn.cannil ix = string _ idxo<[sc char rgx] checker, int amount = 1> } (where 'checker' is what to look for and 'amount' is the number of indices to return defaulting to 1)
+        Split = split -> { arr[sc] splitted = string _ split<[sc|char] splitter> } (where 'splitter' will take every instance of itself and remove it from the string and at each removal a substring from the previous removal (or 0) to the index of the removal will be added to a returned array)
+        Join = join -> { array _ join<sc joiner> } (will create an array with a separator of 'joiner')
+        Repeat = rep -> { string _ rep<int.usn amount> } (where 'amount' is the number of times to repeat the string)
+        Occurences = occur -> { string _ occur<[rgx|sc|char] checker int ?limit> } (where 'checker' is the occurence checker and 'limit' is the max occurence count to be returned)
 
 
     Array Procedures [ where 'array' is an example array ] (you can either use full keyword method or bracket method):
-        Loops:
-            Filter = filter ->
-                keyword:
-                    { cycle array use int e, int i, vect a with filter ( rn alg->bool expression` ) } (you don't need brackets if there is just one line)
-                bracket:
-                    { array filter(int e, int i, vect a) .. ( rn alg->bool expression` ) } (semi-ellipse (..) is to indicate an anonymus procedure)
-            Any = any ->
-                keyword:
-                    { bool check = cycle array use int e with any ( rn alg->bool expression` ) } 
-                bracket:
-                    { bool check = array _ any(val e) .. ( rn alg->bool expression` ) }
-            All = all ->
-                keyword:
-                    { bool check = cycle array use int e with every ( rn alg->bool expression` ) }
-                bracket:
-                    { bool check = array every(int e) .. ( rn alg->bool expression` ) }
-            Map = map ->
-                keyword:
-                    { vect-int mapper = cycle array use int e with map ( rn proc expression` ) }
-                bracket:
-                    { vect-int mapper = array map(int e) .. ( rn proc expression` ) }
-            Prop = prop ->
-                keyword:
-                    { cycle array use int e with prop ( rn alg-assoc expression` ) }
-                bracket:
-                    { array prop(int e) .. ( rn alg-assoc expression` ) }
-            Up till = till -> 
-                keyword:
-                    { cycle array use int e with till ( rn proc expression` ) }
-                bracket:
-                    { array till(int e) .. ( rn proc expression` ) }
-        Not Loops:
-            Index Of = index -> { int e = array _ index(val element, int ^times = 1)` } (where 'element' is the item to check for its index and 'times' is for how many indexes to return)
-            Length = length -> { int l = array _ length()` } (returns number of elements in array)
-            Push = ins -> { array _ ins(int position = (array_length() - 1), val ~items)` } (where position is the index to push (default is end of array) and items is the list of items to insert)
-            Pop = rem -> { array _ rem(val ~items)` } OR { array_rem(int position, int amount)` ;{{ MUL }} } (where position is index in the array and amount is the number of items to remove at that index; the 'mul' specifier is specifying multiple removals for the context )
-            Sort = sort -> { array _ sort(sc format)` } (where 'format' is matched by a specific regex such as "a-z")
-            Reverse = rev -> { array _ rev()` }
-            Select/Slice = select -> { collection sliced = array : select(int start, int amount)` } (where 'start' is the start of slice (index base 0) and 'amount' is the places in the array to slice)
-            Includes = has -> { bool check = array _ has(val element)` } (where 'element' is any value that you would want to check for in an array)
-            Flatten = flat -> { array _ flat(int ^amount) } (will flatten any 2d+ array to a 1d array unless otherwise specified by a depth argument, 'amount')
-            Fatten = fat -> { array _ fat(int amount)` } (where 'amount' specifies how many extra layers of array e.g. [1 2 3]:fat(1) would give [[1 2 3]] and [[1 2 3] [4 5 6] [7 8 9]] would give [[[1 2 3]] [[4 5 6]] [[7 8 9]]])
-            Sum = sum (only for num arrays) -> { num sum = array _ sum()` } (returns the sum of all numeric values in an array)
-            Series = serie (only for sequences) -> { num sum = seq _ serie(int last)` } (where 'last' is the place of the seq to sum up to i.e. {1 3 5}:serie(2) will return 1 + 3 because the last value is 2)
-            Shuffle = shuf -> { arr.instance shuffled = array _ shuf()` }
+        Index Of = index -> { int e = array _ index<val element int ?times = 1> } (where 'element' is the item to check for its index and 'times' is for how many indexes to return)
+        Length = length -> { int l = array _ length } (returns number of elements in array)
+        Push = ins -> { array _ ins<int position = (array_length - 1) val ~items> } (where position is the index to push (default is end of array) and items is the list of items to insert)
+        Pop = rem -> { array _ rem<val ~items> } OR { array_rem<int position, int amount> {{ MUL }} } (where position is index in the array and amount is the number of items to remove at that index; the 'mul' specifier is specifying multiple removals for the context )
+        Sort = sort -> { array _ sort<sc format> } (where 'format' is matched by a specific regex such as "a-z")
+        Reverse = rev -> { array _ rev }
+        Select/Slice = select -> { collection sliced = array _ select<int start int amount> } (where 'start' is the start of slice (index base 0) and 'amount' is the places in the array to slice)
+        Includes = has -> { bool check = array _ has<val element> } (where 'element' is any value that you would want to check for in an array)
+        Flatten = flat -> { array _ flat<int ?amount> } (will flatten any 2d+ array to a 1d array unless otherwise specified by a depth argument, 'amount')
+        Fatten = fat -> { array _ fat<int amount> } (where 'amount' specifies how many extra layers of array e.g. [1 2 3]:fat(1) would give [[1 2 3]] and [[1 2 3] [4 5 6] [7 8 9]] would give [[[1 2 3]] [[4 5 6]] [[7 8 9]]])
+        Sum = sum (only for num arrays) -> { num sum = array _ sum } (returns the sum of all numeric values in an array)
+        Series = serie (only for sequences) -> { num sum = seq _ serie<int last> } (where 'last' is the place of the seq to sum up to i.e. {1 3 5}:serie(2) will return 1 + 3 because the last value is 2)
+        Shuffle = shuf -> { arr.instance shuffled = array _ shuf }
 
 
     Regex Procedures [ where 'regex' is an example regex ]:
         
 
     Ambiguous Procedures [ where 'ambiguous' is an example ambiguous ]:
-        Data Type History = dtypeHist -> { ambiguous variable = 'a'` variable = "hello"` variable = 2.2` variable _ dtypeHist() }
+        Data Type History = dtypeHist -> { ambiguous variable = 'a'   variable = "hello"   variable = 2.2   variable _ dtypeHist }
 
 
 
-ERRORS/EXCEPTIONS:
-    Global Variable errors:
-        Variable doesn't exist = VariableInexistent
-    Array errors:
-        Array index is out of bounds = ArrayIndexUnreachable
-        Indexing a non-array = NonArrayIndexing
-    String errors:
-        String in single quotes = StringSingleQuote
-    Number errors:
-        Non number using mathematical operators = NonNumberMathematicalUsage
-    Algorithm errors:
-        Algorithm doesn't exist/can't be found = AlgorithmInexistent
-    Association errors:
-        Association without access points = AssociationNoAccess
-    Nil errors:
-        Variable can't be nil = NilNotAllowed
-    Character errors:
-        Character in double quotes = CharacterDoubleQuote
-    Comment errors:
-        Comment obstructing line of code = CommentObstruction
-    Resource errors:
-        File errors:
-            File not found = ResourceFileNotFound
-    Iostream errors:
-    Regular Expression errors:
-        Invalid regexp = RegexInvalid
-
-    Ktype errors:
-        Immute variable can't be altered = ImmutableValueChange
-
-    Miscellaneous Errors:
-        Alone keyword (with surrounding spaces) = IllegalKeywordPlacement
-        Invalid case param in switch statement = SwitchCaseInvalidParameter
-        Wrong datatype (e.g. int number = "string?"`) = DataTypeInequality
-        Casting that doesn't make sense (e.g. char to proc) = IllegalDataTypeCast
-
-
-
-DYNAMIC AI TREE:
-    Description = Starts with a stem that remembers every bit of information that is given to it. Each bit of information is associated with a value
-
-    Tree Anatomy:
-        Root (AKA Stem) -> 
+MISCELLANEOUS:
+    Difference between 'ambiguous' and 'val'? ambigious can change data types while val cannot
+    Do commas have a use? JSON variables and parameter filters, otherwise separation is by using blocks
+    Special (Curly) blocks uses:
+        Parameter Filters (also works on orps) -> proc procedure = sc.?cannil{_len > 6, _occur "string" > 2, # !== "nope"} string (...) (will only allow string parameters with len > 6 and at least 2 occurences of "string", and self is not "nope")
+        JSON -> JSON json = [{...}, {...}, ...]
+    Cool assignments:
+        'int x = 3  x *+= 2, 4' (x is now 10)
+        'int y = 5  y ^-%/= 2, 5, 7, 6' (y is now 1)
+        'val z _= 7 algo' (z is now equal to 'algo z')
+    Printing in Bytl is just putting an expression or using >>:
+        '5' prints 5
+        'int.usn x = 10    Ktype x' prints "usn"
+        '>> 5' prints 5
+    Precedence:
+        ( inferior precedence } (will run last)
+            e.g. if ( x == 5 } & !x#key (...) (the second statement will run before the first statement)
+        { superior precedence ) (will run first)
+            e.g. if bet x_p 1, 3 | { apply x#check ) (...) the second statement will run before the first statement
+        [ within math context ] ( superior precedence )
+            e.g. >> ;m 2^7π * (5 + 2); (within brackets run first due to BEDMAS)
+    Special Contexts: (chainable like this ;bm ... ; (runs both bit and math contexts))
+        Bit-context -> ;b 3 >> 4 ~ 2 - 4 & 1 ; (example bit operations)
+        Regex-context -> ;r ^[^not]\d+$ ; (example regex)
+        Executable-context -> ;e cd ~, ls ; (example terminal commands (commas and newlines separate commands))
+        Mathematical-context -> ;m 3! * 7% ∑(n1,10,n) ; (mathematical operators such as factorial, and sigma sum are now executable)
+        Source-context -> ;s Crt int  ; (can alter source code)
+        Path-context -> ;p ../path/to/file ;
+    Relative Creation Syntax (indents are not required, but make it more readable):
+        :: <relative name>
+            : <create sub relative> ; __ (can infinitely nest relatives)
+            _ <create procedure for relative>
+            # <create value for relative>
+        :: {{ TYPE }}
+        Specifiying the 'TYPE' modifier turns the relative into a datatype, without it, the relative would just be for organization
+    Modifier Precedence:
+        { expression } ... {{ MODIFIER }} (anything in curly blocks will be affected by the modifier, nothing else will be)
+            (no curly blocks means every possible modification will be made)
+    'if .. eif .. else' as ternary:
+        Regular -> if c1 ( rn a ) eif c2 ( rn b ) else ( rn c )
+        As Ternary -> rn c1 ? a || c2 ? b : c
+        '||' represents eif
+    Every type classified (applies to subtypes):
+        dtype -> 'data type' | representation of all types (excluding 'ktype') | examples: 'int', 'rgx', 'assoc'
+        ftype -> 'functional type' | cannot create a variable from (only used for functionality) | examples: 'math', 'time', 'rnd'
+        ktype -> 'kinetic type' | modifies variable value | examples: 'dync', 'immute', 'usn'
+        gtype -> 'ghost type' | types that can only be referenced, not used | examples: 'dtype', 'rel', 'gtype'
+        rtype -> 'reference type' | types that reference primitives | examples: 'rgx', 'exc'
+        ptype -> 'primitive type' | original bytl types | examples: 'assoc', 'int', 'bool'
+        etype -> 'encapsulating type' | takes in types 
+        stype -> 'special type' | none of the above | examples: 'cmacro', 'comm', 'mod'
+    Every bracket classified:
+        ( ... ) -> default block:
+            code blocks - 'if someCondition ( !@ code to run @! )'
+            separation - 'vect[int] v = [1 2 ( !@ some expression that returns an int @! ) 4 5]'
+            readability (escaped) - 'while variable bet \( !@ put code as normal @! ) ...' (prevents ambiguity)
+        [ ... ] -> square block:
+            indexing - '>> anArray[!@ array index @!]'
+            array literals - 'arr a = [!@ list of elements separated by spaces @!]'
+            property interpolation - '>> someRelative # [!@ expression that returns a string @!]'
+        { ... } -> curly block:
+            modifier application - '>> array[0] - ' ' - { array[0] } {{ INVERSE }}' (prints first and last array elements)
+            json - 'json j = [{"a": 5, "b": 10}, {"c": 15, "d": 20}]'
+            parameter filters - proc <sc{_ len bet 8 12, #[0] === 'a'} s int x> p = ...
+        ( ... } -> superior precedence block:
+            this is the only use - 'if x === 5 | ( y === 6 } (...)' (code in (} block runs first)
+        { ... ) -> inferior precedence block:
+            this is the only use - 'if { x === 5 ) | y === 6 (...)' (code in {) block runs last)
+        < ... > -> angle block:
+            associations - 'assoc[@int sc] a = <1 "one" 2 "two" 3 "three">'
+            procedure parameters - 'proc <!@ procedure arguments go here @!>'
+            greater than - 'bool b = x > y'
+            less than - 'bool b = x < y'
+            decontext - 'r:sub:sub<-sub<-r # thisWasAUselessJourneyForMe'
+            printing - '>> printMe'
+            interpolation - 'sc.raw s = "I love <insertHamburgerHere>s"'
+    Multi-purpose special characters (specialty within context not included):
+        ? -> 
+            optional ktypes in procedure parameters - 'proc <sc.?cannil s> p = (...)'
+            ternary - '>> condition ? thing1 : thing2'
+            optional arguments - 'proc <sc ?s> p = (...)'
+        * ->
+            non-expression procedure arguments - 'proc <val *v> p = (...)'
+            multiplication - '>> 3 * 4'
+        @ -> 
+            association key reference - 'assoc[@sc int bool] a = <"one" 1 true> \\ >> a["one"] __ [1 true]'
+            (don't remember how this works) upper-scope referencing - 'int y = 5 \\ proc p = (int x = @y)'
+            (don't remember how this works) scoped procedure referencing - ''
+            multi-line comments - '!@ multi line comment @!'
+        - ->
+            subtraction - '>> 3 - 4'
+            concatenation - '>> "string " - var - " string"'
+        ! ->
+            mandatory value access - ':: someRandomMathShit<sc s> #! pi dec ::'
+            boolean negation - 'if !\(x _ len) & x !== 5 (...)'
+            multi-line comments - '!@ multi line comment @!'
+        > ->
+            greater than (or equal to) - 'if x > 5 | x >= y (...)'
+            printing - '>> "this string gets printed"'
+        < ->
+            less than (or equal to) - 'if x < 5 | x <= y'
+            decontext - '>> curScope<- __ prints entire outer scope as relative'
+        # -> 
+            value access - '>> relative # value'
+            parameter filter self - 'proc <int{# > 5}> p = (...)'
+        \ ->
+            delimiter - 'int x = 1 \\ int y = 2 \\ int z = 3 \\ >> x y z'
+            inverse ktype/modifier (only if it has been Set earlier) - 'sc.\raw.cannil s = "this cannot be \<nil>" {{ \FORMATINVERSE }}'
+            block escape/container - 'if \(x === 5) (...)'
+        . ->
+            ktypes - 'sc.cannil s = nil'
+            anonymous function - '>> array _ map e .. e + 5'
+        _ -> 
+            procedure access - 'sc s = "   string      " \\ >> s _ trim'
+            single line comments - '__ cool comment bro'
+        | ->
+            or - 'if this | that (...)'
+            ternary eif - 'forMainIf ? thing || forEif ? anotherThing || forAnotherEif ? evenAnotherThing : ok'
