@@ -48,7 +48,7 @@ arr[sc] a = ["there is one string" 1 2 3]
 A data type can either be encapsulating, or not, though all data types are encapsulatable. Only data types that may require another type to be specified (procedure return type, array require type, etc.) are encapsulating as they are the initiators of the encapsulation.
 
 ```
-arr.cannil[num.usn] a = nil __ The cannil ktype overrides the num coalesced type
+arr.cannil[num.usn] a = nil __ The cannil ktype overrides the encapsulated num type
 ```
 As shown above, encapsulating types can be combined with ktypes.
 
