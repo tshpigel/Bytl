@@ -7,7 +7,7 @@ Unfortunately, because Bytl uses TypeScript Deno for both compilation and code g
 ## Basic Tutorial
 > All Bytl code is within either a `.bytl` or a `.bt` file
 >
-> More info can be found in the [official documentation](https://www.duckduckgo.com), source code in `docs`
+> More info can be found in the [official documentation](http://127.0.0.1:5173/), source code in `docs`
 
 ### Basic Data Types
 * String of Characters `sc`
