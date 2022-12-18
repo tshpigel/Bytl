@@ -21,7 +21,7 @@ function vcheck(vs: string, l: number, c: number, slice?: boolean): vtype | void
 
 const XN: TextEncoder = new TextEncoder();
 async function Gen(text: string, options?: Deno.WriteFileOptions): Promise<void> {
-    await Deno.writeFile(`./${fname.slice(0, -5)}.ts`, XN.encode(text), options);
+    await Deno.writeFile(`../out/${fname.slice(0, -5)}.ts`, XN.encode(text), options);
 }
 
 function literalCheck<T extends TokenType>(node: AST<T>): string | void {
@@ -156,11 +156,7 @@ async function Emit(AbstractSyntaxTree: AST<TokenType>[], onlyReturn?: boolean):
             asg += "}";
         } else if (N?.CustomRelative) {
             asg += await RelCreate(N.CustomRelative as CustomRelative) + "};\n";
-            //variables.push({ name:  });
-        } /*else if (N?.ObjectAccess || N?.ValueAccess || N?.ProcAccess) {
-            asg += ".";
-            //console.log(AbstractSyntaxTree.slice(i, i + 2));
-        }*/ else if (N?.Expunge) {
+        } else if (N?.Expunge) {
             for(const E of (N.Expunge as Expunge).args) 
                 variables.splice(variables.indexOf((vcheck(E.value, E.l, E.c) as vtype)), 1)
         } else if (N?.ForLoop) {
