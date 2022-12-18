@@ -1,5 +1,3 @@
-import { Token } from "./tokens.ts"
-
 export function lookAheadReg(code: string | string[], match: RegExp, curPos: number, matchNext?: RegExp): string[] {
     const bucket: string[] = [];
     while(true) {
@@ -10,6 +8,19 @@ export function lookAheadReg(code: string | string[], match: RegExp, curPos: num
         let m: string | RegExp = match;
         if(matchNext && bucket.length) m = matchNext;
         if(m && !m.test(nextToken)) break;
+        bucket.push(nextToken);
+    }
+
+    return bucket;
+} export function lookAheadObj<T extends { [key: string]: string }>(mainObj: T[], prop: [string, string], curPos: number): T[] {
+    if(!(prop[0] in mainObj[0]) || typeof mainObj[0][prop[0]] !== 'string') throw Error("Property is invalid");
+    const bucket: T[] = [];
+    while(true) {
+        const nextIx: number = curPos + bucket.length;
+        const nextToken: T = mainObj[nextIx];
+        if(!nextToken) break;
+
+        if(prop[1] && prop[1] === nextToken[prop[0]]) break;
         bucket.push(nextToken);
     }
 
