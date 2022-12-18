@@ -1,25 +1,55 @@
-import { Null } from "../misc/tokens.ts";
+/*
+    Main/Glob
+*/
+
+export interface Glob {
+    $init?: (v: Val) => void,
+    $cannil?: boolean,
+    $dync?: boolean,
+    $obj?: boolean,
+    $immute?: boolean,
+    $instance?: boolean
+}
+
+// Ghost Types
+export interface Gtype extends Glob {
+    readonly ref : true
+}
+
+/* 
+    Relatives 
+*/
+
+export interface Rel extends Glob {
+    readonly __type: 'Relative',
+    readonly value: Record<string, unknown>
+}
 
 /* 
     Numbers
 */
 
-export interface Num {
-    __type: 'Number' | 'Integer' | 'Decimal',
-    readonly value: number | "Error" | string
+export interface Num extends Glob {
+    readonly __type: 'Number' | 'Integer' | 'Decimal',
+    $base?: (n: Num) => void,
+    $uom?: boolean,
+    $usn?: boolean,
+    $sn?: boolean,
+    readonly TSTYPE?: number,
+    value: number | void | string
 } export interface Int extends Num {__type:'Integer'}
 export interface Dec extends Num {__type:'Decimal'}
 export const IntConstruct = (n: Num): Int => {
     const an: number = <number>n.value;
     return {
         __type: 'Integer',
-        value: an % 1 == 0 ? an : "Error"
+        value: an % 1 === 0 && (<string>n.value)[0] !== "0" ? an : 'Error'
     }
 }; export const DecConstruct = (n: Num): Dec => {
     const an: number = <number>n.value;
     return {
         __type: 'Decimal',
-        value: an % 1 == 0 ? an.toFixed(1) : an
+        value: an % 1 === 0 ? an.toFixed(1) : an
     }
 }
 
@@ -30,15 +60,18 @@ export const IntConstruct = (n: Num): Int => {
 
 */
 
-export interface Sc {
-    __type: 'String' | 'Character',
+export interface Sc extends Glob {
+    readonly __type: 'String' | 'Character',
+    $base?: (n: Sc) => void,
+    $raw?: boolean,
+    readonly TSTYPE?: string,
     readonly value: string | 'Error'
-} export interface Char extends Sc {__type:'Character'}
+} export interface Char extends Omit<Sc, "$base"> {__type:'Character'}
 export const CharConstruct = (s: Sc): Char => {
     const asc: string = s.value;
     return {
         __type: 'Character',
-        value: asc.length > 1 ? 'Error' : asc
+        value: asc.length > 3 ? 'Error' : asc
     };
 };
 
@@ -47,20 +80,11 @@ export const CharConstruct = (s: Sc): Char => {
     Booleans
 */
 
-export interface Bool {
-    __type: 'Boolean',
-    readonly value: boolean
+export interface Bool extends Glob {
+    readonly __type: 'Boolean',
+    readonly value: 'true' | 'false',
+    readonly TSTYPE?: boolean
 } 
-
-
-/*
-    Nil
-*/
-
-export interface Nil {
-    __type: 'Nil',
-    readonly value: null | undefined | never | 'Nil'
-}
 
 
 /*
@@ -68,8 +92,12 @@ export interface Nil {
 */
 
 type proc = (...args: Val[]) => Val | void;
-export interface Proc {
-    __type: 'Procedure' | 'Function' | 'Algorithm',
+export interface Proc extends Glob {
+    readonly __type: 'Procedure' | 'Function' | 'Algorithm',
+    $lambda?: (v: Val) => Val,
+    $lrhs?: boolean,
+    $ovld?: boolean,
+    $r2?: boolean,
     readonly __void?: boolean,
     readonly __return?: boolean,
     readonly value: proc | 'Error'
@@ -92,33 +120,45 @@ export const AlgConstruct = (p: Proc): Alg => {
 
 
 /*
-    IO Stream
-*/
-
-export interface Io {
-    __type: 'Input' | 'Output',
-    readonly value: string | 'Error'
-}
-
-
-/*
     Resources
 */
 
-export interface Res {
-    __type: 'Resource' | 'File' | 'Localize'
+export interface Res extends Glob {
+    readonly __type: 'Resource' | 'File' | 'Localize' | 'Input'
+} export interface File extends Res {
+    readonly __type: 'File'
+} export interface Localize extends Res {
+    readonly __type: 'Localize'
+} export interface Input extends Res {
+    readonly __type: 'Input'
 }
 
 
 /*
-    RegExp
+    RegExp [ special ]
 */
+import { RgxLex, RgxAST, Emit } from "../regex/regex.ts";
 
-export interface Rgx {
-    __type: 'Regexp',
-    value: RegExp
+export class Rgx {
+    private readonly __type: 'Regex' = 'Regex';
+    public regex: string;
+    constructor(public regxp: string) {
+        this.regex = regxp;
+    }
+
+    check(str: string): boolean {
+        return Emit(RgxAST(RgxLex(this.regex)), str);
+    }
 }
 
+
+/* 
+    Expression
+*/
+export interface Expr extends Glob {
+    readonly __type: 'Expression',
+    readonly value: (anyv)[]
+}
 
 /*
     Arrays
@@ -127,16 +167,17 @@ export interface Rgx {
 type VA = Val[];
 type VT = Val['__type'];
 type GenA = (VT[] | VT);
-export interface Arr<T extends GenA | null> {
-    __type: 'Array' | 'Vector' | 'Collection' | 'Sequence' | 'Or Parameters' | 'And Parameters' | 'JSON',
+export interface Arr<T extends GenA | null> extends Glob {
+    readonly __type: 'Array' | 'Vector' | 'Collection' | 'Sequence' | 'Or Parameters',
+    $md?: (lim?: Int) => void,
+    $arrspace?: boolean,
+    $uniq?: boolean,
     sub: T | null,
-    value: VA | 'Error'
+    value: VA | VT[] | JSONT | 'Error'
 } export interface Vect extends Arr<GenA> {__type: 'Vector'}
 export interface Coll extends Arr<GenA> {__type: 'Collection'}
 export interface Seq extends Arr<'Number' | 'Integer' | 'Decimal' | 'Character'> {__type: 'Sequence'}
 export interface Orp extends Arr<null> {__type: 'Or Parameters'}
-export interface Anp extends Arr<null> {__type: 'And Parameters'}
-export interface JSON extends Arr<null> {__type: 'JSON'}
 export const VectConstruct = (a: Arr<GenA | null>): Vect => {
     const aa: VA = <VA>a.value;
     const aam: string[] = aa.map(e => e.__type);
@@ -157,35 +198,47 @@ export const CollConstruct = (a: Arr<GenA | null>): Coll => {
         value: sub !== null && !aam.every(e => sub?.includes(e as VT)) ? 'Error' : aa
     };
 };
-
+export const SeqConstruct = (a: Arr<'Number' | 'Integer' | 'Decimal' | 'Character'>): Seq => {
+    const aa: VA = <VA>a.value;
+    const aam: string[] = aa.map(e => e.__type);
+    const sub: 'Number' | 'Integer' | 'Decimal' | 'Character' | null = a.sub;
+    return {
+        __type: 'Sequence',
+        sub: sub,
+        value: sub === null || aam[2] !== 'Integer' || aa.length !== 3 ? 'Error' : aa
+    };
+};
+export const OrpConstruct = (a: Arr<null>): Orp => {
+    const aa: VT[] | VA = <VT[]|VA>a.value;
+    const aam: string[] = aa.map(e => typeof e == 'string' ? '' : e.__type);
+    const af: string[] = aam.filter(e => e === '');
+    return {
+        __type: 'Or Parameters',
+        sub: null,
+        value: af.length > 0 || af.length < aam.length ? 'Error' : aa
+    }
+};
 
 /*
     Modifier
 */
-export interface Mod {
-    __type: 'Modifier',
+export interface Mod extends Glob {
+    readonly __type: 'Modifier',
     value: Fnc
 }
 
 
 /*
-    Ambiguous
+    Any
 */
 
-export interface Ambg {
-    __type: 'Ambiguous',
-    value: Num | Int | Dec | Sc | Char | Bool | Nil | Proc | Fnc | Alg | Io | Res | Rgx
+type anyt = Num | Int | Dec | Sc | Char | Bool | Proc | Fnc | Alg | Res | Rgx | Mod;
+type anys = Num["__type"] | Sc["__type"] | Bool["__type"] | Proc["__type"] | Res["__type"] | Rgx["__type"] | Mod["__type"];
+type anyv = Num["value"] | Sc["value"] | Bool["value"] | Proc["value"] | Mod["value"]
+export interface Ambg extends Glob {
+    readonly __type: 'Ambiguous',
+    value: anyv
 } export interface Val extends Omit<Ambg, "__type"> {
-    __type: 'Value' | 'String' | 'Number' | 'Boolean' | 'Character' | 'Integer' | 'Decimal' 
-}
-
-/* 
-
-    GLOBAL
-
-*/
-
-export interface Glob {
-    Num: Num | { Int: Int, Dec: Dec }
-    Sc: Sc | { Char: Char }
+    readonly __type: anys,
+    value: anyv
 }
