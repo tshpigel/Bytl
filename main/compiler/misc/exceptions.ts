@@ -22,8 +22,17 @@ export enum Exceptions {
     InexistentMod = "Modifier '¬' does not exist",
     InvalidModCase = "Modifier must contain only uppercase",
     DuplicateVarName = "Variable name '¬' is already in use",
+    InexistentVariable = "Variable '¬' does not exist",
     IncompatibleType = "'¬' type is not compatible with '¬' type",
-    RequiredType = "Variable '¬' must be associated with a data type if not previously initialized"
+    RequiredType = "Variable '¬' must be associated with a data type if not previously initialized",
+    ExpectedToken = "¬ token expected after '¬' but got '¬'",
+    UnexpectedArgument = "Expected argument of type '¬' but got '¬'",
+    InaccessibleAssociation = "Association '¬' has 0 access points, at least 1 is required",
+    InvalidRegExp = "Regular expression '¬' is invalid",
+    ImmutableAlteration = "Immutable variable '¬' cannot be altered",
+    IllegalCast = "Variable '¬' of type '¬' cannot be casted to type '¬'",
+    InvalidForIteration = "For loop iteration value must be a positive integer, or a variable/expression valuing one",
+    UnexpectedToken = "Unexpected token '¬' in '¬'"
 }
 
 function strRep(char: string, count: number): string {
