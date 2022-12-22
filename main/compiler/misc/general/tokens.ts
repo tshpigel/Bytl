@@ -19,6 +19,7 @@ export enum TokenType {
     VectDT = 'VectorDataType',
     CollDT = 'CollectionDataType',
     JSONDT = 'JSONDataType',
+    LocalDT = 'LocalizeDataType',
     SeqDT = 'SequenceDataType',
     StringDT = 'StringDataType',
     NumDT = 'NumberDataType',
@@ -35,7 +36,7 @@ export enum TokenType {
     ProcDT = 'ProcedureDataType',
     AssocDT = 'AssociationDataType',
     RgxDT = 'RegexDataType',
-    Input = 'Input',
+    Input = 'InputDataType',
     KtypeChain = 'KineticTypeChain',
     Context = 'Context',
     FullContext = 'FullContext',
@@ -43,6 +44,7 @@ export enum TokenType {
     Lambda = 'Lambda',
     And = 'And',
     Or = 'Or',
+    Self = 'SelfParameter',
     Exclamation = 'Exclamation',
     DeContext = 'DeContext',
     InContext = 'InContext',
@@ -102,7 +104,6 @@ export enum TokenType {
     Number = 'Number',
     Char = 'Character',
     Bool = 'Boolean',
-    // Nil = 'Nil',
     Resource = 'Resource',
     Comment = 'Comment',
     RegExp = 'RegularExpression',
@@ -118,7 +119,7 @@ export enum TokenType {
     MultiLineComment = 'MultiLineComment',
     Between = 'InBetween',
     Continue = 'Continue',
-    SystemC = 'SystemConditionals',
+    SystemC = 'SystemofConditionals',
     SubtypeVal = 'SubtypeValue',
     Modu = 'Modulo',
     Cmacro = 'CodeMacro',
@@ -134,6 +135,8 @@ export enum TokenType {
     For = 'ForLoop',
     While = 'WhileLoop',
     Delimiter = 'Delimiter',
+    Ref = 'Reference',
+    Regress = 'Regress',
 
 
     Assign = 'Assignment',
@@ -164,6 +167,7 @@ export const ktypes: string[] = [
     'ovld',
     'md',
     'init',
+    'reach',
     'cannil',
     'fspace',
     'argspace',
@@ -178,7 +182,8 @@ export const ktypes: string[] = [
     'raw',
     'lambda',
     'lrhs',
-    'r2'
+    'r2',
+    'rec'
 ];
 
 export const mods: string[] = [
@@ -190,7 +195,10 @@ export const mods: string[] = [
     'mul',
     'each',
     'negative',
+    'includekeys',
+    'filterparamexc',
     'noaccessdupe',
+    'autocast',
     'excludeaccs',
     'uovd',
     'once',
@@ -206,8 +214,6 @@ export const TOKENS: string[][] = [
     [' ', 'Space'],
     ['\n', 'LineBrk'],
     ['\\\\', 'Delimiter'],
-    ['[', 'LeftSquareBracket'],
-    [']', 'RightSquareBracket'],
     ['+', 'Plus'],
     ['*', 'Asterisk'],
     [',', 'Comma'],
@@ -222,6 +228,7 @@ export const TOKENS: string[][] = [
     ['char', 'CharDT'],
     ['bool', 'BoolDT'],
     ['cmacro', 'CmacDT'],
+    ['localize', 'LocalDT'],
     ['res', 'ResDT'],
     ['io', 'IODT'],
     ['assoc', 'AssocDT'],
@@ -235,6 +242,7 @@ export const TOKENS: string[][] = [
     ['>>', 'PrOvd'],
     ['in', 'Input'],
     [':', 'ObjAcc'],
+    ['$', 'Self'],
     ['...', 'CollDTCreate'],
     ['..', 'AnonmProc'],
     ['.', 'KtypeChain'],
@@ -268,6 +276,7 @@ export const TOKENS: string[][] = [
     ['while', 'While'],
     ['eif', 'ElseIf'],
     ['else', 'Else'],
+    ['regress', 'Regress'],
     ['switch', 'Switch'],
     ['case', 'Case'],
     ['gte', 'GTECase'],
@@ -494,6 +503,7 @@ export type Token =
     TokenNode<TokenType.CharDT> |
     TokenNode<TokenType.BoolDT> |
     TokenNode<TokenType.FncDT> |
+    TokenNode<TokenType.LocalDT> |
     TokenNode<TokenType.AlgDT> |
     TokenNode<TokenType.ResDT> |
     TokenNode<TokenType.IODT> |
@@ -506,12 +516,11 @@ export type Token =
     TokenNode<TokenType.FullContext> |
     TokenNode<TokenType.ProcAccess> |
     TokenNode<TokenType.Lambda> |
+    TokenNode<TokenType.Regress> |
     TokenNode<TokenType.And> |
     TokenNode<TokenType.Or> |
     TokenNode<TokenType.Exclamation> |
     TokenNode<TokenType.LeftAngleBracket> |
-    TokenNode<TokenType.RightAngleBracket> |
-    TokenNode<TokenType.LeftSquareBracket> |
     TokenNode<TokenType.RightSquareBracket> |
     TokenNode<TokenType.BaseKtypeRef> |
     TokenNode<TokenType.MultiArgs> |
@@ -533,6 +542,7 @@ export type Token =
     TokenNode<TokenType.LTECase> |
     TokenNode<TokenType.DVSCase> |
     TokenNode<TokenType.PROCase> |
+    TokenNode<TokenType.Self> |
     TokenNode<TokenType.Glob> |
     TokenNode<TokenType.Event> |
     TokenNode<TokenType.Mute> |
@@ -568,12 +578,11 @@ export type Token =
 
     TokenMultiValueNode<TokenType.Array> |
     TokenMultiValueNode<TokenType.Block> |
+    TokenMultiValueNode<TokenType.Mod> |
     TokenMultiValueNode<TokenType.EBlock> |
     TokenMultiValueNode<TokenType.CurlyBlock> |
     TokenMultiValueNode<TokenType.Association> |
     TokenMultiValueNode<TokenType.TypeArr> |
-    TokenMultiValueNode<TokenType.InfPrec> |
-    TokenMultiValueNode<TokenType.SupPrec> |
     TokenMultiValueNode<TokenType.RelCreate> |
     TokenMultiValueNode<TokenType.SubRel> |
     TokenMultiValueNode<TokenType.Cmacro> | 
@@ -592,6 +601,7 @@ export type Token =
     TokenValueNode<TokenType.KtypeVal> |
     TokenValueNode<TokenType.SubtypeVal> |
     TokenValueNode<TokenType.MacVar> |
+    TokenValueNode<TokenType.Ref> |
     TokenValueNode<TokenType.Literal>;
     
     
