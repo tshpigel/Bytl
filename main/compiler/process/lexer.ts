@@ -22,7 +22,7 @@ export function Lexer(code: string) : Token[] {
     const voidTokens: string[][] = [];
     const ignoreTokens: string[][] = [];
 
-    function nested(opening: string, closing: string, addToCurPos: (value: number) => void, propName: 'Array' | 'Block' | 'EBlock' | 'CurlyBlock' | 'SubRel' | 'SupPrec' | 'InfPrec'): void {
+    function nested(opening: string, closing: string, addToCurPos: (value: number) => void, propName: 'Array' | 'Block' | 'EBlock' | 'CurlyBlock' | 'SubRel' | 'TypeArr'): void {
         const bucket = lookAheadReg(code, new RegExp(`[^\\${closing}]`), curPos);
         const bi: number = bucket.indexOf(opening);
         if(bi > -1 && opening !== "") {
@@ -39,7 +39,6 @@ export function Lexer(code: string) : Token[] {
                 addToCurPos(1);
             }
             const cni: number[] = [nestIndex[0], nestIndex.slice(-1)[0]];
-            //console.log(code.slice(cni[0] - lookBehindReg(code, new RegExp(`[^\\${opening}]`), cni[0]).length, cni[1]), nestIndex);
             output.push({
                 type: TokenType[propName],
                 vals: Lexer(code.slice(cni[0] - lookBehindReg(code, new RegExp(`[^\\${opening}]`), cni[0] - 1).length, cni[1])),
@@ -101,7 +100,7 @@ export function Lexer(code: string) : Token[] {
                 ln, col
             });
             cadd(bucket.length + 1);
-            continue;
+            continue; 
         } else if ([curToken, code[curPos + 1]].every(e => e === `_`)) {
             cadd(2); 
             const bucket = lookAheadReg(code, /[^\n]/, curPos);
@@ -109,30 +108,17 @@ export function Lexer(code: string) : Token[] {
             ln++; col = 1;
             continue;
         } else if (curToken === `[`) {
-            const os0: string = (output.slice(-1)[0] ?? {type:''}).type;
-            if(os0 !== 'KineticTypeValue' && os0.slice(-8) !== 'DataType') {
-                cadd(1);
-                nested('[', ']', cadd, 'Array');
-                continue;
-            }
+            const os0: string = (output[output.length - 1] ?? {type:''}).type;
+            const type = os0 !== 'KineticTypeValue' && os0.slice(-8) !== 'DataType' ? 'Array' : 'TypeArr';
+            cadd(1);
+            nested('[', ']', cadd, type);
+            continue;
         } else if (curToken === `(`) {
             cadd(1);
-            const bucket: string = lookAheadReg(code, /[^}]/, curPos).join('');
-            if(bucket.includes(')')) {
-                if(output[output.length - 1].type === 'Backslash') {
-                    output.pop();
-                    nested('(', ')', cadd, 'EBlock');
-                }
-                else nested('(', ')', cadd, 'Block');
-            }
-            else nested('(', '}', cadd, "SupPrec");/*{
-                output.push({
-                    type: TokenType.SupPrec,
-                    vals: Lexer(bucket),
-                    ln, col: col - 1 || 1
-                });
-                cadd(bucket.length + 1);
-            }*/
+            if(output[output.length - 1] && output[output.length - 1].type === 'Backslash') {
+                output.pop();
+                nested('(', ')', cadd, 'EBlock');
+            } else nested('(', ')', cadd, 'Block');
             continue;
         } else if (curToken === `!` && code[curPos + 1] === `@`) {
             cadd(2);
@@ -148,28 +134,28 @@ export function Lexer(code: string) : Token[] {
             continue;
         } else if (curToken === `{`) {
             cadd(1);
-            if(code[curPos] !== `{`) {
-                const bucket: string = lookAheadReg(code, /[^)]/, curPos).join('');
-                if(bucket.includes('}')) nested('{', '}', () => curPos, 'CurlyBlock');
-                else output.push({
-                    type: TokenType.InfPrec,
-                    vals: Lexer(bucket),
-                    ln, col: col - 1 || 1
-                });
-                cadd(bucket.length + 1);
-            } else {
-                const bucket = lookAheadReg(code, /[^\}]/, curPos);
-                const mod = bucket.slice(1).join('').trim();
+            if(code[curPos] !== `{`) nested('{', '}', cadd, 'CurlyBlock');
+            else {
+                const bucket1 = lookAheadReg(code, /[^\}]/, curPos);
+                const bucket2 = lookAheadReg(code, /[^\}]/, curPos + bucket1.length + 1);
+                const mod = bucket1.slice(1).join('').trim();
                 if(!mods.includes(mod.toLowerCase())) excLex("InexistentMod", [mod], ln, col + 1);
                 if(mod.toUpperCase() !== mod) excLex("InvalidModCase", [], ln, col + 1);
-                if(code[curPos + bucket.length + 1] === `}`) {
+                if(code[curPos + bucket1.length + 1] === `}`) {
                     output.push({
                         type: TokenType.Mod,
                         val: mod,
                         ln, col
                     });
-                    cadd(bucket.length + 2);
+                    
+                } else {
+                    output.push({
+                        type: TokenType.Mod,
+                        vals: Lexer(bucket2.join('')),
+                        ln, col
+                    })
                 }
+                cadd(bucket1.length + bucket2.length + 2);
             }
             continue;
         } else if (curToken === ';' && code[curPos + 1] === 'r') {
@@ -203,7 +189,16 @@ export function Lexer(code: string) : Token[] {
             cadd(2);
             inRelCrt = false;
             continue;
-        } 
+        } else if (curToken === '$' && code[curPos + 1] && /[a-zA-Z]/.test(code[curPos + 1])) {
+            const refName: string = lookAheadReg(code, /[^\w]/, curPos + 1).join('');
+            output.push({
+                type: TokenType.Ref,
+                val: refName,
+                ln, col
+            });
+            cadd(refName.length + 2);
+            continue;
+        }
 
         let match = false;
 
@@ -223,7 +218,7 @@ export function Lexer(code: string) : Token[] {
         const litRegex = /[a-zA-Z]/;
         const litRegexNext = /[a-zA-Z0-9]/;
 
-        const numRegex = /\d|-/;
+        const numRegex = /\d/;
         const numRegexNext = /\d|\./;
         if(litRegex.test(curToken)) {
             const bucket = lookAheadReg(code, litRegex, curPos, litRegexNext).join('');
@@ -260,14 +255,11 @@ export function Lexer(code: string) : Token[] {
             cadd(bucket.length);
             continue;
         } else if (numRegex.test(curToken)) {
-            const bucket = lookAheadReg(code, numRegex, curPos, numRegexNext);
-            if(output[output.length - 1].type === 'Hyphen') output.splice(output.length - 1, 1, {
+            const bucket = lookAheadReg(code, numRegex, curPos, numRegexNext).join('');
+            const [count, char] = output[output.length - 1] && output[output.length - 1].type === 'Hyphen' ? [1, '-'] : [0, ''];
+            output.splice(output.length - count, count, {
                 type: TokenType.Number,
-                val: "-" + bucket.join(''),
-                ln, col
-            }); else output.push({
-                type: TokenType.Number,
-                val: bucket.join(''),
+                val: char + bucket,
                 ln, col
             });
 
@@ -282,7 +274,7 @@ export function Lexer(code: string) : Token[] {
     return output.filter(e => e.type !== 'Space');
 }
 
-export const CODE = new TextDecoder('utf-8').decode(await Deno.readFile('test.bytl')).replace(/\r|^\n$/gm, '');
+export const CODE = new TextDecoder('utf-8').decode(await Deno.readFile(fname)).replace(/\r|^\n$/gm, '');
 export const lexed = Lexer(CODE);
 
 console.log("Lexer:");
