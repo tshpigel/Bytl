@@ -1,4 +1,4 @@
-# Bytl <img src="https://github.com/tshpigel/Bytl/blob/main/docs/images/icon.png" alt="Bytl Icon" title="Bytl Icon" align="right" width="100px" height="100px">
+# Bytl <img src="https://github.com/tshpigel/Bytl/blob/main/bytl.png" alt="Bytl Icon" title="Bytl Icon" align="right" width="100px" height="100px">
 #### (Very much a WIP and most likely not fully up-to-date)
 
 #### A S2S compiler for a statically typed non-OO AI development esoteric programming language made purely in TypeScript Deno
