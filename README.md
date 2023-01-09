@@ -71,7 +71,7 @@ alg[int] five1 = (
 )
 int five2 = 5
 
->> five1, five2 __ 5 and 5
+>> five1 five2 __ 5 and 5
 ```
 > _Note that if code becomes too unreadable, surrounding expressions with regular parentheses `()` can help, and does nothing to the code_
 
@@ -81,33 +81,45 @@ Because procedures are just variables, they are accessed/called in the same way 
 Modifiers are similar to ktypes in the sense that they modify default code. Although ktypes fall short quite quickly as they can only modify the value of a declared variable. Modifiers can modify literally anything. 
 ```
 sc string = "string"
->> string _ idxo "i" {{ NEGATIVE }}
+>> string _ index "i" {{ NEGATIVE }}
 ```
-So... there's some new syntax to uncover here. First of all, the underscore is an accessor for procedures of a variable and `idxo` is the name of the procedure which returns the index of the character `'i'` within the string, `string`. But there's a catch. The `{{ INVERSE }}` is a reference to a modifier with the name of `NEGATIVE` (and yes it does come after the line ender). This specific built-in modifier changes the `idxo` output from returning an index from left to right (`s` is at index 0 and `t` is at index 1), to returning the value from right to left (`g` is at index 0 and `n` is at index 1). Admittedly, this isn't the most useful piece of code to ever exist, although it has a lot of potential. 
+So... there's some new syntax to uncover here. First of all, the underscore is an accessor for procedures of a variable and `index` is the name of the procedure which returns the index of the character `'i'` within the string, `string`. But there's a catch. The `{{ INVERSE }}` is a reference to a modifier with the name of `NEGATIVE` (and yes it does come after the line ender). This specific built-in modifier changes the `index` output from returning an index from left to right (`s` is at index 0 and `t` is at index 1), to returning the value from right to left (`g` is at index 0 and `n` is at index 1). Admittedly, this isn't the most useful piece of code to ever exist, although it has a lot of potential. 
 
 ### Associations
 Associations are essentially a super hash map. A normal hashmap contains a unique key, and a value that is accessed through the key. Not only is this possible with associations, but they can have multiple keys and values.
 ```
 assoc[@sc int] map = <
-  "one" 1,
-  "two" 2,
+  "one" 1
+  "two" 2
   "three" 3
 >
 ```
-The above is an example of a classic hashmap, which, to give an easier understanding (if you don't know javascript i'm sorry), is the equivalent javascript code 
-```js
-let map = {
-  "one": 1,
-  "two": 2,
-  "three": 3
-};
-```
-Now, you might be asking: why go through all the trouble to declare types for the hashmap, or why does it have to be so convoluted for such simple code. Well if you wanted multiple access points, you could do the following 
+The above is an example of a classic hashmap. Now, you might be asking: why go through all the trouble to declare types for the hashmap, or why does it have to be so convoluted for such simple code. Well if you wanted multiple access points, you could do the following 
 ```
 assoc[@int @sc arr[int]] superMap = <
-  1 "one" [1],
-  2 "two" [2 2],
+  1 "one" [1]
+  2 "two" [2 2]
   3 "three" [3 3 3]
 >
 ``` 
 Obviously the final element of each set in the association is unecessary and frankly useless, but this shows an _association_ between any of number of elements (greater than 1)
+
+### Relatives
+Because Bytl is non-OO, I still thought about having an idea similar to classes, except the actual implementation uses javascript objects. These structures are called relatives and every program is filled with them. An example of using a relative was already shown in the example using modifiers (`string _ index`). Here, `string` is the relative and `index` is the procedure for that relative. Though the underscore is not the sole operator to access data within a relative. There is also `:` and `#`. The colon accesses a sub-relative within a current relative, while the hash accesses a value or constant. For example: ```
+__ 'math' is a built-in relative
+>> math # pi
+``` `math` is the relative being referenced, and `pi` is the constant within that relative that is being accessed. The colon on the other hand isn't used very often but if you are creating a relative (see the docs) then there are cases where a sub-relative would want to be accessed (and the sub-relative would have the same functionality as a normal relative).
+
+### Context
+Context is similar to a live representation of the scope of your program. It is accessed using the semi-colon and it is essentially a way to access any bit of code from anywhere in a program. An operator that goes with context is `<-` which goes back 1 context (scope). Remember property accessing in the 'Relatives' section? Well that is the way to go <em>forward</em> 1 context. You can also go back multiple contexes at a time by doing `<amount-` where `amount` is a positive int. For example: ```
+proc p1 = (
+  int x = 5
+  >> x
+)
+
+proc p2 = (
+  int x = 5
+  int y = ;<- _ p1 # x
+  >> x + y __ 10
+)
+``` Using the information from property accessing, because `p1` is a procedure, that means it is accessed using `_` and same goes for `x`. Essentially, the entire bytl program is one massive relative where the utmost parent is `glob`, the global relative.
