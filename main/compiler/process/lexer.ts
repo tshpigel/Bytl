@@ -4,13 +4,15 @@ import { lookAheadStr, lookAheadReg, lookBehindReg } from "../misc/general/looks
 import { exception, Exceptions } from "../misc/exceptions.ts";
 
 export const fname = `${Deno.args[0]}.bytl`;
+export const CODE = new TextDecoder('utf-8').decode(await Deno.readFile(fname));
+const lines: string[] = CODE.split(/\r|\n\r?/);
 
 let inRelCrt = false;
 let ln = 1;
 let col = 1;
 export function Lexer(code: string) : Token[] {
-    function excLex(t: keyof typeof Exceptions, args: string[], l: number, c: number): void {
-        exception(t, args, l, c, code, 'Lex');
+    function excLex(t: keyof typeof Exceptions, args: string[], l: number, c: number, rgx = /[^\W_]/): void {
+        exception(t, args, l, c, code, 'Lex', rgx);
     }
     const macros: string[] = [];
     const output: Token[] = [];
@@ -54,9 +56,9 @@ export function Lexer(code: string) : Token[] {
         }
     }
 
-    function context(name: 'RegExp' | 'Cmacro') {
+    function special(name: 'RegExp' | 'Cmacro') {
         cadd(2);
-        const bucket: string[] = lookAheadReg(code, /(?<=\\);|[^;]/, curPos);
+        const bucket: string[] = lookAheadReg(code, /(?<=\\)\}|[^}]/, curPos);
         if(name === 'RegExp')
             output.push({
                 type: TokenType.RegExp,
@@ -73,6 +75,8 @@ export function Lexer(code: string) : Token[] {
     }
 
     while(curPos < code.length) {
+        if(lines[ln - 1] + lines[ln] === '') { ln += 2; continue; }
+
         const EOF = !code[curPos];
         const curToken = code[curPos];
         if(curToken === ' ' && curToken + code.slice(curPos, curPos + 2) !== '   ') {
@@ -158,16 +162,16 @@ export function Lexer(code: string) : Token[] {
                 cadd(bucket1.length + bucket2.length + 2);
             }
             continue;
-        } else if (curToken === ';' && code[curPos + 1] === 'r') {
-            context('RegExp');
+        } else if (curToken === 'r' && code[curPos + 1] === '{') {
+            special('RegExp');
             continue;
-        } else if (curToken === ';' && code[curPos + 1] === 'c') {
-            if(output[output.length - 1].type === 'AssignmentOperator') {
+        } else if (curToken === 'c' && code[curPos + 1] === '{') {
+            if(output[output.length - 1] && output[output.length - 1].type === 'AssignmentOperator') {
                 const secondLast: Token = output[output.length - 2];
                 if(secondLast.type === 'Literal')
                     macros.push(secondLast.val)
             }
-            context('Cmacro');
+            special('Cmacro');
             continue;
         } else if (curToken === ':' && inRelCrt) {
             cadd(1);
@@ -190,7 +194,7 @@ export function Lexer(code: string) : Token[] {
             inRelCrt = false;
             continue;
         } else if (curToken === '$' && code[curPos + 1] && /[a-zA-Z]/.test(code[curPos + 1])) {
-            const refName: string = lookAheadReg(code, /[^\w]/, curPos + 1).join('');
+            const refName: string = lookAheadReg(code, /[^\W]/, curPos + 1).join('');
             output.push({
                 type: TokenType.Ref,
                 val: refName,
@@ -241,10 +245,9 @@ export function Lexer(code: string) : Token[] {
                     ln, col
                 })
             } else {
-                const c1 = code[curPos - 1];
-                const c2 = code[curPos - 2];
-                const dot: boolean = c2 + c1 === `.\\` || c1 === `.`;
-                if(dot && !ktypes.includes(bucket)) excLex("InexistentKtype", [bucket], ln, col - 1);
+                const toDot: string = lookBehindReg(code, /[^.]/, curPos - 1).join('');
+                const dot: boolean = /^[?\\]+$|^$/g.test(toDot);
+                if(dot && !ktypes.includes(bucket)) excLex("InexistentKtype", [bucket], ln, col - 1, /[^\s{\[\]]/);
                 if(bucket.length > 0) output.push({
                     type: TokenType[dot ? "KtypeVal" : "Literal"],
                     val: bucket,
@@ -268,14 +271,13 @@ export function Lexer(code: string) : Token[] {
         }
         
         if(match) continue;
-        throw new Error(`Unknown input character: ${curToken.charCodeAt(0) + ` = '${curToken}'`} at "${code.slice(0,curPos)}"`);
+        throw new Error(`Unknown input character: ${curToken.charCodeAt(0) + ` = '${curToken}'`} at "${code.slice(curPos - 10,curPos)}"`);
     }
 
     return output.filter(e => e.type !== 'Space');
 }
 
-export const CODE = new TextDecoder('utf-8').decode(await Deno.readFile(fname)).replace(/\r|^\n$/gm, '');
-export const lexed = Lexer(CODE);
+export const lexed = Lexer(CODE.replace(/\r|^\n$/gm, ''));
 
 console.log("Lexer:");
 console.dir(lexed, { depth: Infinity });
