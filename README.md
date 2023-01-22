@@ -7,7 +7,7 @@ When I decided to start making the design for Bytl, I was thinking of a language
 Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation (because I don't know any other language well enough), it is incredibly slow. Even simple programs such as declaring and printing a variable takes a noticeable amount of time. I'm also not very good at programming so there are probably a lot of bugs and the code is very unoptimized.
 
 ## Installation
-### For Unix Systems (bash)
+### For Unix Systems (Terminal)
 ```bash
 curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
 ```
