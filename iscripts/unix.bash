@@ -12,7 +12,7 @@ function bytl() {
         [[ -z "$2" && "$2" != "no" ]] && arg="$a1" || arg="$2"
         deno run --allow-read --allow-write "$1" "$arg"
     }
-    rdeno ~/bytl/main/process/main.ts "$1"
+    rdeno ~/Bytl-main/main/compiler/process/main.ts "$1"
     if [ "$?" == 0 ]; then
         rdeno "./out/$a1.ts" no
     fi
