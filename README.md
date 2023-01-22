@@ -9,9 +9,9 @@ Unfortunately, because Bytl uses TypeScript Deno for both compilation and code g
 ## Installation
 ### For Unix Systems (bash)
 ```bash
-curl -fsSL ... | sh
+curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
 ```
 ### For Windows Systems (PowerShell)
 ```sh
-irm ... | iex
+irm https://github.com/tshpigel/Bytl/blob/main/iscripts/windows.sh | iex
 ```
