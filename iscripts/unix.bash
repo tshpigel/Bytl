@@ -3,6 +3,7 @@ if deno --version; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
 fi
 if test -f ~/.bytl.bash; then
+mv 
 touch ~/.bytl.bash
 cat > ~/.bytl.bash << "EOF"
 #!/bin/bash
