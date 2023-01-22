@@ -303,6 +303,3 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
 }
 
 export const _AST: AST<TokenType>[] = Parser(lexed);
-console.log('\n' + new Array(100).fill("-").join('') + '\n\n');
-console.log("\nParser:");
-console.dir(_AST, { depth: Infinity });
