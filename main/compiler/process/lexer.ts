@@ -278,6 +278,3 @@ export function Lexer(code: string) : Token[] {
 }
 
 export const lexed = Lexer(CODE.replace(/\r|^\n$/gm, ''));
-
-console.log("Lexer:");
-console.dir(lexed, { depth: Infinity });
