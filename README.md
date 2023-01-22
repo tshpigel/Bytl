@@ -13,5 +13,5 @@ curl -fsSL ... | sh
 ```
 ### For Windows Systems (PowerShell)
 ```sh
-irm ... | iex`
+irm ... | iex
 ```
