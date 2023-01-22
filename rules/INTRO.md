@@ -1,4 +1,3 @@
-***
 ## Basic Tutorial
 > All Bytl code is within either a `.bytl` or a `.bt` file
 >
