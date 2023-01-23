@@ -10,7 +10,7 @@ cat > ~\.bytl.bash << "EOF"
 function bytl() {
     a1="$1"
     function rdeno() {
-        [[ -z "$2" -and "$2" != "no" ]] && arg="$a1" || arg="$2"
+        [[ -z "$2" -and "$2" != "no" ]] -and arg="$a1" || arg="$2"
         deno run --allow-read --allow-write "$1" "$arg"
     }
     rdeno ~\Bytl-main\main\compiler\process\main.ts "$1"
