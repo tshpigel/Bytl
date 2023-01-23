@@ -22,3 +22,5 @@ EOF
 else 
     echo "Bytl is already installed"
 fi
+
+source ~/.bytl.bash
