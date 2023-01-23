@@ -15,5 +15,5 @@ curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
 ```
 ### For Windows Systems (PowerShell)
 ```sh
-irm https://github.com/tshpigel/Bytl/blob/main/iscripts/windows.sh | iex
+iex (iwr https://github.com/tshpigel/Bytl/blob/main/iscripts/windows.ps1)
 ```
