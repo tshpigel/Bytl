@@ -83,14 +83,18 @@ function splitByCase(inp: string): string[] {
 }
 
 function Parser(lexer: Token[]): AST<TokenType>[] {
-    function createEXPR(cpos: number): Expression {
+    function createEXPR(cpos: number, tokens = lexer): Expression {
         const finalExpr: Token[] = [];
-        const ctoken: Token = lexer[cpos];
-        if(VListFE.includes(ctoken.type)) {
-            let i = 0;
-            while(FListFE.includes(lexer[++cpos].type)) 
-            if(!(i & 1))
-                finalExpr.push(lexer[cpos]);
+        let i = cpos;
+        let VFE = true;
+        while(tokens[i] && FListFE.includes(tokens[i].type.toLowerCase())) {
+            if(tokens[i - 1]?.type === 'Array' && VFE) VFE = false;
+            const thing = VFE ? VListFE : OListFE;
+            if(thing.includes(tokens[i].type.toLowerCase())) {
+                finalExpr.push(tokens[i]);
+            }
+            VFE = !VFE;
+            i++;
         }
         return finalExpr as Expression;
     }
