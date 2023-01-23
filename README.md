@@ -8,6 +8,7 @@ Unfortunately, because Bytl uses TypeScript Deno for both compilation and code g
 
 ## Setup
 #### First download the repository then unzip the folder
+Make sure the `Bytl-main` folder is in `Downloads` on either system
 ### For Unix Systems (Terminal)
 ```bash
 curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
