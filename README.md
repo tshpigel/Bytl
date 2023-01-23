@@ -14,6 +14,6 @@ Make sure the `Bytl-main` folder is in `Downloads` on either system
 curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
 ```
 ### For Windows Systems (PowerShell)
-```sh
+```ps1
 iex (iwr https://github.com/tshpigel/Bytl/blob/main/iscripts/windows.ps1)
 ```
