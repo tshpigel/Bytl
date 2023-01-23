@@ -12,7 +12,7 @@ Unfortunately, because Bytl uses TypeScript Deno for both compilation and code g
 ```bash
 curl -fsSL https://github.com/tshpigel/Bytl/blob/main/iscripts/unix.bash | bash
 ```
-### For Windows Systems (PowerShell)
+### For Windows Systems (Command Prompt)
 ```ps1
 iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/tshpigel/Bytl/blob/main/iscripts/windows.sh'))
 ```
