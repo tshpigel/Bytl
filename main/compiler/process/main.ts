@@ -4,6 +4,8 @@ import { Null, TokenType, Types, valToType } from "../misc/general/tokens.ts";
 import { exception, Exceptions } from "../misc/exceptions.ts";
 import { CODE as file, fname } from "./lexer.ts";
 
+try { await Deno.mkdir("out") } catch(e) {}
+
 type vtype = { name: string, pType: string };
 const variables: vtype[] = [];
 const tempVariables: vtype[] = [];
@@ -21,7 +23,7 @@ function vcheck(vs: string, l: number, c: number, slice?: boolean): vtype | void
 
 const XN: TextEncoder = new TextEncoder();
 async function Gen(text: string, options?: Deno.WriteFileOptions): Promise<void> {
-    await Deno.writeFile(`../out/${fname.slice(0, -5)}.ts`, XN.encode(text), options);
+    await Deno.writeFile(`./out/${fname.slice(0, -5)}.ts`, XN.encode(text), options);
 }
 
 function literalCheck<T extends TokenType>(node: AST<T>): string | void {
