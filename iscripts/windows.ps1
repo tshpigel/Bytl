@@ -2,7 +2,7 @@ If (!(deno --version)) {
     irm https://deno.land/install.ps1 | iex
 }
 
-If ([System.IO.File]::Exists(C:\Users\.bytl.bash)) {
+If ([System.IO.File]::Exists($env:USERPROFILE\.bytl.bash)) {
     Move-item $env:USERPROFILE\Downloads\Bytl-main %homepath%%homedrive%
     New-item $env:USERPROFILE\.bytl.bash -type file
 @"
