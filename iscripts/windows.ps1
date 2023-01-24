@@ -3,7 +3,7 @@ If (! where deno | out-null ) {
 }
 
 If ([System.IO.File]::Exists($env:USERPROFILE\.bytl.bash)) {
-    Move-item $env:USERPROFILE\Downloads\Bytl-main %homepath%%homedrive%
+    Move-item $env:USERPROFILE\Downloads\Bytl-main $env:USERRPROFILE
     New-item $env:USERPROFILE\.bytl.bash -type file
 @"
     Function bytl(`$file) { 
@@ -17,7 +17,8 @@ If ([System.IO.File]::Exists($env:USERPROFILE\.bytl.bash)) {
         }
     }
 "@
+"Bytl was successfully setup"
 } Else {
-    echo "Bytl is already installed"
+    "Bytl is already setup"
 }
 . $env:USERPROFILE\.bytl.bash
