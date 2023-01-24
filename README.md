@@ -17,3 +17,8 @@ curl -fsSL https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/unix.ba
 ```ps1
 iex (iwr https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/windows.ps1)
 ```
+
+## Current Known Bugs
+* Column number shoots up at the end of a nested statement (line number decreases by 1 as well)
+* Consecutive macros unidentified if assigned in the opposite order
+* .bt extension is not recognizable
