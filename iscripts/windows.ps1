@@ -3,14 +3,15 @@ If (!(deno --version)) {
 }
 
 If ([System.IO.File]::Exists(C:\Users\.bytl.bash)) {
-    New-item C:\Users\.bytl.bash -type file
+    Move-item %homepath%%homedrive%\Downloads\Bytl-main %homepath%%homedrive%
+    New-item %homepath%%homedrive%\.bytl.bash -type file
 @"
     Function bytl(`$file) { 
         Function Rdeno(`$tsfile `$opt) {
             `$arg = If(`$opt -eq `$null -and `$opt -ne 'no') {`$file} Else {`$opt}
             deno run --allow-read --allow-write `$tsfile `$arg
         }
-        Rdeno C:\Users\bytl\main\process\main.ts `$file
+        Rdeno %homepath%%homedrive%\Bytl-main\main\compiler\process\main.ts `$file
         If(`$? -eq 0) {
             Rdeno './out\`$file.ts' no
         }
@@ -19,4 +20,4 @@ If ([System.IO.File]::Exists(C:\Users\.bytl.bash)) {
 } Else {
     echo "Bytl is already installed"
 }
-source C:\Users\.bytl.bash
+. %homepath%%homedrive%\.bytl.bash
