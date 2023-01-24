@@ -1,4 +1,4 @@
-If (!(deno --version)) {
+If (!(deno --version | out-null)) {
     irm https://deno.land/install.ps1 | iex
 }
 
