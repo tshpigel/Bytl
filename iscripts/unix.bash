@@ -7,6 +7,9 @@ fi
 if ! test -f ~/.bytl.bash; then
 mv ~/Downloads/Bytl-main ~
 touch ~/.bytl.bash
+mkdir ~/.bytl
+touch ~/.bytl/localize.bytl
+touch ~/.bytl/init.bytl
 cat > ~/.bytl.bash << "EOF"
 #!/bin/bash
 function bytl() {
