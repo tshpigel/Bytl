@@ -19,6 +19,7 @@ function bytl() {
     fi
 }
 EOF
+echo "Bytl has successfully installed."
 else 
     echo "Bytl is already installed"
 fi
