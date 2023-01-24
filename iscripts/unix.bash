@@ -19,9 +19,9 @@ function bytl() {
     fi
 }
 EOF
-echo "Bytl has successfully installed."
+echo "Bytl has setup succesfully"
 else 
-    echo "Bytl is already installed"
+    echo "Bytl is already properly setup"
 fi
 
 source ~/.bytl.bash
