@@ -19,7 +19,7 @@ function bytl() {
     fi
 }
 EOF
-echo "Bytl has setup succesfully"
+echo "Bytl was successfully setup"
 else 
     echo "Bytl is already properly setup"
 fi
