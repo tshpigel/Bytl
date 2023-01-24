@@ -1,6 +1,6 @@
 #!/bin/bash
 if ! which deno >/dev/null; then
-    curl -fsSL https://deno.land/x/install/install.sh | sh >/dev/null
+    curl -fsSL https://deno.land/x/install/install.sh | sh
     export DENO_INSTALL="~/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
