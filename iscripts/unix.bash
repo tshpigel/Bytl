@@ -1,5 +1,5 @@
 #!/bin/bash
-if deno --version >/dev/null; then
+if which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
 fi
 if test -f ~/.bytl.bash; then
