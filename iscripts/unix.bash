@@ -1,8 +1,10 @@
 #!/bin/bash
 if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
+    export DENO_INSTALL="~/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
 fi
-if test -f ~/.bytl.bash; then
+if ! test -f ~/.bytl.bash; then
 mv ~/Downloads/Bytl-main ~
 touch ~/.bytl.bash
 cat > ~/.bytl.bash << "EOF"
