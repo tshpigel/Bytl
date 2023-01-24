@@ -20,5 +20,5 @@ iex (iwr https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/windows.p
 
 ## Current Known Bugs
 * Column number shoots up at the end of a nested statement (line number decreases by 1 as well)
-* Consecutive macros unidentified if assigned in the opposite order
+* Consecutive macros unidentified if assigned in an inverse order
 * `.bt` extension is unrecognizable
