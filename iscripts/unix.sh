@@ -7,6 +7,7 @@ if ! which deno >/dev/null; then
         touch ~/.zshrc
         echo 'DENO_INSTALL="~/.deno"' >> ~/.zshrc
         echo 'PATH="$DENO_INSTALL/bin:$PATH' >> ~/.zshrc
+    fi
     export DENO_INSTALL="~/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
