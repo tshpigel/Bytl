@@ -2,7 +2,7 @@ If ((-Not (where deno)) | out-null) {
     irm https://deno.land/install.ps1 | iex
 }
 
-If (-Not [System.IO.File]::Exists($env:PROGRAMFILES\.bytl.ps1)) {
+If (-Not ([System.IO.File]::Exists($env:PROGRAMFILES\.bytl.ps1))) {
     Move-item $env:USERPROFILE\Downloads\Bytl-main $env:PROGRAMFILES
     New-item $env:PROGRAMFILES\.bytl.ps1 -type file
     $text = @'
