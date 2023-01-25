@@ -16,7 +16,7 @@ Function bytl {
     }
     Rdeno `$env:PROGRAMFILES\Bytl-main\main\compiler\process\main.ts `$file
     If(`$?) {
-	    Rdeno './out\`$file.ts' no
+	Rdeno './out\`$file.ts' no
     }
 }
 "@
