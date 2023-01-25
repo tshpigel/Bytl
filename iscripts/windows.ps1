@@ -20,7 +20,7 @@ If (-Not [System.IO.File]::Exists($env:PROGRAMFILES\.bytl.ps1)) {
     }
 '@
     Add-content $env:PROGRAMFILES\.bytl.ps1 $text
-    New-item $env:PROGRAMFILES\.bytl -type directory
+    md $env:PROGRAMFILES\.bytl
     New-item $env:PROGRAMFILES\.bytl\localize.bytl -type file
     New-item $env:PROGRAMFILES\.bytl\init.bytl -type file
     "Bytl was successfully setup"
