@@ -95,7 +95,7 @@ function parseCondition(cond: AST<TokenType>[]): string {
     return final;
 }
 
-await Gen("import * as TYPE from '~/Bytl-main/main/compiler/misc/defs/types.ts';\n");
+await Gen("import * as TYPE from '~/Bytl-main/main/compiler/defs/types.ts';\n");
 
 const parentStyles: { parent: string, style: string }[] = [
     { parent: 'Number', style: 'color:#f6e58d;'},
