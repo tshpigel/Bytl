@@ -1,15 +1,8 @@
 #!/bin/sh
 if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
-    echo 'DENO_INSTALL="~/.deno"' >> ~/.bashrc
-    echo "PATH='$DENO_INSTALL/bin:$PATH'" >> ~/.bashrc
-    if ! test -f ~/.zshrc; then
-        touch ~/.zshrc
-        echo 'DENO_INSTALL="~/.deno"' >> ~/.zshrc
-        echo "PATH='$DENO_INSTALL/bin:$PATH'" >> ~/.zshrc
-    fi
-    export DENO_INSTALL="$HOME/.deno"
-    export PATH="$DENO_INSTALL/bin:$PATH"
+    echo "export DENO_INSTALL=\"$deno_install\"" >> $shell_profile
+	echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> $shell_profile
 fi
 if ! test -f ~/.bytl.sh; then
 mv ~/Downloads/Bytl-main ~
@@ -26,7 +19,7 @@ function bytl() {
         deno run --allow-read --allow-write "$1" "$arg"
     }
     rdeno ~/Bytl-main/main/compiler/process/main.ts "$1"
-    if [ "$?" == 0 ]; then
+    if [ "$?" = 0 ]; then
         rdeno "./out/$a1.ts" no
     fi
 }
