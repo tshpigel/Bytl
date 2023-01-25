@@ -1,6 +1,12 @@
 #!/bin/bash
 if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
+    echo 'DENO_INSTALL="~/.deno"' >> ~/.bashrc
+    echo 'PATH="$DENO_INSTALL/bin:$PATH' >> ~/.bashrc
+    if ! test -f ~/.zshrc; then
+        touch ~/.zshrc
+        echo 'DENO_INSTALL="~/.deno"' >> ~/.zshrc
+        echo 'PATH="$DENO_INSTALL/bin:$PATH' >> ~/.zshrc
     export DENO_INSTALL="~/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
