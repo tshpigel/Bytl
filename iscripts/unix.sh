@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
     echo 'DENO_INSTALL="~/.deno"' >> ~/.bashrc
@@ -10,14 +10,14 @@ if ! which deno >/dev/null; then
     export DENO_INSTALL="~/.deno"
     export PATH="$DENO_INSTALL/bin:$PATH"
 fi
-if ! test -f ~/.bytl.bash; then
+if ! test -f ~/.bytl.sh; then
 mv ~/Downloads/Bytl-main ~
-touch ~/.bytl.bash
+touch ~/.bytl.sh
 mkdir ~/.bytl
 touch ~/.bytl/localize.bytl
 touch ~/.bytl/init.bytl
-cat > ~/.bytl.bash << "EOF"
-#!/bin/bash
+cat > ~/.bytl.sh << "EOF"
+#!/bin/sh
 function bytl() {
     a1="$1"
     function rdeno() {
@@ -35,4 +35,4 @@ else
     echo "Bytl is already properly setup"
 fi
 
-source ~/.bytl.bash
+source ~/.bytl.sh
