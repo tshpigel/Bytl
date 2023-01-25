@@ -29,4 +29,4 @@ else
     echo "Bytl is already properly setup"
 fi
 
-source ~/.bytl.sh
+. "HOME/.bytl.sh"
