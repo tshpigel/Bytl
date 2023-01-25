@@ -1,4 +1,4 @@
-If (-Not (where deno | out-null)) {
+If ((-Not (where deno)) | out-null) {
     irm https://deno.land/install.ps1 | iex
 }
 
