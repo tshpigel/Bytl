@@ -5,9 +5,9 @@ if ! which deno >/dev/null; then
     echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/.bashrc"
     if ! test -f ~/.zshrc; then
         touch ~/.zshrc
-        echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/.zshrc"
-        echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/.zshrc"
     fi
+    echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/.zshrc"
+    echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/.zshrc"
 fi
 if ! test -f ~/.bytl.sh; then
 mv ~/Downloads/Bytl-main ~
