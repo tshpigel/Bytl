@@ -11,7 +11,7 @@ Unfortunately, because Bytl uses TypeScript Deno for both compilation and code g
 Make sure the `Bytl-main` folder is in `Downloads` on either system
 ### For Unix Systems (Terminal)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/unix.bash | bash
+curl -fsSL https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/unix.sh | sh
 ```
 ### For Windows Systems (PowerShell)
 ```ps1
