@@ -3,7 +3,7 @@ if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
     case $SHELL in
 	/bin/zsh) shellprof=".zshrc" ;;
-	*) shell_profile=".bash_profile" ;;
+	*) shellprof=".bash_profile" ;;
     esac
     echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/$shellprof"
     echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/$shellprof"
