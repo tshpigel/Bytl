@@ -4,7 +4,7 @@ if ! which deno >/dev/null; then
     case $SHELL in
 	/bin/zsh) shellprof=".zshrc" ;;
 	*) shell_profile=".bash_profile" ;;
-	esac
+    esac
     echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/$shellprof"
     echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/$shellprof"
 fi
