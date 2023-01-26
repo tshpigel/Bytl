@@ -1,13 +1,12 @@
 #!/bin/sh
 if ! which deno >/dev/null; then
     curl -fsSL https://deno.land/x/install/install.sh | sh
-    echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/.bashrc"
-    echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/.bashrc"
-    if ! test -f ~/.zshrc; then
-        touch ~/.zshrc
-    fi
-    echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/.zshrc"
-    echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/.zshrc"
+    case $SHELL in
+	/bin/zsh) shellprof=".zshrc" ;;
+	*) shell_profile=".bash_profile" ;;
+	esac
+    echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/$shellprof"
+    echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/$shellprof"
 fi
 if ! test -f ~/.bytl.sh; then
 mv ~/Downloads/Bytl-main ~
