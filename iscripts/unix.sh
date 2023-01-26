@@ -7,6 +7,7 @@ if ! which deno >/dev/null; then
     esac
     echo "export DENO_INSTALL=\"$deno_install\"" >> "$HOME/$shellprof"
     echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> "$HOME/$shellprof"
+    source $shellprof
 fi
 if ! test -f ~/.bytl.sh; then
 mv ~/Downloads/Bytl-main ~
