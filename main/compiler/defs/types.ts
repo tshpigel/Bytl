@@ -8,21 +8,42 @@ export interface Glob {
     $dync?: boolean,
     $obj?: boolean,
     $immute?: boolean,
-    $instance?: boolean
+    $instance?: boolean,
+    filter?: (...e: anyt[]) => boolean
 }
 
 // Ghost Types
 export interface Gtype extends Glob {
-    readonly ref : true
+    readonly ref: true
+} export interface Rtype extends Gtype{}
+
+// Data Types
+export type Dtype = anyt & Gtype;
+
+// Special Types
+export type Stype = st & Gtype;
+
+// Primitive Types
+export type Ptype = pt & Gtype;
+
+// Encapsulating Types
+export type Etype = et & Gtype;
+
+/*
+    The Special Type
+*/
+export interface Special extends Glob {
+    readonly __type: 'Regular Expression' | 'Bitwise' | 'Command Execution' | 'Math' | 'Path' | 'Code Macro'
+    readonly value: string
 }
 
 /* 
     Relatives 
 */
 
-export interface Rel extends Glob {
+export interface Rel extends Gtype {
     readonly __type: 'Relative',
-    readonly value: Record<string, unknown>
+    readonly value: Record<string, anyt>
 }
 
 /* 
@@ -91,8 +112,8 @@ export interface Bool extends Glob {
     Procedures
 */
 
-type proc = (...args: Val[]) => Val | void;
-export interface Proc extends Glob {
+export type proc = (...args: Val[]) => Val | void;
+export interface Proc<A extends Dtype | null> extends Glob {
     readonly __type: 'Procedure' | 'Function' | 'Algorithm',
     $lambda?: (v: Val) => Val,
     $lrhs?: boolean,
@@ -100,17 +121,18 @@ export interface Proc extends Glob {
     $r2?: boolean,
     readonly __void?: boolean,
     readonly __return?: boolean,
+    readonly __rettype?: A
     readonly value: proc | 'Error'
-} export interface Fnc extends Proc {__type:'Function'}
-export interface Alg extends Proc {__type:'Algorithm'}
-export const FncConstruct = (p: Proc): Fnc => {
+} export interface Fnc extends Proc<null> {__type:'Function'}
+export interface Alg<T extends Dtype> extends Proc<T> {__type:'Algorithm'}
+export const FncConstruct = (p: Proc<null>): Fnc => {
     const ap: proc = <proc>p.value;
     return {
         __type: 'Function',
         value: !p.__void || p.__return ? 'Error' : ap
     };
 };
-export const AlgConstruct = (p: Proc): Alg => {
+export const AlgConstruct = <T extends Dtype>(p: Proc<T>): Alg<T> => {
     const ap: proc = <proc>p.value;
     return {
         __type: 'Algorithm',
@@ -124,19 +146,20 @@ export const AlgConstruct = (p: Proc): Alg => {
 */
 
 export interface Res extends Glob {
-    readonly __type: 'Resource' | 'File' | 'Localize' | 'Input'
+    readonly __type: 'Resource' | 'File' | 'Localize' | 'Inp'
 } export interface File extends Res {
     readonly __type: 'File'
 } export interface Localize extends Res {
     readonly __type: 'Localize'
-} export interface Input extends Res {
-    readonly __type: 'Input'
+} export interface Inp extends Res {
+    readonly __type: 'Inp'
 }
 
 
 /*
     RegExp [ special ]
 */
+
 import { RgxLex, RgxAST, Emit } from "../regex/regex.ts";
 
 export class Rgx {
@@ -164,58 +187,67 @@ export interface Expr extends Glob {
     Arrays
 */
 
-type VA = Val[];
+export type VA = Val[];
 type VT = Val['__type'];
-type GenA = (VT[] | VT);
+export type GenA = (VT[] | VT | 'Dtype');
+type JSONT = {[k: string]: unknown}[];
 export interface Arr<T extends GenA | null> extends Glob {
-    readonly __type: 'Array' | 'Vector' | 'Collection' | 'Sequence' | 'Or Parameters',
+    readonly __type: 'Array' | 'Vector' | 'Collection' | 'Sequence' | 'Union' | 'JSON' | 'Dtype',
     $md?: (lim?: Int) => void,
     $arrspace?: boolean,
     $uniq?: boolean,
     sub: T | null,
     value: VA | VT[] | JSONT | 'Error'
-} export interface Vect extends Arr<GenA> {__type: 'Vector'}
-export interface Coll extends Arr<GenA> {__type: 'Collection'}
-export interface Seq extends Arr<'Number' | 'Integer' | 'Decimal' | 'Character'> {__type: 'Sequence'}
-export interface Orp extends Arr<null> {__type: 'Or Parameters'}
-export const VectConstruct = (a: Arr<GenA | null>): Vect => {
+} export interface Vect<T extends GenA> extends Arr<T> {__type: 'Vector'}
+export interface Coll<T extends GenA> extends Arr<T> {__type: 'Collection'}
+export interface Seq<T extends 'Number' | 'Integer' | 'Decimal' | 'Character'> extends Arr<T> {__type: 'Sequence'}
+export interface Uni<T extends VT[] | 'Dtype'> extends Arr<T> {__type: 'Union'}    
+export interface JSON extends Arr<null> {__type: 'JSON'}
+export const VectConstruct = <T extends GenA>(a: Arr<T>): Vect<T> => {
     const aa: VA = <VA>a.value;
-    const aam: string[] = aa.map(e => e.__type);
-    const sub: GenA | null = a.sub as VT[] | null;
+    const aam: string[] = <unknown>aa.map(e => e.__type) as string[];
+    const sub: T | null = a.sub;
     return {
         __type: 'Vector',
         sub: sub,
-        value: (sub === null && !aam.every(e => e === aam[0])) || !aam.every(e => sub?.includes(e as VT)) ? 'Error' : aa
+        value: (sub === null && !aam.every(e => e === aam[0])) || !aam.every(e => sub?.includes(<unknown>e as VT)) ? 'Error' : aa
     };
 };
-export const CollConstruct = (a: Arr<GenA | null>): Coll => {
+export const CollConstruct = <T extends GenA>(a: Arr<T>): Coll<T> => {
     const aa: VA = <VA>a.value;
-    const aam: string[] = aa.map(e => e.__type);
-    const sub: GenA | null = a.sub as VT[] | null;
+    const aam: string[] = <unknown>aa.map(e => e.__type) as string[];
+    const sub: T | null = a.sub;
     return {
         __type: 'Collection',
         sub: sub,
-        value: sub !== null && !aam.every(e => sub?.includes(e as VT)) ? 'Error' : aa
+        value: sub !== null && !aam.every(e => sub?.includes(<unknown>e as VT)) ? 'Error' : aa
     };
 };
-export const SeqConstruct = (a: Arr<'Number' | 'Integer' | 'Decimal' | 'Character'>): Seq => {
+export const SeqConstruct = <T extends 'Number' | 'Integer' | 'Decimal' | 'Character'>(a: Arr<T>): Seq<T> => {
     const aa: VA = <VA>a.value;
-    const aam: string[] = aa.map(e => e.__type);
-    const sub: 'Number' | 'Integer' | 'Decimal' | 'Character' | null = a.sub;
+    const aam: string[] = <unknown>aa.map(e => e.__type) as string[];
+    const sub: T | null = a.sub;
     return {
         __type: 'Sequence',
         sub: sub,
         value: sub === null || aam[2] !== 'Integer' || aa.length !== 3 ? 'Error' : aa
     };
 };
-export const OrpConstruct = (a: Arr<null>): Orp => {
+export const UniConstruct = <T extends VT[]>(a: Arr<T>): Uni<T> => { // needs changing
     const aa: VT[] | VA = <VT[]|VA>a.value;
-    const aam: string[] = aa.map(e => typeof e == 'string' ? '' : e.__type);
+    const aam: string[] = aa.map(e => typeof e == 'string' ? '' : e.__type) as string[];
     const af: string[] = aam.filter(e => e === '');
     return {
-        __type: 'Or Parameters',
+        __type: 'Union',
         sub: null,
         value: af.length > 0 || af.length < aam.length ? 'Error' : aa
+    }
+};
+export const JSONConstruct = (a: Arr<null>): JSON => { // needs changing
+    return {
+        __type: 'JSON',
+        sub: null,
+        value: <JSONT>a.value
     }
 };
 
@@ -231,10 +263,13 @@ export interface Mod extends Glob {
 /*
     Any
 */
-
-type anyt = Num | Int | Dec | Sc | Char | Bool | Proc | Fnc | Alg | Res | Rgx | Mod;
-type anys = Num["__type"] | Sc["__type"] | Bool["__type"] | Proc["__type"] | Res["__type"] | Rgx["__type"] | Mod["__type"];
-type anyv = Num["value"] | Sc["value"] | Bool["value"] | Proc["value"] | Mod["value"]
+export type pt = Num | Int | Dec | Sc | Char | Bool | Proc<Dtype | null> | Fnc | Alg<Dtype> | Arr<GenA | null> | Coll<GenA> | Vect<GenA> | 
+    Uni<VT[]> | Seq<'Number' | 'Integer' | 'Decimal' | 'Character'>;
+export type st = Res | File | Inp | Localize;
+export type et = Arr<GenA | null> | Coll<GenA> | Vect<GenA> | Uni<VT[]> | Seq<'Number' | 'Integer' | 'Decimal' | 'Character'>;
+export type anyt = pt | st;
+export type anys = Num["__type"] | Sc["__type"] | Bool["__type"] | Proc<Dtype | null>["__type"] | Res["__type"] | Rgx["__type"] | Mod["__type"] | 'Array';
+type anyv = Num["value"] | Sc["value"] | Bool["value"] | Proc<Dtype | null>["value"] | Mod["value"]
 export interface Ambg extends Glob {
     readonly __type: 'Ambiguous',
     value: anyv
