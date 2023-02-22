@@ -1,12 +1,49 @@
 import { lexed, CODE, Lexer } from "./lexer.ts";
-import type { Assign, Token, TokenNode, AST, TokenValueNode, TokenMultiValueNode, CustomRelative, relbase, Expression, LC } from "../misc/general/tokens.ts";
-import { TokenType, Nested, MultiTypes, Null, Types, valToType, Primitives, FListFE, VListFE, OListFE } from "../misc/general/tokens.ts";
+import type { Assign, Token, AST, TokenValueNode, TokenMultiValueNode, CustomRelative, relbase, Expression, LC } from "../misc/general/tokens.ts";
+import { TokenType, Complex, Nested, Primitives, FListFE, VListFE, OListFE } from "../misc/general/tokens.ts";
 import { lookAheadStr, lookAheadReg, lookBehindReg } from "../misc/general/looks.ts";
 import { exception, Exceptions } from "../misc/exceptions.ts";
 import { NthD } from "../misc/general/tokens.ts";
 
-function excParse(t: keyof typeof Exceptions, args: string[], l: number, c: number): void {
-    exception(t, args, l, c, CODE, 'Pars');
+function excParse(t: keyof typeof Exceptions, args: string[], l: number, c: number, rgx = /[^\W_]/): void {
+    exception(t, args, l, c, CODE, 'Pars', rgx);
+}
+
+type vtype = { name: string, pType: string } | null;
+const variables: NthD<vtype> = [];
+let scope = 0;
+
+function vcheck(vs: string, l: number, c: number, slice?: boolean): vtype | void {
+    const vn: string = vs.slice(0, slice ? -6 : Infinity);
+    const fv = avail();
+    return fv.find(e => e?.name === vn) ?? excParse("InexistentVariable", [vn], l, c - 1);
+}
+
+function avail(): vtype[] {
+    let c: vtype[] = variables as vtype[];
+    for(let i = 0; i < scope; i++) {
+        c = c.filter((e: vtype | vtype[]) => {
+            const [ee, ea] = [e as vtype, e as vtype[]]
+            return ee?.name || (ea[0] && typeof ea[0] === 'object' && !!ea[ea.length - 1]);
+        }).flat(1);
+    }
+
+    return c;
+}
+
+function add(e: vtype | []): void {
+    ((scope > 0 
+        ? 
+            ((variables as unknown[]).flat(scope - 1) as 
+                typeof variables extends NthD<infer T> ? T[] : never
+            ).filter(Array.isArray).at(-1) || variables
+        : variables
+    ) as NthD<vtype>).push(e);
+}
+
+function invalidate(): void {
+    add(null);
+    scope--;
 }
 
 function MacroComb(LHS: Token, RHS: Token): Token[] {
@@ -83,6 +120,7 @@ function splitByCase(inp: string): string[] {
 }
 
 function Parser(lexer: Token[]): AST<TokenType>[] {
+
     function createEXPR(cpos: number, tokens = lexer): Expression {
         const finalExpr: Token[] = [];
         let i = cpos;
@@ -103,6 +141,46 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
     const output: AST<TokenType>[] = [];
     let curToken: Token = lexer[lexerPos];
 
+    function EKT(complex: Token[]): Complex[] {
+        const cur: Complex[] = [];
+        function last<T>(e: T[]): T { return e.at(-1)!; }
+        let i = 0;
+        while(i < complex.length) {
+            const ct: string = complex[i].type;
+            if(ct.slice(-8) === 'DataType') {
+                const otype: string = (complex[i - 1] && complex[i - 1].type === 'AtSymbol' ? '@' : '') + 
+                ct.slice(0, -8) + (complex[i + 1] && complex[i + 1].type === 'QuestionMark' ? '?' : '');
+                cur.push({ type: otype, ktypes: [], etypes: [] });
+            } else if (ct === 'KineticTypeChain') {
+                last(cur).ktypes?.push({t:''});
+                const ktypemods = new Set(lookAheadObj(<unknown>complex as { [key: string]: string }[], ['type', 'KineticTypeValue'], i).map(e => e.type));
+                const typeToMod: { [ k: string ]: string } = {
+                    'QuestionMark': '?',
+                    'Backslash': '\\'
+                };
+                for(const [ k, v ] of Object.entries(typeToMod)) 
+                    if(ktypemods.has(k)) 
+                        last(last(cur).ktypes!)!.t += v;
+                i += ktypemods.size - 1;
+            } else if (ct === 'KineticTypeValue') {
+                last(last(cur).ktypes!)!.t += (<{ type: string, val: string }>complex[i]).val;
+                if(complex[i + 1] && complex[i + 1].type === 'Block') {
+                    last(last(cur).ktypes!)!.p = complex[i + 1].vals;
+                }
+            } else if (ct === 'TypeArray') 
+                last(cur).etypes?.push(...EKT((<{ type: string, vals: Token[] }>complex[i]).vals));
+            else if (ct === 'CurlyBlock') {
+                const vals: Token[] = (<unknown>complex[i] as TokenMultiValueNode<TokenType>).vals;
+                if(vals[0].vals)
+                    last(cur).vfilter = vals.map(e => ({ [TokenType.Expr]: createEXPR(0, e.vals)}));
+                else
+                    last(cur).vfilter = [{ [TokenType.Expr]: createEXPR(0, vals) }];
+            }
+            i++;
+        }
+        return cur;
+    }
+
     while(lexerPos < lexer.length && curToken.type !== 'ProgramExitCode0') {
         curToken = lexer[lexerPos++];
 
@@ -114,29 +192,39 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
             
         else if(curToken.type === 'AssignmentOperator') {
             const ao: Assign = <Assign>{};
-
             const lmt: string[] = lexer.map(e => e.type);
-            const bucket: string[] = lookBehindReg(lmt, /^(?:(?!(Delimeter|LineBreak)).)+/, lexerPos - 2);
-
+            const bucket: string[] = lookBehindReg(lmt, /^(?:(?!(Delimeter|LineBreak)).)+/, lexerPos - 3);
+            const part: Token[] = lexer.slice(lexerPos - 2 - bucket.length, lexerPos - 2);
+            const ultimate: Complex[] = EKT(part);
             const laBucket: string[] = lookAheadReg(lmt, /^(?:(?!(Delimiter|LineBreak)).)+/, lexerPos);
-
             const dtypeI: number = bucket.findIndex(e => e.endsWith("DataType"));
             const dtype: string = (dtypeI > -1 ? bucket[dtypeI] : null) ?? '';
 
-            ao.mainType = {m:dtype.slice(0, -8),l:lexer[lexerPos-2+bucket.length].ln as number,c:lexer[lexerPos-2+bucket.length].col as number};
-            const name = (lexer.slice(lexerPos - bucket.length - (ao.mainType.m ? 0 : 1), lexerPos).find(e => e.type === 'Literal') as { type:string, val:string, ln:number, col:number });
-            ao.name = {n:name.val,l:name.ln,c:name.col};
-            const val = lexer.slice(lexerPos++, laBucket.length + lexerPos).find(e => e.type === laBucket[0]);
-            ao.val = <Token>val;
+            if(ultimate.length > 1) excParse("MultiTypedVariable", [], part[0].ln as number, part[0].col as number);
+            ao.ctype = { m: ultimate[0], l: lexer[bucket.length].ln as number, c: lexer[bucket.length].col as number };
+
+            const name: TokenValueNode<TokenType> = (lexer[lexerPos - 2] as TokenValueNode<TokenType.Literal>);
+            ao.name = { n: name.val, l: name.ln as number, c: name.col as number };
+
+            const val: Expression = createEXPR(0, lexer.slice(lexerPos++, laBucket.length + lexerPos));
+            ao.val = val;
 
             if(dtype === 'CodeMacroDataType') {
-                const cvals: Token[] = (val as TokenMultiValueNode<TokenType.Cmacro>).vals;
+                if(val.length > 1) excParse("MacroExpression", [], val[0].ln as number, val[0].col as number);
+                const cvals: Token[] = (val[0] as TokenMultiValueNode<TokenType.Cmacro>).vals;
                 lexer.forEach((e, i, a) => {
                     if(i > lexerPos) if(e.type === 'MacroVar' && e.val === name.val) 
                         a.splice(i - 1, 2, ...MacroComb(a[i - 1], cvals[0]).concat(cvals.slice(1)));
                 });
             }
-            
+
+            if(part.length > 0) {
+                add({ name: name.val, pType: ao.ctype.m.type });
+            }
+            else {
+                const [n, l, c] = [name.val, name.ln as number, name.col as number];
+                if(!vcheck(n, l, c)) excParse("RequiredType", [n], l, c);
+            }
             lexerPos += laBucket.length;
             output.push({
                 [TokenType.Assign]: { ...ao, l: curToken.ln as number, c: curToken.col as number }
@@ -150,7 +238,7 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
 
             for(const b of bucket) 
                 if(b.type === 'Literal') 
-                    push(b.val + ".value", b);
+                    push(vcheck(b.val, b.ln as number, b.col as number)?.name as string, b);
                 else if (b.type === 'String')
                     push(`"${b.val}"`, b);
                 else if (b.type === 'Character')
@@ -171,6 +259,8 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
             const lar: number = lexerPos + lookAheadReg(lmt, /^(?:(?!Block).)+/, lexerPos).length;
             const bucket: AST<TokenType>[] = Parser(lexer.slice(lexerPos, lar));
             lexerPos += bucket.length;
+            add([]);
+            scope++;
             output.push({
                 [TokenType[`${e ? 'Else' : ''}If`]]: {
                     condition: bucket,
@@ -179,7 +269,10 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
                     c: curToken.col as number
                 }
             });
+            invalidate();
         } else if (curToken.type === 'ElseStatement') {
+            add([]);
+            scope++;
             output.push({
                 [TokenType.Else]: { 
                     block: Parser((lexer[lexerPos] as { type: 'Block', vals: Token[] }).vals),
@@ -187,6 +280,7 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
                     c: curToken.col as number
                 }
             });
+            invalidate();
         } else if (curToken.type === 'RelativeCreation') {
             const relative: CustomRelative = <CustomRelative>{
                 name: '',
@@ -197,7 +291,7 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
             };
             const vals: Token[] = (curToken as TokenMultiValueNode<TokenType.RelCreate>).vals;
             const first: Token = vals[0];
-            if(first.type !== 'Literal') excParse("ExpectedToken", ['Literal', '::', first.type], first.ln as number, first.col as number);
+            if(first.type !== 'Literal') excParse("ExpectedToken", ['Literal', '::', first.type], first.ln as number, first.col as number, /\:/);
             else {
                 relative.name = first.val;
                 let relI = 2;
@@ -259,23 +353,10 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
             if(lexer[lexerPos]?.type !== 'AssignmentOperator') {
                 output.push({ [curToken.type]: curToken.val, l: curToken.ln as number, c: curToken.col as number });
             }
-        } else if (curToken.type === 'ExpungeVariableFromMemory') {  
-            const lmt: string[] = lexer.map(e => e.type);
-            const bucket: Token[] = lexer.slice(lexerPos, lexerPos + lookAheadReg(lmt, /^(?:(?!Delimiter|LineBreak).)+/, lexerPos).length);
-            const args: ({ value: string } & LC)[] = [];
-            for(const e of bucket) 
-                if(e.type !== 'Literal') 
-                    excParse("UnexpectedArgument", ['Variable', e.type], e.ln as number, e.col as number);
-                else
-                    args.push({ value: e.val, l: e.ln as number, c: e.col as number });
-            output.push({ [TokenType.EPG]: { 
-                args,
-                l: curToken.ln as number,
-                c: curToken.col as number
-            } });
-            lexerPos += bucket.length;
         } else if (curToken.type === 'ForLoop') {
             const forArgs: Token[] = lookAheadObj(lexer, ["type", "Block"], lexerPos);
+            add([]);
+            scope++;
             const action: AST<TokenType>[] = Parser(
                 (lexer[lexerPos + forArgs.length] as TokenMultiValueNode<TokenType.Block>).vals
             );
@@ -300,6 +381,7 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
                     c: curToken.col as number
                 } });
             }
+            invalidate();
             lexerPos += forArgs.length + 1;
         }
     }
@@ -307,3 +389,4 @@ function Parser(lexer: Token[]): AST<TokenType>[] {
 }
 
 export const _AST: AST<TokenType>[] = Parser(lexed);
+export default variables;
