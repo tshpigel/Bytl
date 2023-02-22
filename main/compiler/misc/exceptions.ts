@@ -32,7 +32,15 @@ export enum Exceptions {
     ImmutableAlteration = "Immutable variable '¬' cannot be altered",
     IllegalCast = "Variable '¬' of type '¬' cannot be casted to type '¬'",
     InvalidForIteration = "For loop iteration value must be a positive integer, or a variable/expression valuing one",
-    UnexpectedToken = "Unexpected token '¬' in '¬'"
+    UnexpectedToken = "Unexpected token '¬' in '¬'",
+    NonEncapsulatingType = "'¬' type is not an encapsulating type and therefore cannot hold encapsulated types",
+    MacroExpression = "Code macros cannot be part of an expression",
+    MultiTypedVariable = "A variable cannot have multiple types, consider using a union instead",
+    Redeclaration = "Variable '¬' cannot be redeclared with neither a value nor a type"
+}
+
+export enum Suggestions {
+    Redeclaration = "Consider using 'Coerce' or simply reassigning '¬'"
 }
 
 function strRep(char: string, count: number): string {
