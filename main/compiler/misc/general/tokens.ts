@@ -7,8 +7,6 @@ export enum TokenType {
     AssignOper = 'AssignmentOperator',
     RightSquareBracket = 'RightSquareBracket',
     LeftSquareBracket = 'LeftSquareBracket',
-    LooseEqu = 'LooseEquality',
-    StrictEqu = 'StrictEquality',
     Literal = 'Literal',
     String = 'String',
     LineBrk = 'LineBreak',
@@ -28,10 +26,10 @@ export enum TokenType {
     CharDT = 'CharacterDataType',
     FncDT = 'FunctionDataType',
     AlgDT = 'AlgorithmDataType',
+    UniDT = 'UnionDataType',
     BoolDT = 'BooleanDataType',
     ResDT = 'ResourceDataType',
     CmacDT = 'CodeMacroDataType',
-    CommDT = 'CommentDataType',
     IODT = 'InputOutputStreamDataType',
     ProcDT = 'ProcedureDataType',
     AssocDT = 'AssociationDataType',
@@ -55,6 +53,7 @@ export enum TokenType {
     BaseKtypeRef = 'BaseKineticTypeReference',
     MultiArgs = 'MultipleArguments',
     AtSymbol = 'AtSymbol',
+    InfArg = 'InfiniteArguments',
     QuestionMark = 'QuestionMark',
     OptParam = 'OptionalParameter',
     ValAcc = 'ValueAccess',
@@ -95,6 +94,9 @@ export enum TokenType {
     Apply = 'ApplyModifier',
     Alias = 'ApplyAlias',
     Expunge = 'ExpungeVariableFromMemory',
+    Augment = 'Augment',
+    Coerce = 'CoerceValue',
+    Serialize = 'Serialize',
     ScCast = 'StringCasting',
     ArrCast = 'ArrayCasting',
     CharCast = 'CharacterCasting',
@@ -104,6 +106,7 @@ export enum TokenType {
     Number = 'Number',
     Char = 'Character',
     Bool = 'Boolean',
+    // Nil = 'Nil',
     Resource = 'Resource',
     Comment = 'Comment',
     RegExp = 'RegularExpression',
@@ -124,8 +127,6 @@ export enum TokenType {
     Modu = 'Modulo',
     Cmacro = 'CodeMacro',
     DvsBy = 'DivisibleBy',
-    SupPrec = 'SuperiorPrecedence',
-    InfPrec = 'InferiorPrecedence',
     Equ = 'Equality',
     Ineq = 'Inequality',
     RelCreate = 'RelativeCreation',
@@ -137,12 +138,14 @@ export enum TokenType {
     Delimiter = 'Delimiter',
     Ref = 'Reference',
     Regress = 'Regress',
+    Power = 'Power',
 
 
     Assign = 'Assignment',
     CustRel = 'CustomRelative',
     Logic = 'LogicalOperator',
     ForLoop = 'ForLoop',
+    Expr = 'Expression',
     EPG = 'Expunge',
     Lone = 'Lone',
     Alg = 'Algorithm',
@@ -151,13 +154,13 @@ export enum TokenType {
     Coll = 'Collection',
     JSON = 'JSON',
     Seq = 'Sequence',
-    Orp = 'OrParameters',
+    Uni = 'Union',
     Int = 'Integer',
     Dec = 'Decimal',
 
     TypeArr = 'TypeArray',
 
-    LOLOLOLOLOLOLOLOLOLOLOLOLOLOL = 'lolugottheerrorkey'
+    ErrorKey = 'ErrorKey'
 }
 
 export const ktypes: string[] = [
@@ -183,7 +186,8 @@ export const ktypes: string[] = [
     'lambda',
     'lrhs',
     'r2',
-    'rec'
+    'rec',
+    'lhs'
 ];
 
 export const mods: string[] = [
@@ -210,7 +214,7 @@ export const mods: string[] = [
 ];
 
 export const TOKENS: string[][] = [
-    ['¬', 'LOLOLOLOLOLOLOLOLOLOLOLOLOLOL'],
+    ['¬', 'ErrorKey'],
     [' ', 'Space'],
     ['\n', 'LineBrk'],
     ['\\\\', 'Delimiter'],
@@ -221,6 +225,7 @@ export const TOKENS: string[][] = [
     ['\\', 'Backslash'],
     ['val', 'ValDT'],
     ['ambg', 'AmbDT'],
+    ['uni', 'UniDT'],
     ['sc', 'StringDT'],
     ['num', 'NumDT'],
     ['int', 'IntDT'],
@@ -267,8 +272,9 @@ export const TOKENS: string[][] = [
     ['proc', 'ProcDT'],
     ['~', 'MultiArgs'],
     ['@', 'AtSymbol'],
+    ['??', 'InfArg'],
     ['?', 'QuestionMark'],
-    ['^', 'OptParam'],
+    ['^', 'Power'],
     ['#', 'ValAcc'],
     ['if', 'If'],
     ['cycle', 'Cycle'],
@@ -302,6 +308,9 @@ export const TOKENS: string[][] = [
     ['Apply', 'Apply'],
     ['Alias', 'Alias'],
     ['Expunge', 'Expunge'], 
+    ['Augment', 'Augment'],
+    ['Serialize', 'Serialize'],
+    ['Coerce', 'Coerce'],
     ['SC', 'ScCast'],
     ['ARR', 'ArrCast'],
     ['CHAR', 'CharCast'],
@@ -351,10 +360,14 @@ export const Types: Type[] = [
     { trueType: 'CodeMacro', nrquo: true, rest: { bytlType: 'CodeMacro', parentType: 'CodeMacro' }, regex: /^cmacro$/ }
 ];
 
-export interface Nested {
+export interface Complex {
     type: string,
-    ktypes: string[],
-    sub?: Nested
+    ktypes?: {
+        t: string,
+        p?: Token[]
+    }[],
+    etypes?: Complex[],
+    vfilter?: {[TokenType.Expr]: Expression}[]
 }
 
 export type AllTokens<T extends TokenType> = TokenNode<T> | TokenValueNode<T> | TokenMultiValueNode<T>;
@@ -363,9 +376,8 @@ export type LC = { l: number, c: number };
 
 export type Assign = {
     name: { n: string } & LC,
-    mainType: { m: string | null } & LC,
-    cktypes?: Nested,
-    val: Token | NthD<Token>
+    ctype: { m: Complex } & LC,
+    val: Token | Expression
 }; export type Orp = {
     name?: string,
     vals: unknown[]
@@ -384,7 +396,7 @@ export type ElseStatement = {
 }; export type relbase<T extends Omit<Assign, "val"> | never> = {
     name: string,
     value?: string | AST<TokenType>[],
-    dtype?: Pick<Assign, "mainType" | "cktypes">,
+    dtype?: Pick<Assign, "ctype">,
     args?: T[]
 }; export type CustomRelative = {
     name: string,
@@ -413,17 +425,17 @@ export type For = {
 type OperFE = TokenNode<TokenType.Plus> | TokenNode<TokenType.Hyphen> | TokenNode<TokenType.Asterisk> | 
 TokenNode<TokenType.ForwardSlash> | TokenNode<TokenType.And> | TokenNode<TokenType.Or> | TokenNode<TokenType.Modu> |
 TokenNode<TokenType.LeftAngleBracket> | TokenNode<TokenType.RightAngleBracket> | TokenNode<TokenType.ObjAcc> | 
-TokenNode<TokenType.ProcAccess> | TokenNode<TokenType.ValAcc> | TokenNode<TokenType.LooseEqu> | TokenNode<TokenType.Equ> | 
-TokenNode<TokenType.Ineq> | TokenNode<TokenType.Comma> | TokenNode<TokenType.KtypeChain> | TokenNode<TokenType.Context>;
-type ValueFE = TokenMultiValueNode<TokenType> | TokenValueNode<TokenType> | TokenNode<TokenType.Literal>;
+TokenNode<TokenType.ProcAccess> | TokenNode<TokenType.ValAcc> | TokenNode<TokenType.Equ> | TokenNode<TokenType.Ineq> | TokenNode<TokenType.Comma> | TokenNode<TokenType.KtypeChain> | TokenNode<TokenType.Context> |
+TokenMultiValueNode<TokenType.Array>;
+type ValueFE = TokenMultiValueNode<TokenType> | TokenValueNode<TokenType> | TokenNode<TokenType.Literal> | 
+TokenNode<TokenType.Self>;
 
 export type Expression = (ValueFE | OperFE)[];
 export const VListFE: string[] = ['array', 'block', 'association', 'number', 'string', 'boolean', 'nil', 'regularexpression',
-'character', 'resource', 'procedure', 'literal', 'block', 'curlyblock', 'superiorprecedece', 'inferiorprecedence', 'kinetictypechain',
-'modifier'];
+'character', 'resource', 'procedure', 'literal', 'block', 'curlyblock', 'kinetictypechain', 'modifier', 'selfparameter'];
 export const OListFE: string[] = ['plus', 'hyphen', 'asterisk', 'forwardslash', 'and', 'or', 'modulo', 'leftanglebracket',
-'rightanglebracket', 'objectaccess', 'procedureaccess', 'valueaccess', 'looseequality', 'looseinequality', 'strictequality',
-'strictinequality', 'separation', 'kinetictypevalue', 'context', 'exclamation'];
+'rightanglebracket', 'objectaccess', 'procedureaccess', 'valueaccess', 'equality', 'inequality', 'separation', 
+'kinetictypevalue', 'context', 'exclamation', 'array'];
 export const FListFE: string[] = VListFE.concat(OListFE);
 
 export type AST<T extends TokenType> = {
@@ -561,6 +573,9 @@ export type Token =
     TokenNode<TokenType.Apply> |
     TokenNode<TokenType.Alias> |
     TokenNode<TokenType.Expunge> |
+    TokenNode<TokenType.Coerce> |
+    TokenNode<TokenType.Augment> |
+    TokenNode<TokenType.Serialize> |
     TokenNode<TokenType.ScCast> |
     TokenNode<TokenType.ArrCast> |
     TokenNode<TokenType.CharCast> |
@@ -572,9 +587,12 @@ export type Token =
     TokenNode<TokenType.Continue> |
     TokenNode<TokenType.SystemC> |
     TokenNode<TokenType.QuestionMark> |
+    TokenNode<TokenType.InfArg> |
     TokenNode<TokenType.Ineq> |
     TokenNode<TokenType.Equ> |
     TokenNode<TokenType.Space> |
+    TokenNode<TokenType.UniDT> |
+    TokenNode<TokenType.Power> | 
 
     TokenMultiValueNode<TokenType.Array> |
     TokenMultiValueNode<TokenType.Block> |
@@ -610,7 +628,7 @@ export type PToken =
     ParseKey<TokenType.Assign> |
     ParseKey<TokenType.Vect> |
     ParseKey<TokenType.Coll> |
-    ParseKey<TokenType.Orp> |
+    ParseKey<TokenType.Uni> |
     ParseKey<TokenType.JSON> |
     ParseKey<TokenType.Seq> |
     ParseKey<TokenType.Int> |
