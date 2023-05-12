@@ -97,14 +97,16 @@ assoc[@int @sc arr[int]] superMap = <
 Obviously the final element of each set in the association is unecessary and frankly useless, but this shows an _association_ between any of number of elements (greater than 1)
 
 ### Relatives
-Because Bytl is non-OO, I still thought about having an idea similar to classes, except the actual implementation uses javascript objects. These structures are called relatives and every program is filled with them. An example of using a relative was already shown in the example using modifiers (`string _ index`). Here, `string` is the relative and `index` is the procedure for that relative. Though the underscore is not the sole operator to access data within a relative. There is also `:` and `#`. The colon accesses a sub-relative within a current relative, while the hash accesses a value or constant. For example: ```
+Because Bytl is non-OO, I still thought about having an idea similar to classes, except the actual implementation uses javascript objects. These structures are called relatives and every program is filled with them. An example of using a relative was already shown in the example using modifiers (`string _ index`). Here, `string` is the relative and `index` is the procedure for that relative. Though the underscore is not the sole operator to access data within a relative. There is also `:` and `#`. The colon accesses a sub-relative within a current relative, while the hash accesses a value or constant. For example: 
+```
 __ 'math' is a built-in relative
 >> math # pi
 ``` 
 `math` is the relative being referenced, and `pi` is the constant within that relative that is being accessed. The colon on the other hand isn't used very often but if you are creating a relative (see the docs) then there are cases where a sub-relative would want to be accessed (and the sub-relative would have the same functionality as a normal relative).
 
 ### Context
-Context is similar to a live representation of the scope of your program. It is accessed using the semi-colon and it is essentially a way to access any bit of code from anywhere in a program. An operator that goes with context is `<-` which goes back 1 context (scope). Remember property accessing in the 'Relatives' section? Well that is the way to go <em>forward</em> 1 context. You can also go back multiple contexes at a time by doing `<amount-` where `amount` is a positive int. For example: ```
+Context is similar to a live representation of the scope of your program. It is accessed using the semi-colon and it is essentially a way to access any bit of code from anywhere in a program. An operator that goes with context is `<-` which goes back 1 context (scope). Remember property accessing in the 'Relatives' section? Well that is the way to go <em>forward</em> 1 context. You can also go back multiple contexes at a time by doing `<amount-` where `amount` is a positive int. For example: 
+```
 proc p1 = (
   int x = 5
   >> x
@@ -115,4 +117,5 @@ proc p2 = (
   int y = ;<- _ p1 # x
   >> x + y __ 10
 )
-``` Using the information from property accessing, because `p1` is a procedure, that means it is accessed using `_` and same goes for `x`. Essentially, the entire bytl program is one massive relative where the utmost parent is `glob`, the global relative.
+``` 
+Using the information from property accessing, because `p1` is a procedure, that means it is accessed using `_` and same goes for `x`. Essentially, the entire bytl program is one massive relative where the utmost parent is `glob`, the global relative.
