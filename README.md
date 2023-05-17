@@ -32,3 +32,4 @@ iex (iwr https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/windows.p
 * Switch Statements
 * Neural Network Type
 * Context
+* Fully Complex Types
