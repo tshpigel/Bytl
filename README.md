@@ -6,7 +6,7 @@ Bytl is meant to be an esoteric language with shortened keywords and more bare s
 
 Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation (because I don't know any other language well enough), its compilation and runtime is slower than other common languages. Even simple programs such as declaring and printing a variable may take a noticeable amount of time. I'm also not very good at programming so there are probably a lot of bugs and the code is currently unoptimized. 
 
-Essentially, all the time saved by writing the code in Bytl will be made up for during runtime.
+Essentially, all the time saved by writing code in Bytl as opposed to another language will be made up for during runtime.
 
 ## Setup (no script currently works)
 #### First download the repository then unzip the folder
