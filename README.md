@@ -2,9 +2,11 @@
 #### (Very much a WIP and most likely not fully up-to-date)
 
 #### A S2S compiler for a statically typed non-OO AI development esoteric programming language made purely in TypeScript Deno
-When I decided to start making the design for Bytl, I was thinking of a language where you type as little as possible to write equally as powerful programs as other common languages where you would have to type more. This obviously ended up in shorter and sometimes not as memorable keywords, but it did end up with a lot of shortcuts to do common things such as loops or even switch statements. Bytl also has different syntax from other languages in some cases, as not only are keywords different, but also expressions are made slightly differently. In addition, Bytl can have very complex typing and, types have the option to be become extremely specific. 
+Bytl is meant to be an esoteric language with shortened keywords and more bare syntax. This comes at the cost of memorability (keywords are shorter, but less memorable) but the language is only meant for casual/non-professional use. Bytl also has different syntax from other languages in some cases, as not only are keywords different, but also expressions are made slightly differently. In addition, Bytl can have very complex typing and, types have the option to be become extremely specific. 
 
-Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation (because I don't know any other language well enough), it is incredibly slow. Even simple programs such as declaring and printing a variable takes a noticeable amount of time. I'm also not very good at programming so there are probably a lot of bugs and the code is very unoptimized.
+Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation (because I don't know any other language well enough), its compilation and runtime is slower than other common languages. Even simple programs such as declaring and printing a variable may take a noticeable amount of time. I'm also not very good at programming so there are probably a lot of bugs and the code is currently unoptimized. 
+
+Essentially, all the time saved by writing the code in Bytl will be made up for during runtime.
 
 ## Setup (no script currently works)
 #### First download the repository then unzip the folder
@@ -24,7 +26,6 @@ iex (iwr https://raw.githubusercontent.com/tshpigel/Bytl/main/iscripts/windows.p
 
 ## Major features yet to be implemented for beta version
 * Procedures
-* Modifiers
 * Associations
 * Relative Creation
 * Special Types
