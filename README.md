@@ -4,7 +4,7 @@
 #### A S2S compiler for a statically typed non-OO AI development esoteric programming language made purely in TypeScript Deno
 Bytl is meant to be an esoteric language with shortened keywords and more bare syntax. This comes at the cost of memorability (keywords are shorter, but less memorable) but the language is only meant for casual/non-professional use. Bytl also has different syntax from other languages in some cases, as not only are keywords different, but also expressions are made slightly differently. In addition, Bytl can have very complex typing giving types the option to become extremely specific. 
 
-Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation (because I don't know any other language well enough), its compilation and runtime is slower than other common languages. Even simple programs such as declaring and printing a variable may take a noticeable amount of time. I'm also not very good at programming so there are probably a lot of bugs and the code is currently unoptimized. 
+Unfortunately, because Bytl uses TypeScript Deno for both compilation and code generation, its compilation and runtime is slower than other common languages. Even simple programs such as declaring and printing a variable may take a noticeable amount of time.
 
 Essentially, all the time saved by writing code in Bytl as opposed to another language will be made up for during runtime.
 
