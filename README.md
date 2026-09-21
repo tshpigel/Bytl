@@ -8,11 +8,8 @@ Bytl is meant to be an esoteric language with shortened keywords and more bare s
 * `.bt` extension is unrecognizable
 
 ## Major features yet to be implemented for beta version
-* Procedures
 * Associations
-* Relative Creation
 * Special Types
-* Loops
 * Switch Statements
 * Neural Network Type
 * Context
